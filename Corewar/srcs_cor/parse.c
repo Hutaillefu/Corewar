@@ -21,11 +21,11 @@ unsigned int extract_prog_size(t_vm *vm)
 }
 
 /*
-  ** DOESNT WORK
+  ** 
 */
 char    *extract_prog_comment(t_vm *vm, int start)
 {
     if (!vm || !(vm->area))
         return (NULL);
-    return (ft_strsub((char *)vm->area, start + 8 + PROG_NAME_LENGTH, COMMENT_LENGTH));
+    return (ft_strsub((char *)vm->area, start + 2 * sizeof(unsigned int) + PROG_NAME_LENGTH + 4, COMMENT_LENGTH));
 }

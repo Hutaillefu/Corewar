@@ -41,9 +41,7 @@ void	ft_print_prcs_char(t_prnt *p)
 void	ft_print_wdth_char(t_prnt *p)
 {
 	int len;
-	int i;
 
-	i = -1;
 	len = (int)ft_strlen(p->arg);
 	if (len < p->wdth)
 	{
@@ -58,11 +56,9 @@ void	ft_print_wdth_char(t_prnt *p)
 
 void	ft_print_neg_char(t_prnt *p)
 {
-	int i;
 	int len;
 	int wdth;
 
-	i = -1;
 	len = (int)ft_strlen(p->arg);
 	if (p->arg[0] == '\0' && p->spe == 'c')
 		len = 1;
@@ -76,13 +72,11 @@ void	ft_print_neg_char(t_prnt *p)
 void	ft_print_zro_char(t_prnt *p)
 {
 	int len;
-	int i;
 	int wdth;
 
 	len = (int)ft_strlen(p->arg);
 	if (p->arg[0] == '\0' && p->spe == 'c')
 		len = 1;
-	i = -1;
 	wdth = p->wdth - len;
 	while (wdth-- > 0)
 	{

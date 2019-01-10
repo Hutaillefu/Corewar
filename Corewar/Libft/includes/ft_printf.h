@@ -20,6 +20,7 @@
 # include <locale.h>
 # include <wchar.h>
 # include "libft.h"
+# include <stdint.h>
 
 typedef struct	s_prnt
 {

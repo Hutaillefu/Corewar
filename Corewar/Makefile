@@ -29,7 +29,7 @@ OBJ_C = $(addprefix ,$(S_C:.c=.o))
 
 #OBJ_A = $(addprefix ,$(S_A:.c=.o))
 
-LIB_DIR = ./libft
+LIB_DIR = ./Libft
 L_FT = $(LIB_DIR)
 LIB_LNK = -L $(L_FT) -lft
 LIB_INC	= -I $(L_FT)/libft.h
@@ -41,7 +41,7 @@ FLAGS = -Werror -Wextra -Wall
 all: $(NAME)
 
 $(NAME): $(OBJ_C)
-	@$(MAKE) -C libft/
+	@$(MAKE) -C Libft/
 	@gcc $(OBJ_C) -I $(INC) $(LIB_LNK) $(FLAGS) -o $(NAME)
 	@echo "\n\033[32;01m./corewar.. done !\033[00m\n"
 

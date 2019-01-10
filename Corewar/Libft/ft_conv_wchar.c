@@ -35,13 +35,10 @@ int		ft_conv_bc(va_list args, t_prnt *p)
 int		ft_conv_bs(va_list args, t_prnt *p)
 {
 	wchar_t	*ws;
-	int		len;
 
-	len = 0;
 	ws = va_arg(args, wchar_t *);
 	if (ws == NULL)
 		ws = L"(null)";
-	len = ft_wstrlen(ws);
 	p->arg = ft_modif_wchar_to_char(ws, p);
 	if (p->arg == NULL)
 		return (-1);

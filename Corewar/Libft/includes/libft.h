@@ -19,6 +19,8 @@
 # include "../get_next_line.h"
 # include "./ft_printf.h"
 
+#include <stdint.h>
+
 typedef	struct		s_list
 {
 	void			*content;
