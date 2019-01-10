@@ -13,10 +13,14 @@ char    *extract_prog_name(t_vm *vm, int start)
 /*
   ** TODO
 */
-unsigned int extract_prog_size(t_vm *vm)
+unsigned int extract_prog_size(t_vm *vm, int start)
 {
     if (!vm || !(vm->area))
         return (0);
+    int i = start + 2 * sizeof(unsigned int) + PROG_NAME_LENGTH - 1;
+    while (++i < 140)
+	    printf("%d ", vm->area[i]);
+    printf("\n");
     return 1;
 }
 
