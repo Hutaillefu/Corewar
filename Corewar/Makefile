@@ -19,7 +19,7 @@ SRCS_C = srcs_cor/
 
 #SRCS_A = srcs_asm/
 
-S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c
+S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c $(SRCS_C)parse.c 
 
 #S_A = fichier asm 
 

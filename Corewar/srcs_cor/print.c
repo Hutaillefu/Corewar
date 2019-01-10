@@ -25,7 +25,7 @@ void	print_map(t_cor *c)
 	{
 		++j;
 		printf("%3.2x", c->vm->area[i]);
-		if (j == 64)
+		if (j == 32)
 		{
 			j = 0;
 			printf("\n");

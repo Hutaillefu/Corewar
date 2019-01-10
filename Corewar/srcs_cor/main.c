@@ -95,6 +95,10 @@ int		main(int ac, char **av)
 	// printf("len: %#x\n", line);
 	c->vm->area = memcpy(c->vm->area, line, off);
 	print_map(c);
+
+	printf("%s\n", extract_prog_name(c->vm, 0)); // 0 for first champ
+	printf("%s\n", extract_prog_comment(c->vm, 0)); // 0 for first champ
+	
 	//printf("%s\n", c->vm->area);
 	cycle(c);
 	return (0);
