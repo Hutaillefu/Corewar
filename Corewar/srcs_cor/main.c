@@ -95,6 +95,7 @@ int		main(int ac, char **av)
 	// printf("len: %#x\n", line);
 	c->vm->area = memcpy(c->vm->area, line, off);
 	print_map(c);
+	//printf("%s\n", c->vm->area);
 	cycle(c);
 	return (0);
 }
