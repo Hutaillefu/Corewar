@@ -53,26 +53,31 @@ void	i_add(int *r1, int *r2, int *r3)
 void	i_sub(int *r1, int *r2, int *r3)
 {
 	*r3 = *r1 - *r2;
+	// if *r3 == 0 -> carry = 1
 }
 
 void	i_and(int i1, int i2, int *r)
 {
 	*r = i1 & i2;
+	// if *r == 0 -> carry = 1
 }
 
 void	i_or(int i1, int i2, int *r)
 {
 	*r = i1 | i2;
+	// if *r == 0 -> carry = 1
 }
 
 void	i_xor(int i1, int i2, int *r)
 {
 	*r = i1 ^ i2;
+	// if *r == 0 -> carry = 1
 }
 
 void	i_ld(int i, int *r)
 {
 	*r = i;
+	// if *r == 0 -> carry = 1
 }
 
 /*

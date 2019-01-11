@@ -7,7 +7,7 @@ char    *extract_prog_name(t_vm *vm, int start)
 {
     if (!vm || !(vm->area))
         return (NULL);
-    return (ft_strsub((char *)vm->area, start + sizeof(unsigned int), PROG_NAME_LENGTH));
+    return (ft_strsub((char *)vm->area, start + sizeof(unsigned int), PROG_NAME_LENGTH + 4));
 }
 
 /*
@@ -31,5 +31,5 @@ char    *extract_prog_comment(t_vm *vm, int start)
 {
     if (!vm || !(vm->area))
         return (NULL);
-    return (ft_strsub((char *)vm->area, start + 2 * sizeof(unsigned int) + PROG_NAME_LENGTH + 4, COMMENT_LENGTH));
+    return (ft_strsub((char *)vm->area, start + 2 * sizeof(unsigned int) + PROG_NAME_LENGTH + 4, COMMENT_LENGTH + 140)); // why + 140 ?
 }
