@@ -19,7 +19,7 @@ SRCS_C = srcs_cor/
 
 #SRCS_A = srcs_asm/
 
-S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c $(SRCS_C)parse.c 
+S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c $(SRCS_C)parse.c $(SRCS_C)instructions.c 
 
 #S_A = fichier asm 
 
@@ -49,7 +49,7 @@ $(NAME): $(OBJ_C)
 	gcc -I $(INC) -c $< -o $@
 
 clean:
-	@rm -rf srcs/*.o
+	@rm -rf $(SRCS_C)/*.o
 	@rm -rf $(L_FT)/objs/*.o
 	@echo "\n\033[31;01mClean..\033[00m\n"
 
