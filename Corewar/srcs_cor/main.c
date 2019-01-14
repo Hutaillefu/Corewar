@@ -96,9 +96,9 @@ int		main(int ac, char **av)
 	c->vm->area = memcpy(c->vm->area, line, off);
 	print_map(c);
 
-	printf("%s\n", extract_prog_name(c->vm, 0)); // 0 for first champ
-	printf("%s\n", extract_prog_comment(c->vm, 0)); // 0 for first champ
-	printf("%d\n", extract_prog_size(c->vm, 0));
+	printf("%s\n", extract_prog_name(c->vm));
+	printf("%s\n", extract_prog_comment(c->vm));
+	printf("%d\n", extract_prog_size(c->vm));
 
 	//printf("%s\n", c->vm->area);
 	cycle(c);
