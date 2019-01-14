@@ -96,10 +96,10 @@ int		main(int ac, char **av)
 	c->vm->area = memcpy(c->vm->area, line, off);
 	print_map(c);
 
-	printf("%s\n", extract_prog_name(c->vm));
-	printf("%s\n", extract_prog_comment(c->vm));
-	printf("%d\n", extract_prog_size(c->vm));
-
+	printf("Prog name :%s\n", extract_prog_name(c->vm));
+	printf("Prog com  :%s\n", extract_prog_comment(c->vm));
+	printf("Prog size :%d\n", extract_prog_size(c->vm));
+	parse_code(c->vm, 8 + 128 + 8 + 2048);
 	//printf("%s\n", c->vm->area);
 	cycle(c);
 	return (0);

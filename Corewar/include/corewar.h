@@ -56,4 +56,5 @@ void	print_map(t_cor *c);
 char    *extract_prog_name(t_vm *vm);
 char    *extract_prog_comment(t_vm *vm);
 unsigned int extract_prog_size(t_vm *vm);
+int			parse_code(t_vm *vm, int index);
 #endif
