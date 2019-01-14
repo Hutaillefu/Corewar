@@ -5,9 +5,9 @@
 */
 char    *extract_prog_name(t_vm *vm)
 {
-    if (!vm || !(vm->area))
-        return (NULL);
-    return (ft_strsub((char *)vm->area, sizeof(unsigned int), PROG_NAME_LENGTH));
+	if (!vm || !(vm->area))
+		return (NULL);
+	return (ft_strsub((char *)vm->area, sizeof(unsigned int), PROG_NAME_LENGTH));
 }
 
 /*
@@ -15,19 +15,19 @@ char    *extract_prog_name(t_vm *vm)
 */
 int    read_next_uint(t_vm *vm, int index, int bytes_len)
 {
-    unsigned int res;
+	unsigned int res;
 
-    res = 0;
-    if (bytes_len == 1)
-        return (res | (int)vm->area[index]);
-    else if (bytes_len == 2)
-        return (res | (int)vm->area[index] << 8 | (int)vm->area[index + 1]);
-    else if (bytes_len == 4)
-        return (res | (int)vm->area[index] << 24 |
-        (int)vm->area[index + 1] << 16 |
-        (int)vm->area[index + 2] << 8 |
-        (int)vm->area[index + 3]);
-    return (-1);
+	res = 0;
+	if (bytes_len == 1)
+		return (res | (int)vm->area[index]);
+	else if (bytes_len == 2)
+		return (res | (int)vm->area[index] << 8 | (int)vm->area[index + 1]);
+	else if (bytes_len == 4)
+		return (res | (int)vm->area[index] << 24 |
+		(int)vm->area[index + 1] << 16 |
+		(int)vm->area[index + 2] << 8 |
+		(int)vm->area[index + 3]);
+	return (-1);
 }
 
 /*
@@ -35,9 +35,9 @@ int    read_next_uint(t_vm *vm, int index, int bytes_len)
 */
 unsigned int extract_prog_size(t_vm *vm)
 {
-    if (!vm || !(vm->area))
-        return (0);
-    return (read_next_uint(vm, sizeof(unsigned int) * 2 + PROG_NAME_LENGTH, 4));
+	if (!vm || !(vm->area))
+		return (0);
+	return (read_next_uint(vm, sizeof(unsigned int) * 2 + PROG_NAME_LENGTH, 4));
 }
 
 /*
@@ -45,9 +45,9 @@ unsigned int extract_prog_size(t_vm *vm)
 */
 char    *extract_prog_comment(t_vm *vm)
 {
-    if (!vm || !(vm->area))
-        return (NULL);
-    return (ft_strsub((char *)vm->area, 3 * sizeof(unsigned int) + PROG_NAME_LENGTH, COMMENT_LENGTH));
+	if (!vm || !(vm->area))
+		return (NULL);
+	return (ft_strsub((char *)vm->area, 3 * sizeof(unsigned int) + PROG_NAME_LENGTH, COMMENT_LENGTH));
 }
 
 /*
@@ -56,15 +56,32 @@ char    *extract_prog_comment(t_vm *vm)
 */
 int     read_coding_byte(int byte, int index)
 {
-    if (index < 1 || index > 3)
-        return (-1);
-    if (index == 1)
-        return (byte >> 6);
-    if (index == 2)
-        return ((byte & 48) >> 4);
-    if (index == 3)
-        return ((byte & 12) >> 2);
-    return (-1);
+	if (index < 1 || index > 3)
+		return (-1);
+	if (index == 1)
+		return (byte >> 6);
+	if (index == 2)
+		return ((byte & 48) >> 4);
+	if (index == 3)
+		return ((byte & 12) >> 2);
+	return (-1);
+}
+
+/*
+  ** Return the matching op.
+*/
+t_op    get_op_by_opcode(int opcode)
+{
+	int i;
+
+	i = 0;
+	while (op_tab[i].name)
+	{
+		if (op_tab[i].opcode == opcode)
+			return (op_tab[i]);
+		i++;
+	}
+	return (op_tab[16]);
 }
 
 /*
@@ -72,24 +89,50 @@ int     read_coding_byte(int byte, int index)
 */
 int     exec_process(t_vm *vm, int index)
 {
-    if (!vm || !(vm->area))
-        return (0);
-    while (vm->area[index])
-    {
-        if ((int)vm->area[index] == 11) // sti
-        {
-            printf("STI\n");
+	int		coding_byte;
+	t_op	op;
 
-            //(int)vm->area[index + 1] = octect de codage. 01 11 10 00
-            //01 = 1 -> registre == REG_CODE
-            //10 = 2 -> direct == DIR_CODE
-            //11 = 3 -> indirect == IND_CODE
-            printf("Code param 1: %d\n", read_coding_byte((int)vm->area[index + 1], 1));
-            printf("Code param 2: %d\n", read_coding_byte((int)vm->area[index + 1], 2));
-            printf("Code param 3: %d\n", read_coding_byte((int)vm->area[index + 1], 3));
-            //Extract param 
-        }
-        index++;
-    }
-    return (1);
+	if (!vm || !(vm->area))
+		return (0);
+
+	if (!(op = get_op_by_opcode((int)vm->area[index])).name)
+		return (0);
+		
+	if (op.opcode == 11) // sti
+	{
+		printf("STI\n");
+		coding_byte = (int)vm->area[++index];
+		printf("coding byte of STI :%d\n", coding_byte);
+		if (read_coding_byte(coding_byte, 1) != 1)
+		{
+			printf("Param 1 of STI must be REG\n");
+			return (0);
+		}
+		printf("STI 1st param is REG : %d\n", read_next_uint(vm, ++index, 1));
+		if (read_coding_byte(coding_byte, 2) == 2) // direct
+		{
+			printf("STI 2nd param is DIR : %d\n", read_next_uint(vm, ++index, 2));
+			index++;
+		}
+		else if (read_coding_byte(coding_byte, 2) == 1)
+		{
+			printf("STI 2nd param is REG : %d\n", read_next_uint(vm, ++index, 1));         
+		}
+		else if (read_coding_byte(coding_byte, 2) == 3)
+		{
+			printf("STI 2nd param is IND : %d\n", read_next_uint(vm, ++index, 2));
+			index++;     
+		}
+
+		if (read_coding_byte(coding_byte, 3) == 2) // direct
+		{
+			printf("STI 3rd param is DIR : %d\n", read_next_uint(vm, ++index, 2));
+			index++;
+		}
+		else if (read_coding_byte(coding_byte, 3) == 1)
+		{
+			printf("STI 3rd param is REG : %d\n", read_next_uint(vm, ++index, 1));
+			}
+	}
+	return (1);
 }

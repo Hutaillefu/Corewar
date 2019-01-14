@@ -23,6 +23,18 @@ typedef struct		s_line
 	int				size;
 }					t_line;
 
+typedef struct	s_op
+{
+	char	*name;
+	int		nb_params;
+	int		param_mask[3];
+	int		opcode;
+	int		i3;
+	char	*com;
+	int		i4;
+	int		i5;
+}				t_op;
+
 typedef struct	s_vm
 {
 	int			*pc;
@@ -44,10 +56,7 @@ typedef struct	s_cor
 	struct s_vm		*vm;
 }				t_cor;
 
-
-
-
-
+extern	t_op op_tab[17];
 
 void	ft_exit(void);
 void	init_vm(t_cor *c);
@@ -56,5 +65,5 @@ void	print_map(t_cor *c);
 char    *extract_prog_name(t_vm *vm);
 char    *extract_prog_comment(t_vm *vm);
 unsigned int extract_prog_size(t_vm *vm);
-int			parse_code(t_vm *vm, int index);
+int     exec_process(t_vm *vm, int index);
 #endif
