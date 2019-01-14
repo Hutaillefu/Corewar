@@ -29,10 +29,10 @@ typedef struct	s_op
 	int		nb_params;
 	int		param_mask[3];
 	int		opcode;
-	int		i3;
+	int		nb_cycles;
 	char	*com;
-	int		i4;
-	int		i5;
+	int		coding_byte;
+	int		dir_size;
 }				t_op;
 
 typedef struct	s_vm
