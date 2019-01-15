@@ -37,8 +37,12 @@ int		main(int ac, char **av)
 	read_infos(c, av);
 	check_infos(c);
 	init_map(c);
+	
 	exec_process(c->vm, c->chmp[0]);
-	//print_map(c, 64);
+	if (c->chmp[0]->op.opcode == 11)
+		i_sti(c->chmp[0], c->vm);
+	
+	print_map(c, 64);
 	cycle(c);
 	return (0);
 }

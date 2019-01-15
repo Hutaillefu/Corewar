@@ -25,7 +25,7 @@ typedef struct		s_line
 
 typedef struct		s_vm
 {
-	int				*reg[REG_NUMBER];
+	int				reg[REG_NUMBER];
 	unsigned char	*area;
 	int				carry;
 	int				nb_player;
@@ -105,7 +105,8 @@ void				read_infos(t_cor *c, char **av);
 */
 void				cycle(t_cor *c);
 
-int     	exec_process(t_vm *vm, t_chmp *chmp);
+int     			exec_process(t_vm *vm, t_chmp *chmp);
 
-
+void				i_sti(t_chmp *chmp, t_vm *vm);
+int   				read_next_uint(t_vm *vm, int index, int bytes_len);
 #endif
