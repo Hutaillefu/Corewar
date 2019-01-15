@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 14:36:53 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/15 15:45:57 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,6 +31,8 @@ typedef struct		s_chmp
 	char			*comment;
 	char			*infos;
 	int				pc;
+	// struct s_op		op;
+	int				param[3][2];
 }					t_chmp;
 
 typedef struct		s_vm
@@ -48,17 +50,27 @@ typedef struct		s_vm
 	unsigned int	prog_size;
 }					t_vm;
 
+
+typedef struct	s_op
+{
+	char	*name;
+	int		nb_params;
+	int		param_mask[3];
+	int		opcode;
+	int		nb_cycles;
+	char	*com;
+	int		coding_byte;
+	int		dir_size;
+}				t_op;
+
+extern	t_op op_tab[17];
+
 typedef struct	s_cor
 {
 	int				cycle_to_die;
 	struct s_vm		*vm;
 	struct s_chmp	*chmp[MAX_PLAYERS];
 }					t_cor;
-
-typedef struct	s_op 
-{
-	struct s_op op_tab[17];
-}				t_op;
 
 /*
 ** error
@@ -92,5 +104,8 @@ void				read_infos(t_cor *c, char **av);
 ** cycle
 */
 void				cycle(t_cor *c);
+
+int     	exec_process(t_vm *vm, int index);
+
 
 #endif

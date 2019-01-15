@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 14:25:34 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2018/11/19 16:35:56 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/15 15:40:35 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,7 +25,7 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		dest = malloc(sizeof(char) * (len + 1));
 		if (dest != NULL)
 		{
-			while (start < len)
+			while (i < len)
 			{
 				dest[i] = s[start];
 				start++;

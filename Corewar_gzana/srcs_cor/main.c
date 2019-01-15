@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 15:04:49 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 13:44:07 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/15 15:53:50 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -37,6 +37,7 @@ int		main(int ac, char **av)
 	read_infos(c, av);
 	check_infos(c);
 	init_map(c);
+	exec_process(c->vm, 0);
 	print_map(c, 64);
 	cycle(c);
 	return (0);
