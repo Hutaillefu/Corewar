@@ -58,6 +58,7 @@ typedef struct		s_chmp
 	char			*comment;
 	char			*infos;
 	int				pc;
+	int				op_size;
  	struct s_op		op;
 	int				param[3][2];
 }					t_chmp;

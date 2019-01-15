@@ -157,10 +157,12 @@ int		extract_params(t_vm *vm, t_chmp *chmp, int coding_byte)
 int     exec_process(t_vm *vm, t_chmp *chmp)
 {
 	int		coding_byte;
+	int		pc_base;
 	t_op	op;
 
 	if (!vm || !(vm->area) || !chmp)
 		return (0);
+	pc_base = chmp->pc;
 	printf("Start of exec, chmp pc is %d\n", chmp->pc);	
 	if (!(op = get_op_by_opcode((int)vm->area[chmp->pc])).name)
 		return (0);
@@ -175,6 +177,7 @@ int     exec_process(t_vm *vm, t_chmp *chmp)
 	printf("P1 is %d type is %d\n", chmp->param[0][0], chmp->param[0][1]);
 	printf("P2 is %d type is %d\n", chmp->param[1][0], chmp->param[1][1]);
 	printf("P3 is %d type is %d\n", chmp->param[2][0], chmp->param[2][1]);
-	printf("End of exec, chmp pc is %d\n", chmp->pc);
+	chmp->op_size = chmp->pc - pc_base;
+	chmp->pc = pc_base;
 	return (1);
 }

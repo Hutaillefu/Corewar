@@ -13,6 +13,9 @@
 
 #include "corewar.h"
 
+/*
+  ** Write in the memory at start_index value coded on bytes_len.
+*/
 void	write_uint(t_vm *vm, int value, int start_index, int bytes_len)
 {
 	int	i;
@@ -29,6 +32,12 @@ void	write_uint(t_vm *vm, int value, int start_index, int bytes_len)
 	}
 }
 
+/*
+  ** Return the value of param according to his type.
+  ** reg -> reg[param]
+  ** dir -> param
+  ** ind -> read_next_uint(vm, chmp->pc + param, 4)
+*/
 int		get_param_value(t_vm *vm, t_chmp *chmp, int param, int type)
 {
 	if (type == DIR_CODE)
@@ -54,6 +63,8 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	p2 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
 	addr += (p1 + p2) % IDX_MOD;
 	write_uint(vm, -chmp->param[0][0], addr, REG_SIZE);
+	chmp->pc += chmp->op_size;
+	printf("End of sti instruction, chmp pc is %d\n", chmp->pc);
 }
 
 void	i_ldi(int i1, int i2, int *registre)
