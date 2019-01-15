@@ -45,7 +45,7 @@ int		get_param_value(t_vm *vm, t_chmp *chmp, int param, int type)
 	else if (type == REG_CODE)
 		return (vm->reg[param]);
 	else if (type == IND_CODE)
-		return (read_next_uint(vm, 0 + param, 4)); // 0 must be replace by chmp->pc but already inc
+		return (read_next_uint(vm, chmp->pc + param, 4));
 	return (-1);
 }
 
@@ -61,10 +61,9 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	addr = 0;
 	p1 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	addr += (p1 + p2) % IDX_MOD;
+	addr += (chmp->pc + p1 + p2) % IDX_MOD;
 	write_uint(vm, -chmp->param[0][0], addr, REG_SIZE);
 	chmp->pc += chmp->op_size;
-	printf("End of sti instruction, chmp pc is %d\n", chmp->pc);
 }
 
 void	i_ldi(int i1, int i2, int *registre)

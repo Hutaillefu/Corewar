@@ -41,7 +41,11 @@ int		main(int ac, char **av)
 	exec_process(c->vm, c->chmp[0]);
 	if (c->chmp[0]->op.opcode == 11)
 		i_sti(c->chmp[0], c->vm);
-	
+		
+	exec_process(c->vm, c->chmp[0]);
+	if (c->chmp[0]->op.opcode == 11)
+		i_sti(c->chmp[0], c->vm);
+
 	print_map(c, 64);
 	cycle(c);
 	return (0);
