@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 14:03:29 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/15 16:48:52 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,20 +16,14 @@
 
 void	init_map(t_cor *c)
 {
-	ft_memcpy(c->vm->area, c->chmp[0]->infos, c->chmp[0]->champ_size);
-	if (c->vm->nb_player == 2)
-		ft_memsub(c->vm->area, c->chmp[1]->infos, 2048, c->chmp[1]->champ_size);
-	if (c->vm->nb_player == 3)
-	{
-		ft_memsub(c->vm->area, c->chmp[1]->infos, 1408, c->chmp[1]->champ_size);
-		ft_memsub(c->vm->area, c->chmp[2]->infos, 2752, c->chmp[2]->champ_size);
-	}
-	if (c->vm->nb_player == 4)
-	{
-		ft_memsub(c->vm->area, c->chmp[1]->infos, 1024, c->chmp[1]->champ_size);
-		ft_memsub(c->vm->area, c->chmp[2]->infos, 2048, c->chmp[2]->champ_size);
-		ft_memsub(c->vm->area, c->chmp[3]->infos, 3072, c->chmp[3]->champ_size);
-	}
+	int start;
+	int player;
+
+	player = 0;
+	start = MEM_SIZE / c->vm->nb_player;
+	ft_memcpy(c->vm->area, c->chmp[player]->infos, c->chmp[player]->champ_size);
+	while (++player < c->vm->nb_player)
+		ft_memsub(c->vm->area, c->chmp[player]->infos, (start * player), c->chmp[player]->champ_size);
 }
 
 void	init_chmp(t_cor *c)
@@ -63,6 +57,7 @@ void	init_vm(t_cor *c, char **av, int ac)
 	c->vm->max_chk = MAX_CHECKS;
 	c->vm->champ_msize = CHAMP_MAX_SIZE;
 	c->vm->cycle = 0;
+	c->vm->dump = -1;
 	if (check_parse(c, av, ac) == 1)
 		ft_exit(1);
 	init_chmp(c);

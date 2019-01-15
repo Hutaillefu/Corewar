@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 15:45:57 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/15 16:48:15 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,6 +48,7 @@ typedef struct		s_vm
 	int				max_chk;
 	int				champ_msize;
 	unsigned int	prog_size;
+	int				dump;
 }					t_vm;
 
 
