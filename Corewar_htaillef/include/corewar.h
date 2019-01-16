@@ -117,4 +117,10 @@ int     	exec_process(t_vm *vm, t_chmp *chmp);
 void	start_processus(t_chmp *chmp, t_vm *vm);
 void	load_processus(int start, t_cor *c, t_chmp *chmp);
 
+void	i_add(t_chmp *chmp, t_vm *vm);
+void	i_sti(t_chmp *chmp, t_vm *vm);
+void	i_sub(t_chmp *chmp, t_vm *vm);
+void	i_and(t_chmp *chmp, t_vm *vm);
+void	i_or(t_chmp *chmp, t_vm *vm);
+void	i_xor(t_chmp *chmp, t_vm *vm);
 #endif

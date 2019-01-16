@@ -26,7 +26,7 @@ void	cycle(t_cor *c)
 			player = -1;
 			while (++player < c->vm->nb_player)
 			{
-				printf("\nc->chmp[%d]->exec: %d || cycle: %d || pc %d\n\n", player, c->chmp[player]->exec, c->vm->cycle, c->chmp[player]->pc);
+				//printf("\nc->chmp[%d]->exec: %d || cycle: %d || pc %d\n\n", player, c->chmp[player]->exec, c->vm->cycle, c->chmp[player]->pc);
 				if (c->chmp[player]->exec == c->vm->cycle)
 				{
 					start_processus(c->chmp[player], c->vm);

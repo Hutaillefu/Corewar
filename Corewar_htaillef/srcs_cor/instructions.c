@@ -90,7 +90,6 @@ void	i_add(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int	p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);

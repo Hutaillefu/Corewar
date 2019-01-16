@@ -15,12 +15,22 @@
 
 void	start_processus(t_chmp *chmp, t_vm *vm)
 {
-	printf("chmp->name %s\n", chmp->name);
+	//printf("chmp->name %s\n", chmp->name);
 	if (chmp->op.opcode == 11)
 		i_sti(chmp, vm);
-	printf("pc: %d\n", chmp->pc);
+	else if (chmp->op.opcode == 4)
+		i_add(chmp, vm);
+	else if (chmp->op.opcode == 5)
+		i_sub(chmp, vm);
+	else if (chmp->op.opcode == 6)
+		i_and(chmp, vm);	
+	else if (chmp->op.opcode == 7)
+		i_or(chmp, vm);	
+	else if (chmp->op.opcode == 8)
+		i_xor(chmp, vm);	
+	//printf("pc: %d\n", chmp->pc);
 	chmp->pc += chmp->op_size;
-	printf("pc: %d\n", chmp->pc);
+	//printf("pc: %d\n", chmp->pc);
 	chmp->exec = 0;
 }
 
