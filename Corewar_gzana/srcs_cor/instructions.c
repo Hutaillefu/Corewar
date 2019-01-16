@@ -49,9 +49,6 @@ int		get_param_value(t_vm *vm, t_chmp *chmp, int param, int type)
 	return (-1);
 }
 
-/*
-  ** *(i1 + i2) = registre.
-*/
 void	i_sti(t_chmp *chmp, t_vm *vm)
 {
 	int addr;
@@ -68,59 +65,99 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	write_uint(vm, chmp->param[0][0], addr, REG_SIZE);
 }
 
-void	i_ldi(int i1, int i2, int *registre)
+void	i_ldi(t_chmp *chmp, t_vm *vm)
 {
-	int *addr;
+	int p1;
+	int p2;
+	int p3;
 
-	addr = 0;
-	addr += (i1 + i2) % IDX_MOD;
-	*registre = *addr;
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = read_next_uint(vm, (chmp->pc + p1 + p2) % IDX_MOD, REG_SIZE);
 }
 
-void	i_lldi(int i1, int i2, int *registre)
+void	i_lldi(t_chmp *chmp, t_vm *vm)
 {
-	int *addr;
+	int p1;
+	int p2;
+	int p3;
 
-	addr = 0;
-	addr += (i1 + i2);
-	*registre = *addr;
-	// if *registre == 0 -> carry = 1
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = read_next_uint(vm, chmp->pc + p1 + p2, REG_SIZE);
 }
 
-void	i_add(int *r1, int *r2, int *r3)
+void	i_add(t_chmp *chmp, t_vm *vm)
 {
-	*r3 = *r1 + *r2;
+	int p1;
+	int p2;
+	int	p3;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = p1 + p2;
 	// if *r3 == 0 -> carry = 1
 }
 
-void	i_sub(int *r1, int *r2, int *r3)
+void	i_sub(t_chmp *chmp, t_vm *vm)
 {
-	*r3 = *r1 - *r2;
-	// if *r3 == 0 -> carry = 1
+	int p1;
+	int p2;
+	int	p3;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = p1 - p2;
 }
 
-void	i_and(int i1, int i2, int *r)
+void	i_and(t_chmp *chmp, t_vm *vm)
 {
-	*r = i1 & i2;
-	// if *r == 0 -> carry = 1
+	int p1;
+	int p2;
+	int	p3;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = p1 & p2;
 }
 
-void	i_or(int i1, int i2, int *r)
+void	i_or(t_chmp *chmp, t_vm *vm)
 {
-	*r = i1 | i2;
-	// if *r == 0 -> carry = 1
+	int p1;
+	int p2;
+	int	p3;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = p1 | p2;
 }
 
-void	i_xor(int i1, int i2, int *r)
+void	i_xor(t_chmp *chmp, t_vm *vm)
 {
-	*r = i1 ^ i2;
-	// if *r == 0 -> carry = 1
+	int p1;
+	int p2;
+	int	p3;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
+	chmp->reg[p3] = p1 ^ p2;
 }
 
-void	i_ld(int i, int *r)
+void	i_ld(t_chmp *chmp, t_vm *vm)
 {
-	*r = i;
-	// if *r == 0 -> carry = 1
+	int p1;
+	int p2;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
+	chmp->reg[p2] = p1;
 }
 
 /*
