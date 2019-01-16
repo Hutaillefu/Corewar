@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 14:48:46 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 16:39:58 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,19 +42,19 @@ typedef struct		s_chmp
 	char			*name;
 	char			*comment;
 	char			*infos;
+	int				carry;
 	int				pc;
+	int				pc_b;
 	int				op_size;
 	struct s_op		op;
 	int				exec;
 	int				param[3][2];
-	// int				reg[REG_NUMBER];
+	int				reg[REG_NUMBER];
 }					t_chmp;
 
 typedef struct		s_vm
 {
 	unsigned char	*area;
-	int				carry;
-	int				reg[REG_NUMBER];
 	int				nb_player;
 	int				cycle_delta;
 	int				cycle;
@@ -102,6 +102,7 @@ void				check_infos(t_cor *c);
 ** read_infos
 */
 void				read_infos(t_cor *c, char **av);
+int	little_endian(int value);
 
 /*
 ** cycle

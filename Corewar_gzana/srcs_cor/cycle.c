@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 14:37:46 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 15:50:10 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,18 +26,17 @@ void	cycle(t_cor *c)
 			player = -1;
 			while (++player < c->vm->nb_player)
 			{
-				printf("c->chmp[%d]->exec: %d || cycle: %d || pc %d\n", player, c->chmp[player]->exec, c->vm->cycle, c->chmp[player]->pc);
+				printf("\nc->chmp[%d]->exec: %d || cycle: %d || pc %d\n\n", player, c->chmp[player]->exec, c->vm->cycle, c->chmp[player]->pc);
+				if (c->chmp[player]->exec == c->vm->cycle)
+				{
+					start_processus(c->chmp[player], c->vm);
+				}
 				if (c->chmp[player]->exec == 0)
 				{
-					printf("enter\n");
 					if (exec_process(c->vm, c->chmp[player]) == 1)
 					{
 						load_processus(c->vm->cycle, c, c->chmp[player]);
 					}
-				}
-				else if (c->chmp[player]->exec == c->vm->cycle)
-				{
-					start_processus(c->chmp[player], c->vm);
 				}
 				else
 					continue ;

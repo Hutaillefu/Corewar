@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:32:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 14:28:40 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 15:55:47 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,8 @@
 /*
 ** Convertie le Big Endian - Little Endian
 */
-static int	little_endian(int value)
+
+int	little_endian(int value)
 {
 	return ((value & 0x000000FF) << 24 | (value & 0x0000FF00) << 8 |
 	(value & 0xFF000000) >> 24 | (value & 0x00FF0000) >> 8);

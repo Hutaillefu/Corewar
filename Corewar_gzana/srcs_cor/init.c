@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 13:52:50 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 16:51:41 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -29,25 +29,31 @@ void	init_map(t_cor *c)
 void	init_chmp(t_cor *c)
 {
 	int i;
+	int j;
 
 	i = -1;
 	while (++i < c->vm->nb_player)
 	{
+		j = -1;
 		c->chmp[i] = malloc(sizeof(t_chmp));
 		c->chmp[i]->champ_size = 0;
 		c->chmp[i]->name = NULL;
 		c->chmp[i]->comment = NULL;
 		c->chmp[i]->infos = NULL;
-		c->chmp[i]->pc = 0;
+		c->chmp[i]->pc = 0 + (MEM_SIZE / c->vm->nb_player) * i;
+		c->chmp[i]->pc_b = c->chmp[i]->pc;
 		c->chmp[i]->exec = 0;
 		c->chmp[i]->op_size = 0;
+		while (++j < REG_NUMBER)
+			c->chmp[i]->reg[j] = 0;
+		c->chmp[i]->reg[0] = (i + 1) * -1;
+		c->chmp[i]->carry = 0;
 	}
 }
 
 void	init_vm(t_cor *c, char **av, int ac)
 {
 	c->vm = ft_memalloc(sizeof(t_vm));
-	c->vm->carry = 0;
 	c->vm->cycle_delta = CYCLE_DELTA;
 	c->cycle_to_die = 1536;
 	c->vm->nb_live = NBR_LIVE;
