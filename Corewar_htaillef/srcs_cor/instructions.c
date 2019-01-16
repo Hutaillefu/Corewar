@@ -45,10 +45,11 @@ int		get_param_value(t_vm *vm, t_chmp *chmp, int param, int type)
 	else if (type == REG_CODE)
 		return (chmp->reg[param - 1]);
 	else if (type == IND_CODE)
-		return (read_next_uint(vm, chmp->pc + param, 4));
+		return (read_next_uint(vm, chmp->pc + param /* Modulo ? */, 4));
 	return (-1);
 }
 
+// Should be ok
 void	i_sti(t_chmp *chmp, t_vm *vm)
 {
 	int addr;
@@ -63,11 +64,11 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	write_uint(vm, p3, addr, REG_SIZE);
 }
 
+// Should be ok
 void	i_ldi(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
@@ -78,14 +79,13 @@ void	i_lldi(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = read_next_uint(vm, chmp->pc + p1 + p2, REG_SIZE);
+	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, (chmp->pc + p1 + p2) % MEM_SIZE, REG_SIZE);
 }
 
+// Should be ok
 void	i_add(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
@@ -97,6 +97,7 @@ void	i_add(t_chmp *chmp, t_vm *vm)
 	// if *r3 == 0 -> carry = 1
 }
 
+// Should be ok
 void	i_sub(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
@@ -108,6 +109,7 @@ void	i_sub(t_chmp *chmp, t_vm *vm)
 	chmp->reg[chmp->param[2][0] - 1] = p1 - p2;
 }
 
+// Should be ok
 void	i_and(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
@@ -119,6 +121,7 @@ void	i_and(t_chmp *chmp, t_vm *vm)
 	chmp->reg[chmp->param[2][0] - 1] = p1 & p2;
 }
 
+// Should be ok
 void	i_or(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
@@ -130,6 +133,7 @@ void	i_or(t_chmp *chmp, t_vm *vm)
 	chmp->reg[chmp->param[2][0] - 1] = p1 | p2;
 }
 
+// Should be ok
 void	i_xor(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
@@ -141,6 +145,7 @@ void	i_xor(t_chmp *chmp, t_vm *vm)
 	chmp->reg[chmp->param[2][0] - 1] = p1 ^ p2;
 }
 
+// MIss % IDX_MOD but dont know where to put
 void	i_ld(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
