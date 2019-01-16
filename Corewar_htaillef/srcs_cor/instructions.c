@@ -94,7 +94,7 @@ void	i_add(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
 	chmp->reg[chmp->param[2][0] - 1] = p1 + p2;
-	// if *r3 == 0 -> carry = 1
+	//chmp->carry = chmp->reg[chmp->param[2][0] - 1] == 0; How to manage carry ?
 }
 
 // Should be ok
@@ -156,10 +156,13 @@ void	i_ld(t_chmp *chmp, t_vm *vm)
 }
 
 /*
-  ** Content of register r process as ascii char % 256.
+  ** Content of register process as ascii char % 256.
 */
 
-char	i_aff(int *r)
+char	i_aff(t_chmp *chmp, t_vm *vm)
 {
-	return (((unsigned char)*r) % 256);
+	int p1;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
+	return ((unsigned char)(p1 % 256));
 }
