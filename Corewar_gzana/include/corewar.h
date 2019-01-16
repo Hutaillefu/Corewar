@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 16:48:15 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 14:48:46 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,35 +23,6 @@ typedef struct		s_line
 	int				size;
 }					t_line;
 
-typedef struct		s_chmp
-{
-	unsigned int	magic;
-	unsigned int	champ_size;
-	char			*name;
-	char			*comment;
-	char			*infos;
-	int				pc;
-	// struct s_op		op;
-	int				param[3][2];
-}					t_chmp;
-
-typedef struct		s_vm
-{
-	int				*reg[REG_NUMBER];
-	unsigned char	*area;
-	int				carry;
-	int				nb_player;
-	int				cycle_delta;
-	int				cycle;
-	int				nb_live;
-	char			*player[MAX_PLAYERS];
-	int				max_chk;
-	int				champ_msize;
-	unsigned int	prog_size;
-	int				dump;
-}					t_vm;
-
-
 typedef struct	s_op
 {
 	char	*name;
@@ -63,6 +34,37 @@ typedef struct	s_op
 	int		coding_byte;
 	int		dir_size;
 }				t_op;
+
+typedef struct		s_chmp
+{
+	unsigned int	magic;
+	unsigned int	champ_size;
+	char			*name;
+	char			*comment;
+	char			*infos;
+	int				pc;
+	int				op_size;
+	struct s_op		op;
+	int				exec;
+	int				param[3][2];
+	// int				reg[REG_NUMBER];
+}					t_chmp;
+
+typedef struct		s_vm
+{
+	unsigned char	*area;
+	int				carry;
+	int				reg[REG_NUMBER];
+	int				nb_player;
+	int				cycle_delta;
+	int				cycle;
+	int				nb_live;
+	char			*player[MAX_PLAYERS];
+	int				max_chk;
+	int				champ_msize;
+	unsigned int	prog_size;
+	int				dump;
+}					t_vm;
 
 extern	t_op op_tab[17];
 
@@ -106,7 +108,12 @@ void				read_infos(t_cor *c, char **av);
 */
 void				cycle(t_cor *c);
 
-int     	exec_process(t_vm *vm, int index);
+int     	exec_process(t_vm *vm, t_chmp *chmp);
 
+/*
+** processus
+*/
+void	start_processus(t_chmp *chmp, t_vm *vm);
+void	load_processus(int start, t_cor *c, t_chmp *chmp);
 
 #endif

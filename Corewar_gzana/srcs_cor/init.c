@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 16:48:52 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 13:52:50 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -39,6 +39,8 @@ void	init_chmp(t_cor *c)
 		c->chmp[i]->comment = NULL;
 		c->chmp[i]->infos = NULL;
 		c->chmp[i]->pc = 0;
+		c->chmp[i]->exec = 0;
+		c->chmp[i]->op_size = 0;
 	}
 }
 

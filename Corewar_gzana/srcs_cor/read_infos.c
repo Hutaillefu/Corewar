@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:32:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 13:44:03 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/16 14:28:40 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -44,11 +44,11 @@ void		read_infos(t_cor *c, char **av)
 		read(fd, c->chmp[i]->infos, c->chmp[i]->champ_size);
 		close(fd);
 		free(h);
-		printf("PLAYER %d:\n", i + 1);
-		printf("magic: %u\n", c->chmp[i]->magic);
-		printf("name: %s\n", c->chmp[i]->name);
-		printf("comm: %s\n", c->chmp[i]->comment);
-		printf("size: %u\n", c->chmp[i]->champ_size);
-		printf("\n----------------------\n\n");
+		// printf("PLAYER %d:\n", i + 1);
+		// printf("magic: %u\n", c->chmp[i]->magic);
+		// printf("name: %s\n", c->chmp[i]->name);
+		// printf("comm: %s\n", c->chmp[i]->comment);
+		// printf("size: %u\n", c->chmp[i]->champ_size);
+		// printf("\n----------------------\n\n");
 	}
 }
