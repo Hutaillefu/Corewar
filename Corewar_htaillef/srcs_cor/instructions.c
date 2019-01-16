@@ -34,7 +34,7 @@ void	write_uint(t_vm *vm, int value, int start_index, int bytes_len)
 
 /*
   ** Return the value of param according to his type.
-  ** reg -> reg[param]
+  ** reg -> reg[param - 1]
   ** dir -> param
   ** ind -> read_next_uint(vm, chmp->pc + param, 4)
 */
@@ -71,8 +71,7 @@ void	i_ldi(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = read_next_uint(vm, (chmp->pc + p1 + p2) % IDX_MOD, REG_SIZE);
+	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, (chmp->pc + p1 + p2) % (chmp->pc_b + IDX_MOD), REG_SIZE);
 }
 
 void	i_lldi(t_chmp *chmp, t_vm *vm)
@@ -95,8 +94,7 @@ void	i_add(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = p1 + p2;
+	chmp->reg[chmp->param[2][0] - 1] = p1 + p2;
 	// if *r3 == 0 -> carry = 1
 }
 
@@ -108,8 +106,7 @@ void	i_sub(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = p1 - p2;
+	chmp->reg[chmp->param[2][0] - 1] = p1 - p2;
 }
 
 void	i_and(t_chmp *chmp, t_vm *vm)
@@ -120,8 +117,7 @@ void	i_and(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = p1 & p2;
+	chmp->reg[chmp->param[2][0] - 1] = p1 & p2;
 }
 
 void	i_or(t_chmp *chmp, t_vm *vm)
@@ -132,8 +128,7 @@ void	i_or(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = p1 | p2;
+	chmp->reg[chmp->param[2][0] - 1] = p1 | p2;
 }
 
 void	i_xor(t_chmp *chmp, t_vm *vm)
@@ -144,8 +139,7 @@ void	i_xor(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	p3 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
-	chmp->reg[p3] = p1 ^ p2;
+	chmp->reg[chmp->param[2][0] - 1] = p1 ^ p2;
 }
 
 void	i_ld(t_chmp *chmp, t_vm *vm)
@@ -154,8 +148,7 @@ void	i_ld(t_chmp *chmp, t_vm *vm)
 	int p2;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
-	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	chmp->reg[p2] = p1;
+	chmp->reg[chmp->param[1][0] - 1] = p1;
 }
 
 /*
