@@ -209,9 +209,7 @@ void	i_ld(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 
-	printf("Execute ld\n");
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
-	printf("LD param is %d\n", p1);
 	chmp->reg[chmp->param[1][0] - 1] = p1;
 }
 

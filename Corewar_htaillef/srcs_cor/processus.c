@@ -34,8 +34,12 @@ void	start_processus(t_cor *cor, t_chmp *chmp)
 		i_or(chmp, cor->vm);	
 	else if (chmp->op.opcode == 8)
 		i_xor(chmp, cor->vm);
+	else if (chmp->op.opcode == 10)
+		i_ldi(chmp, cor->vm);
 	else if (chmp->op.opcode == 13)
-		i_lld(chmp, cor->vm);	
+		i_lld(chmp, cor->vm);
+	else if (chmp->op.opcode == 14)
+		i_lldi(chmp, cor->vm);	
 	//printf("pc: %d\n", chmp->pc);
 	chmp->pc += chmp->op_size;
 	//printf("pc: %d\n", chmp->pc);

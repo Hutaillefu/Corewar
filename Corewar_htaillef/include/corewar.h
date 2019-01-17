@@ -145,6 +145,8 @@ void	i_live(t_chmp *chmp, t_cor *cor);
 void	i_ld(t_chmp *chmp, t_vm *vm);
 void	i_lld(t_chmp *chmp, t_vm *vm);
 void	i_st(t_chmp *chmp, t_vm *vm);
+void	i_ldi(t_chmp *chmp, t_vm *vm);
+void	i_lldi(t_chmp *chmp, t_vm *vm);
 
 // <br>* Champion sans nom / sans commentaire
 // <br>* Champion avec un nom ou un commentaire trop long
