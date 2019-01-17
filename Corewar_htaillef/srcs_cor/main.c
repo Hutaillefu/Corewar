@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 15:04:49 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 15:29:31 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 18:14:58 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,6 +24,26 @@ void	check_infos(t_cor *c)
 			ft_exit(3);
 }
 
+void		ft_print_winner(t_cor *c)
+{
+	int j;
+	int last;
+	int win;
+
+	win = 0;
+	j = -1;
+	last = 0;
+	while (++j < c->vm->nb_player)
+	{
+		if (c->chmp[j]->last_live >= last)
+		{
+			last = c->chmp[j]->last_live;
+			win = j;
+		}
+	}
+	ft_printf("Contestant %d, \"%s\", has won !\n", win + 1, c->chmp[win]->name);
+}
+
 int		main(int ac, char **av)
 {
 	t_cor *c;
@@ -33,16 +53,10 @@ int		main(int ac, char **av)
 	read_infos(c);
 	check_infos(c);
 	init_map(c);
-	// exec_process(c->vm, c->chmp[0]);
-	// if (c->chmp[0]->op.opcode == 11)
-	// 	i_sti(c->chmp[0], c->vm);
-		
-	// exec_process(c->vm, c->chmp[0]);
-	// if (c->chmp[0]->op.opcode == 11)
-	// 	i_sti(c->chmp[0], c->vm);
-
 	cycle(c);
-	// print_map(c, 64);
-	ft_printf("Le gagnant est %s\n", c->chmp[0]->name);
+	printf("cycle: %d\n", c->vm->cycle);
+	for (int i = 0; i < c->vm->nb_player; i++)
+		printf("last_live[%d]: %d\n", i, c->chmp[i]->last_live);
+	ft_print_winner(c);
 	return (0);
 }

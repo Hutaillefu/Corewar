@@ -6,12 +6,24 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 15:28:30 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 16:25:31 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
+
+int		check_num(t_cor *c, char **av, int i)
+{
+	int j;
+
+	j = -1;
+	while (av[i][++j])
+		if (ft_isalnum(av[i][j]) == 0)
+			ft_exit(5);
+	c->vm->num[c->vm->nb_player] = ft_atoi(av[i]);
+	return (1);
+}
 
 int		check_dump(t_cor *c, char **av, int i)
 {
@@ -29,19 +41,21 @@ int     check_parse(t_cor *c, char **av, int ac)
 {
 	int i;
 	char *tmp;
+	int len;
 
 	i = 1;
 	if (ac < 2)
 		ft_exit(1);
 	while (av[i])
 	{
+		len = 0;
 		if (!ft_strcmp(av[i], "-d"))
 			i += check_dump(c, av, i + 1);
 		else if (!ft_strcmp(av[i], "-n"))
-			printf("flag n\n"); // rajout recup flag -n
-		else if (ft_strlen(av[i]) > 4)
+			i += check_num(c, av, i + 1);
+		else if ((len = ft_strlen(av[i])) > 4)
 		{
-			tmp = ft_strsub(av[i], (ft_strlen(av[i]) - 4), ft_strlen(av[i]));
+			tmp = ft_strsub(av[i], (len - 4), len);
 			if (ft_strcmp(".cor", tmp))
 				ft_exit(2);
 			if (c->vm->nb_player < MAX_PLAYERS)

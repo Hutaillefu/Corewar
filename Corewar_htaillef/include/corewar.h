@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 15:31:40 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 18:08:30 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,6 +51,7 @@ typedef struct		s_chmp
 	int				param[3][2];
 	int				reg[REG_NUMBER];
 	int				lives;
+	int				last_live;
 	int				num;
 }					t_chmp;
 
@@ -66,6 +67,7 @@ typedef struct		s_vm
 	int				champ_msize;
 	unsigned int	prog_size;
 	int				dump;
+	int				num[MAX_PLAYERS];
 }					t_vm;
 
 extern	t_op op_tab[17];
@@ -88,17 +90,21 @@ void				ft_exit(int error);
 void				init_vm(t_cor *c, char **av, int ac);
 void				init_map(t_cor *c);
 void				init_chmp(t_cor *c);
+void				init_num_chmp(t_cor *c, int i);
 
 /*
-** print_map
+** print
 */
 void				print_map(t_cor *c, int octet);
+void		ft_print_winner(t_cor *c);
 
 /*
 **parse
 */
 int					check_parse(t_cor *c, char **av, int ac);
 void				check_infos(t_cor *c);
+int		check_num(t_cor *c, char **av, int i);
+int		check_dump(t_cor *c, char **av, int i);
 
 /*
 ** read_infos
@@ -120,6 +126,11 @@ int     	exec_process(t_vm *vm, t_chmp *chmp);
 */
 void	start_processus(t_cor *cor, t_chmp *chmp);
 void	load_processus(int start, t_chmp *chmp);
+
+/*
+** flags
+*/
+void	ft_flag_dump(t_cor *c);
 
 /*
 ** commande
