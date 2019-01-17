@@ -64,7 +64,6 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	p3 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	addr = (chmp->pc + p1 + p2) % (chmp->pc_b + IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
-	printf("Start addr : %d\n", addr);
 	write_uint(vm, p3, addr, REG_SIZE);
 }
 
