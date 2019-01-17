@@ -26,6 +26,8 @@ void	write_uint(t_vm *vm, int value, int start_index, int bytes_len)
 	dec = (bytes_len - 1) * 8;
 	while (i < bytes_len)
 	{
+		if (start_index + i >= MEM_SIZE)
+			start_index = -i;
 		vm->area[start_index + i] = value >> dec;
 		i++;
 		dec -=8;
@@ -61,6 +63,8 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	p2 = get_param_value(vm, chmp, chmp->param[2][0], chmp->param[2][1]);
 	p3 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	addr = (chmp->pc + p1 + p2) % (chmp->pc_b + IDX_MOD);
+	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+	printf("Start addr : %d\n", addr);
 	write_uint(vm, p3, addr, REG_SIZE);
 }
 
