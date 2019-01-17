@@ -6,7 +6,7 @@
 #    By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/09 16:36:19 by gzanarel     #+#   ##    ##    #+#        #
-#    Updated: 2019/01/17 15:27:54 by gzanarel    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/01/17 16:11:38 by gzanarel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -22,6 +22,7 @@ SRCS_C = srcs_cor/
 S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c $(SRCS_C)parse.c \
 	$(SRCS_C)cycle.c $(SRCS_C)error.c $(SRCS_C)read_infos.c $(SRCS_C)op.c \
 	$(SRCS_C)parse_instruct.c $(SRCS_C)instructions.c $(SRCS_C)processus.c \
+	$(SRCS_C)flags.c
 
 #S_A = fichier asm 
 
@@ -48,7 +49,7 @@ $(NAME): $(OBJ_C)
 	@echo "\n\033[32;01m./corewar.. done !\033[00m\n"
 
 %.o:%.c $(INC)
-	gcc -I $(INC) $(FLAGS) -c $< -o $@
+	@gcc -I $(INC) $(FLAGS) -c $< -o $@
 
 clean:
 	@rm -rf srcs_cor/*.o
