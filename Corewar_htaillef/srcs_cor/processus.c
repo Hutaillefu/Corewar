@@ -15,9 +15,14 @@
 
 void	start_processus(t_cor *cor, t_chmp *chmp)
 {
-	//printf("chmp->name %s\n", chmp->name);
+	printf("Exec instruction %d for chmp %s\n", chmp->op.opcode, chmp->name);
 	if (chmp->op.opcode == 1)
 		i_live(chmp, cor);
+	if (chmp->op.opcode == 2)
+	{
+		printf("Calling ld\n");
+		i_ld(chmp, cor->vm);
+	}
 	if (chmp->op.opcode == 11)
 		i_sti(chmp, cor->vm);
 	else if (chmp->op.opcode == 4)
@@ -29,7 +34,9 @@ void	start_processus(t_cor *cor, t_chmp *chmp)
 	else if (chmp->op.opcode == 7)
 		i_or(chmp, cor->vm);	
 	else if (chmp->op.opcode == 8)
-		i_xor(chmp, cor->vm);	
+		i_xor(chmp, cor->vm);
+	else if (chmp->op.opcode == 13)
+		i_lld(chmp, cor->vm);	
 	//printf("pc: %d\n", chmp->pc);
 	chmp->pc += chmp->op_size;
 	//printf("pc: %d\n", chmp->pc);

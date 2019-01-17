@@ -131,7 +131,8 @@ void	i_and(t_chmp *chmp, t_vm *vm);
 void	i_or(t_chmp *chmp, t_vm *vm);
 void	i_xor(t_chmp *chmp, t_vm *vm);
 void	i_live(t_chmp *chmp, t_cor *cor);
-
+void	i_ld(t_chmp *chmp, t_vm *vm);
+void	i_lld(t_chmp *chmp, t_vm *vm);
 
 // <br>* Champion sans nom / sans commentaire
 // <br>* Champion avec un nom ou un commentaire trop long

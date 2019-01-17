@@ -5,19 +5,24 @@
 */
 int    read_next_uint(t_vm *vm, int index, int bytes_len)
 {
+	int	i;
+	int dec;
 	unsigned int res;
 
+	if (!vm)
+		return (0);
+	i = 0;
 	res = 0;
-	if (bytes_len == 1)
-		return (res | (int)vm->area[index]);
-	else if (bytes_len == 2)
-		return (res | (int)vm->area[index] << 8 | (int)vm->area[index + 1]);
-	else if (bytes_len == 4)
-		return (res | (int)vm->area[index] << 24 |
-		(int)vm->area[index + 1] << 16 |
-		(int)vm->area[index + 2] << 8 |
-		(int)vm->area[index + 3]);
-	return (-1);
+	dec = (bytes_len - 1) * 8;
+	while (i < bytes_len)
+	{
+		if (index + i >= MEM_SIZE)
+			index = -i;
+		res |= vm->area[index + i] << dec;
+		i++;
+		dec -=8;
+	}
+	return (res);
 }
 
 /*
@@ -64,8 +69,11 @@ int		extract_param(t_vm *vm, t_chmp *chmp, int param_index, int coding_byte)
 	
 	if (!vm || !chmp)
 		return (0);
+
 	mask = chmp->op.param_mask[param_index];
-	if (read_coding_byte(coding_byte, param_index + 1) == REG_CODE && (REG_CODE & mask)) // octect codage indique REG et op_tab aussi
+
+
+	if (read_coding_byte(coding_byte, param_index + 1) == REG_CODE && (T_REG & mask)) // octect codage indique REG et op_tab aussi
 	{
 		res = read_next_uint(vm, chmp->pc, 1);
 		chmp->param[param_index][0] = res;
@@ -73,7 +81,7 @@ int		extract_param(t_vm *vm, t_chmp *chmp, int param_index, int coding_byte)
 		(chmp->pc)++;
 		return (1);
 	}
-	else if (read_coding_byte(coding_byte, param_index + 1) == DIR_CODE && (DIR_CODE & mask) == DIR_CODE)
+	else if (read_coding_byte(coding_byte, param_index + 1) == DIR_CODE && (T_DIR & mask) == T_DIR)
 	{
 		res = read_next_uint(vm, chmp->pc, chmp->op.dir_size == 0 ? 4 : 2);
 		chmp->param[param_index][0] = res;
@@ -81,7 +89,7 @@ int		extract_param(t_vm *vm, t_chmp *chmp, int param_index, int coding_byte)
 		chmp->pc += chmp->op.dir_size == 0 ? 4 : 2;
 		return (1);
 	}
-	else if (read_coding_byte(coding_byte, param_index + 1) == IND_CODE && (IND_CODE & mask) == IND_CODE)
+	else if (read_coding_byte(coding_byte, param_index + 1) == IND_CODE && (T_IND & mask) == T_IND)
 	{
 		res = read_next_uint(vm, chmp->pc, 2);
 		chmp->param[param_index][0] = res;
@@ -116,9 +124,15 @@ int		extract_params(t_vm *vm, t_chmp *chmp, int coding_byte)
 		return 23; // process non byte coding : live, lfork, ..
 	init_param(chmp);
 	if (chmp->op.nb_params >= 1 && !extract_param(vm, chmp, 0, coding_byte))
+	{
+		printf("error 1 param\n");
 		return (0);
+	}
 	if (chmp->op.nb_params >= 2 && !extract_param(vm, chmp, 1, coding_byte))
+	{
+		printf("error 2 param\n");
 		return (0);
+	}
 	if (chmp->op.nb_params == 3 && !extract_param(vm, chmp, 2, coding_byte))
 		return (0);
 	return (1);
@@ -144,7 +158,10 @@ int     exec_process(t_vm *vm, t_chmp *chmp)
 		coding_byte = (int)vm->area[++(chmp->pc)];
 	(chmp->pc)++;
 	if (!extract_params(vm, chmp, coding_byte))
+	{
+		printf("Extract params error for instruction %s with %d params\n", op.name, op.nb_params);
 		return (0);
+	}
 	chmp->op_size = chmp->pc - pc_base;
 	chmp->pc = pc_base;
 	return (1);
