@@ -34,6 +34,8 @@ void	start_processus(t_cor *cor, t_chmp *chmp)
 		i_or(chmp, cor->vm);	
 	else if (chmp->op.opcode == 8)
 		i_xor(chmp, cor->vm);
+	else if (chmp->op.opcode == 9)
+		i_zjmp(chmp, cor->vm);
 	else if (chmp->op.opcode == 10)
 		i_ldi(chmp, cor->vm);
 	else if (chmp->op.opcode == 13)

@@ -135,18 +135,29 @@ void	ft_flag_dump(t_cor *c);
 /*
 ** commande
 */
-void	i_add(t_chmp *chmp, t_vm *vm);
+//void	i_lfork(t_chmp *chmp, t_vm *vm);
 void	i_sti(t_chmp *chmp, t_vm *vm);
-void	i_sub(t_chmp *chmp, t_vm *vm);
-void	i_and(t_chmp *chmp, t_vm *vm);
-void	i_or(t_chmp *chmp, t_vm *vm);
-void	i_xor(t_chmp *chmp, t_vm *vm);
-void	i_live(t_chmp *chmp, t_cor *cor);
-void	i_ld(t_chmp *chmp, t_vm *vm);
+//void	i_fork(t_chmp *chmp, t_vm *vm);
 void	i_lld(t_chmp *chmp, t_vm *vm);
-void	i_st(t_chmp *chmp, t_vm *vm);
+void	i_ld(t_chmp *chmp, t_vm *vm);
+void	i_add(t_chmp *chmp, t_vm *vm);
+void	i_zjmp(t_chmp *chmp, t_vm *vm);
+void	i_sub(t_chmp *chmp, t_vm *vm);
 void	i_ldi(t_chmp *chmp, t_vm *vm);
+void	i_or(t_chmp *chmp, t_vm *vm);
+void	i_st(t_chmp *chmp, t_vm *vm);
+char	i_aff(t_chmp *chmp, t_vm *vm);
+void	i_live(t_chmp *chmp, t_cor *cor);
+void	i_xor(t_chmp *chmp, t_vm *vm);
 void	i_lldi(t_chmp *chmp, t_vm *vm);
+void	i_and(t_chmp *chmp, t_vm *vm);
+
+
+
+
+
+
+
 
 // <br>* Champion sans nom / sans commentaire
 // <br>* Champion avec un nom ou un commentaire trop long

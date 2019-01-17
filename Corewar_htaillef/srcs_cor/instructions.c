@@ -104,6 +104,15 @@ void	i_sti(t_chmp *chmp, t_vm *vm)
 	write_uint(vm, p3, addr, REG_SIZE);
 }
 
+void	i_zjmp(t_chmp *chmp, t_vm *vm)
+{
+	int p1;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
+	if (chmp->carry)
+		chmp->pc = p1;
+}
+
 // Should be ok
 void	i_ldi(t_chmp *chmp, t_vm *vm)
 {
