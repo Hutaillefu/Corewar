@@ -19,10 +19,9 @@ void	start_processus(t_cor *cor, t_chmp *chmp)
 	if (chmp->op.opcode == 1)
 		i_live(chmp, cor);
 	if (chmp->op.opcode == 2)
-	{
-		printf("Calling ld\n");
 		i_ld(chmp, cor->vm);
-	}
+	if (chmp->op.opcode == 3)
+		i_st(chmp, cor->vm);
 	if (chmp->op.opcode == 11)
 		i_sti(chmp, cor->vm);
 	else if (chmp->op.opcode == 4)

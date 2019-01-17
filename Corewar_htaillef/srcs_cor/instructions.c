@@ -122,10 +122,31 @@ void	i_lldi(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
+	int addr;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0], 0);
 	p2 = get_param_value(vm, chmp, chmp->param[1], 0);
-	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, (chmp->pc + p1 + p2) % MEM_SIZE, REG_SIZE);
+	addr = (chmp->pc + p1 + p2) % MEM_SIZE;
+	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
+}
+
+void	i_st(t_chmp *chmp, t_vm *vm)
+{
+	int p1;
+	int	p2;
+	int addr;
+
+	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
+	p2 = chmp->param[1][0];
+	if (chmp->param[1][1] == IND_CODE)
+	{
+		addr = (chmp->pc + p2) % (chmp->pc_b + IDX_MOD); 
+		write_uint(vm, p1, addr, REG_SIZE);
+	}
+	else if (chmp->param[1][1] == REG_CODE)
+		chmp->reg[p2 - 1] = p1;
+	
 }
 
 // Should be ok
