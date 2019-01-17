@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:32:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 15:55:47 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:29:02 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -23,14 +23,12 @@ int	little_endian(int value)
 	(value & 0xFF000000) >> 24 | (value & 0x00FF0000) >> 8);
 }
 
-void		read_infos(t_cor *c, char **av)
+void		read_infos(t_cor *c)
 {
 	t_header *h;
 	int fd;
-	int j;
 	int i;
 
-	// j = 0;
 	i = -1;
 	while (++i < c->vm->nb_player)
 	{
