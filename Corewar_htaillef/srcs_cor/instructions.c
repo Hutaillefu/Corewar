@@ -51,6 +51,33 @@ int		get_param_value(t_vm *vm, t_chmp *chmp, int param, int type)
 	return (-1);
 }
 
+/*
+  ** Return the champion with num 'champ_num' or null.
+*/
+t_chmp	*get_chmp_by_num(t_cor 	*cor, int champ_num)
+{
+	int i;
+
+	i = -1;
+	while (++i < MAX_PLAYERS && cor->chmp[i])
+	{
+		if (cor->chmp[i]->num == champ_num)
+			return (cor->chmp[i]);
+	}
+	return (NULL);
+}
+
+void	i_live(t_chmp *chmp, t_cor *cor)
+{
+	int 	champ_num;
+	t_chmp	*selected_chmp;
+
+	champ_num = read_next_uint(cor->vm, chmp->pc + 1, 4);
+	if (!(selected_chmp = get_chmp_by_num(cor, champ_num)))
+		return ;
+	selected_chmp->lives++;
+}
+
 // Should be ok
 void	i_sti(t_chmp *chmp, t_vm *vm)
 {
@@ -72,10 +99,13 @@ void	i_ldi(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
+	int addr;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
-	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, (chmp->pc + p1 + p2) % (chmp->pc_b + IDX_MOD), REG_SIZE);
+	addr = (chmp->pc + p1 + p2) % (chmp->pc_b + IDX_MOD);
+	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
 }
 
 void	i_lldi(t_chmp *chmp, t_vm *vm)

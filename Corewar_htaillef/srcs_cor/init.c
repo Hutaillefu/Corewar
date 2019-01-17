@@ -43,10 +43,12 @@ void	init_chmp(t_cor *c)
 		c->chmp[i]->pc = 0 + (MEM_SIZE / c->vm->nb_player) * i;
 		c->chmp[i]->pc_b = c->chmp[i]->pc;
 		c->chmp[i]->exec = 0;
+		c->chmp[i]->lives = 0;
 		c->chmp[i]->op_size = 0;
 		while (++j < REG_NUMBER)
 			c->chmp[i]->reg[j] = 0;
 		c->chmp[i]->reg[0] = (i + 1) * -1;
+		c->chmp[i]->num = c->chmp[i]->reg[0];
 		c->chmp[i]->carry = 0;
 	}
 }

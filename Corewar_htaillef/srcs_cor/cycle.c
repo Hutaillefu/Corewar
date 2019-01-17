@@ -29,7 +29,7 @@ void	cycle(t_cor *c)
 				//printf("\nc->chmp[%d]->exec: %d || cycle: %d || pc %d\n\n", player, c->chmp[player]->exec, c->vm->cycle, c->chmp[player]->pc);
 				if (c->chmp[player]->exec == c->vm->cycle)
 				{
-					start_processus(c->chmp[player], c->vm);
+					start_processus(c, c->chmp[player]);
 				}
 				if (c->chmp[player]->exec == 0)
 				{
