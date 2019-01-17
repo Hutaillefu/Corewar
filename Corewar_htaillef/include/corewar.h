@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 16:39:58 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:31:40 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -103,8 +103,10 @@ void				check_infos(t_cor *c);
 /*
 ** read_infos
 */
-void				read_infos(t_cor *c, char **av);
+void		read_infos(t_cor *c);
 int	little_endian(int value);
+int    read_next_uint(t_vm *vm, int index, int bytes_len);
+
 
 /*
 ** cycle
@@ -117,8 +119,11 @@ int     	exec_process(t_vm *vm, t_chmp *chmp);
 ** processus
 */
 void	start_processus(t_cor *cor, t_chmp *chmp);
-void	load_processus(int start, t_cor *c, t_chmp *chmp);
+void	load_processus(int start, t_chmp *chmp);
 
+/*
+** commande
+*/
 void	i_add(t_chmp *chmp, t_vm *vm);
 void	i_sti(t_chmp *chmp, t_vm *vm);
 void	i_sub(t_chmp *chmp, t_vm *vm);
@@ -126,4 +131,17 @@ void	i_and(t_chmp *chmp, t_vm *vm);
 void	i_or(t_chmp *chmp, t_vm *vm);
 void	i_xor(t_chmp *chmp, t_vm *vm);
 void	i_live(t_chmp *chmp, t_cor *cor);
+
+
+// <br>* Champion sans nom / sans commentaire
+// <br>* Champion avec un nom ou un commentaire trop long
+// <br>* Champion sans code
+// <br>
+// <br>De nombreuses façons de gérer ces erreurs sont acceptables, comme par exemple :
+// <br>* Refuser de compiler le champion
+// <br>* Refuser de lancer le champion
+// <br>* Corriger automatiquement le champion
+// <br>* Lancer le champion même s'il n'a a
+
+
 #endif

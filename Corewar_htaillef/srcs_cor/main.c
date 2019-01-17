@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 15:04:49 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 15:46:54 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:29:31 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,12 +27,10 @@ void	check_infos(t_cor *c)
 int		main(int ac, char **av)
 {
 	t_cor *c;
-	char *line;
-	unsigned int len;
 
 	c = ft_memalloc(sizeof(t_cor));
 	init_vm(c, av, ac);
-	read_infos(c, av);
+	read_infos(c);
 	check_infos(c);
 	init_map(c);
 	// exec_process(c->vm, c->chmp[0]);
@@ -44,6 +42,7 @@ int		main(int ac, char **av)
 	// 	i_sti(c->chmp[0], c->vm);
 
 	cycle(c);
-	print_map(c, 64);
+	// print_map(c, 64);
+	ft_printf("Le gagnant est %s\n", c->chmp[0]->name);
 	return (0);
 }

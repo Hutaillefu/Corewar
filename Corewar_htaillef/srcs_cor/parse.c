@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 17:15:35 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:28:30 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -28,7 +28,6 @@ int		check_dump(t_cor *c, char **av, int i)
 int     check_parse(t_cor *c, char **av, int ac)
 {
 	int i;
-	int fd;
 	char *tmp;
 
 	i = 1;

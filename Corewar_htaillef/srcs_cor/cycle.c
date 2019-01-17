@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 15:50:10 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:31:34 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ void	cycle(t_cor *c)
 				{
 					if (exec_process(c->vm, c->chmp[player]) == 1)
 					{
-						load_processus(c->vm->cycle, c, c->chmp[player]);
+						load_processus(c->vm->cycle, c->chmp[player]);
 					}
 				}
 				else

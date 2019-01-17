@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 16:51:41 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:36:08 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,11 +19,13 @@ void	init_map(t_cor *c)
 	int start;
 	int player;
 
-	player = 0;
+	player = -1;
 	start = MEM_SIZE / c->vm->nb_player;
-	ft_memcpy(c->vm->area, c->chmp[player]->infos, c->chmp[player]->champ_size);
 	while (++player < c->vm->nb_player)
+	{
+		ft_printf("Player %d, weighing %u bytes, \"%s\" (%s) !\n", (player + 1), c->chmp[player]->champ_size, c->chmp[player]->name, c->chmp[player]->comment);
 		ft_memsub(c->vm->area, c->chmp[player]->infos, (start * player), c->chmp[player]->champ_size);
+	}
 }
 
 void	init_chmp(t_cor *c)

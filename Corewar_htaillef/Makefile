@@ -6,7 +6,7 @@
 #    By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/09 16:36:19 by gzanarel     #+#   ##    ##    #+#        #
-#    Updated: 2019/01/16 13:47:29 by gzanarel    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/01/17 15:27:54 by gzanarel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -48,7 +48,7 @@ $(NAME): $(OBJ_C)
 	@echo "\n\033[32;01m./corewar.. done !\033[00m\n"
 
 %.o:%.c $(INC)
-	gcc -I $(INC) -c $< -o $@
+	gcc -I $(INC) $(FLAGS) -c $< -o $@
 
 clean:
 	@rm -rf srcs_cor/*.o

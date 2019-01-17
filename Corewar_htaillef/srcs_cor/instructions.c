@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/16 16:52:46 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/01/17 15:30:15 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -135,7 +135,6 @@ void	i_sub(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int	p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
@@ -147,7 +146,6 @@ void	i_and(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int	p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
@@ -159,7 +157,6 @@ void	i_or(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int	p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
@@ -171,7 +168,6 @@ void	i_xor(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 	int p2;
-	int	p3;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	p2 = get_param_value(vm, chmp, chmp->param[1][0], chmp->param[1][1]);
@@ -182,7 +178,6 @@ void	i_xor(t_chmp *chmp, t_vm *vm)
 void	i_ld(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
-	int p2;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0][0], chmp->param[0][1]);
 	chmp->reg[chmp->param[1][0] - 1] = p1;

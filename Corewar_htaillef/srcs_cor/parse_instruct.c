@@ -5,22 +5,19 @@
 */
 int    read_next_uint(t_vm *vm, int index, int bytes_len)
 {
-	unsigned int	res;
-	int				i;
-	int				dec;
+	unsigned int res;
 
 	res = 0;
-	i = 0;
-	dec = (bytes_len - 1) * 8;
-	while (i < bytes_len)
-	{
-		if (index + i >= MEM_SIZE)
-			index = -i;
-		res |= (int)vm->area[index + i] << dec;
-		dec -= 8;
-		i++;
-	}
-	return (res);
+	if (bytes_len == 1)
+		return (res | (int)vm->area[index]);
+	else if (bytes_len == 2)
+		return (res | (int)vm->area[index] << 8 | (int)vm->area[index + 1]);
+	else if (bytes_len == 4)
+		return (res | (int)vm->area[index] << 24 |
+		(int)vm->area[index + 1] << 16 |
+		(int)vm->area[index + 2] << 8 |
+		(int)vm->area[index + 3]);
+	return (-1);
 }
 
 /*
