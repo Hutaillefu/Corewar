@@ -1,4 +1,6 @@
-.name "gzanarel The Winner or not"
+.name "htaillef The Winner or not"
 .comment "just a basic living prog"
 
-lives:	live %66
+zjmp %10
+sti r1,%1,%1
+sti r1,%1,%1

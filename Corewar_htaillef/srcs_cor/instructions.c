@@ -81,7 +81,7 @@ void	i_live(t_chmp *chmp, t_cor *cor)
 	int 	champ_num;
 	t_chmp	*selected_chmp;
 
-	champ_num = read_next_uint(cor->vm, chmp->pc + 1, 4);
+	champ_num = get_param_value(cor->vm, chmp, chmp->param[0], 1);
 	if (!(selected_chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
 	selected_chmp->lives++;
@@ -109,8 +109,16 @@ void	i_zjmp(t_chmp *chmp, t_vm *vm)
 	int p1;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
-	if (chmp->carry)
-		chmp->pc = p1;
+	printf("Jmp p1 : %d\n", p1);
+	//if (chmp->carry)
+	//chmp->pc = 0;
+	if ((unsigned int)p1 >= chmp->champ_size)
+	{
+		printf("Jmp cancel cause to long\n");
+		return ;
+	}
+	chmp->pc = 0;
+	chmp->op_size = p1;
 }
 
 // Should be ok
@@ -233,11 +241,18 @@ void	i_lld(t_chmp *chmp, t_vm *vm)
 /*
   ** Content of register process as ascii char % 256.
 */
-
 char	i_aff(t_chmp *chmp, t_vm *vm)
 {
 	int p1;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	return ((unsigned char)(p1 % 256));
+}
+
+void	i_fork(t_chmp *chmp, t_cor *cor)
+{
+	int p1;
+
+	p1 = get_param_value(cor->vm, chmp, chmp->param[0], 1);
+	// add_process(vm, chmp, p1)
 }

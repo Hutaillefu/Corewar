@@ -15,7 +15,7 @@
 
 void	start_processus(t_cor *cor, t_chmp *chmp)
 {
-	printf("Exec instruction %d for chmp %s\n", chmp->op.opcode, chmp->name);
+//	printf("Exec instruction %d for chmp %s\n", chmp->op.opcode, chmp->name);
 	if (chmp->op.opcode == 1)
 		i_live(chmp, cor);
 	if (chmp->op.opcode == 2)
@@ -44,7 +44,7 @@ void	start_processus(t_cor *cor, t_chmp *chmp)
 		i_lldi(chmp, cor->vm);	
 	//printf("pc: %d\n", chmp->pc);
 	chmp->pc += chmp->op_size;
-	//printf("pc: %d\n", chmp->pc);
+	printf("pc: %d\n", chmp->pc);
 	chmp->exec = 0;
 }
 

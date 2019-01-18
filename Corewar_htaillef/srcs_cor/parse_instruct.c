@@ -71,9 +71,7 @@ int		extract_param(t_vm *vm, t_chmp *chmp, int param_index, int coding_byte)
 		return (0);
 
 	mask = chmp->op.param_mask[param_index];
-
-
-	if (read_coding_byte(coding_byte, param_index + 1) == REG_CODE && (T_REG & mask)) // octect codage indique REG et op_tab aussi
+	if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == REG_CODE : 1 && (T_REG & mask))
 	{
 		res = read_next_uint(vm, chmp->pc, 1);
 		chmp->param[param_index][0] = res;
@@ -81,7 +79,7 @@ int		extract_param(t_vm *vm, t_chmp *chmp, int param_index, int coding_byte)
 		(chmp->pc)++;
 		return (1);
 	}
-	else if (read_coding_byte(coding_byte, param_index + 1) == DIR_CODE && (T_DIR & mask) == T_DIR)
+	else if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == DIR_CODE : 1 && (T_DIR & mask) == T_DIR)
 	{
 		res = read_next_uint(vm, chmp->pc, chmp->op.dir_size == 0 ? 4 : 2);
 		chmp->param[param_index][0] = res;
@@ -89,7 +87,7 @@ int		extract_param(t_vm *vm, t_chmp *chmp, int param_index, int coding_byte)
 		chmp->pc += chmp->op.dir_size == 0 ? 4 : 2;
 		return (1);
 	}
-	else if (read_coding_byte(coding_byte, param_index + 1) == IND_CODE && (T_IND & mask) == T_IND)
+	else if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == IND_CODE : 1 && (T_IND & mask) == T_IND)
 	{
 		res = read_next_uint(vm, chmp->pc, 2);
 		chmp->param[param_index][0] = res;
@@ -120,8 +118,6 @@ int		extract_params(t_vm *vm, t_chmp *chmp, int coding_byte)
 {
 	if (!vm || !(vm->area) || !(chmp))
 		return (0);
-	if (coding_byte == -1)
-		return 23; // process non byte coding : live, lfork, ..
 	init_param(chmp);
 	if (chmp->op.nb_params >= 1 && !extract_param(vm, chmp, 0, coding_byte))
 	{
