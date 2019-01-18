@@ -109,16 +109,16 @@ void	i_zjmp(t_chmp *chmp, t_vm *vm)
 	int p1;
 
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
-	printf("Jmp p1 : %d\n", p1);
-	//if (chmp->carry)
-	//chmp->pc = 0;
 	if ((unsigned int)p1 >= chmp->champ_size)
 	{
-		printf("Jmp cancel cause to long\n");
+		printf("IDK if Jmp must be cancel if param > chmp->size or apply modulo\n");
 		return ;
 	}
-	chmp->pc = 0;
-	chmp->op_size = p1;
+	if (chmp->carry)
+	{
+		chmp->pc = 0;
+		chmp->op_size = p1;
+	}
 }
 
 // Should be ok
