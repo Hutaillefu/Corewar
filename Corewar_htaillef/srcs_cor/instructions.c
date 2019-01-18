@@ -146,6 +146,7 @@ void	i_lldi(t_chmp *chmp, t_vm *vm)
 	addr = (chmp->pc + p1 + p2) % MEM_SIZE;
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	chmp->reg[chmp->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
+	chmp->carry = !chmp->reg[chmp->param[2][0] - 1];
 }
 
 void	i_st(t_chmp *chmp, t_vm *vm)
@@ -175,7 +176,7 @@ void	i_add(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	p2 = get_param_value(vm, chmp, chmp->param[1], 1);
 	chmp->reg[chmp->param[2][0] - 1] = p1 + p2;
-	//chmp->carry = chmp->reg[chmp->param[2][0] - 1] == 0; How to manage carry ?
+	chmp->carry = !chmp->reg[chmp->param[2][0] - 1];
 }
 
 // Should be ok
@@ -187,6 +188,7 @@ void	i_sub(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	p2 = get_param_value(vm, chmp, chmp->param[1], 1);
 	chmp->reg[chmp->param[2][0] - 1] = p1 - p2;
+	chmp->carry = !chmp->reg[chmp->param[2][0] - 1];
 }
 
 // Should be ok
@@ -198,6 +200,7 @@ void	i_and(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	p2 = get_param_value(vm, chmp, chmp->param[1], 1);
 	chmp->reg[chmp->param[2][0] - 1] = p1 & p2;
+	chmp->carry = !chmp->reg[chmp->param[2][0] - 1];
 }
 
 // Should be ok
@@ -209,6 +212,7 @@ void	i_or(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	p2 = get_param_value(vm, chmp, chmp->param[1], 1);
 	chmp->reg[chmp->param[2][0] - 1] = p1 | p2;
+	chmp->carry = !chmp->reg[chmp->param[2][0] - 1];
 }
 
 // Should be ok
@@ -220,6 +224,7 @@ void	i_xor(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	p2 = get_param_value(vm, chmp, chmp->param[1], 1);
 	chmp->reg[chmp->param[2][0] - 1] = p1 ^ p2;
+	chmp->carry = !chmp->reg[chmp->param[2][0] - 1];
 }
 
 void	i_ld(t_chmp *chmp, t_vm *vm)
@@ -228,6 +233,7 @@ void	i_ld(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	chmp->reg[chmp->param[1][0] - 1] = p1;
+	chmp->carry = !chmp->reg[chmp->param[1][0] - 1];
 }
 
 void	i_lld(t_chmp *chmp, t_vm *vm)
@@ -236,6 +242,7 @@ void	i_lld(t_chmp *chmp, t_vm *vm)
 
 	p1 = get_param_value(vm, chmp, chmp->param[0], 0);
 	chmp->reg[chmp->param[1][0] - 1] = p1;
+	chmp->carry = !chmp->reg[chmp->param[1][0] - 1];
 }
 
 /*
