@@ -111,7 +111,7 @@ void	i_zjmp(t_chmp *chmp, t_vm *vm)
 	p1 = get_param_value(vm, chmp, chmp->param[0], 1);
 	if (chmp->carry)
 	{
-		chmp->pc = 0;
+		chmp->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : chmp->pc += chmp->op_size;
 		chmp->op_size = p1 % (chmp->pc_b + IDX_MOD);
 	}
 }
