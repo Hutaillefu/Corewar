@@ -53,12 +53,12 @@ void	ft_print_hst(t_prnt *p)
 		if (p->spe == 'o' || p->spe == 'O' || p->spe == 'x' ||
 		p->spe == 'X' || p->spe == 'p')
 		{
-			if ((p->spe == 'x' && p->arg != '\0') || p->spe == 'p')
+			if ((p->spe == 'x') || p->spe == 'p')
 			{
 				ft_putchar_p('0', p);
 				ft_putchar_p('x', p);
 			}
-			else if (p->spe == 'X' && p->arg != '\0')
+			else if (p->spe == 'X')
 			{
 				ft_putchar_p('0', p);
 				ft_putchar_p('X', p);

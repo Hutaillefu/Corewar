@@ -41,46 +41,29 @@ void	init_num_chmp(t_cor *c, int i)
 				c->vm->num[i] += 1;
 				j = -1;
 			}
-		c->chmp[i]->reg[0] = c->vm->num[i] * -1;
 		c->chmp[i]->num = c->vm->num[i] * -1;
 	}
 	else
 	{
-		c->chmp[i]->reg[0] = (i + 1) * -1;
-		while (++j < i)
-			if (c->chmp[j]->num == c->chmp[i]->reg[0])
-			{
-				c->chmp[i]->reg[0] -= 1;
-				j = -1;
-			}
-		c->chmp[i]->num = c->chmp[i]->reg[0];
+		c->chmp[i]->num = (i + 1) * -1;
 	}
 }
 
 void	init_chmp(t_cor *c)
 {
 	int i;
-	int j;
 
 	i = -1;
+	c->proc = malloc(sizeof(t_list2)); // a securiser
 	while (++i < c->vm->nb_player)
 	{
-		j = 0;
 		c->chmp[i] = malloc(sizeof(t_chmp));
 		c->chmp[i]->champ_size = 0;
 		c->chmp[i]->name = NULL;
 		c->chmp[i]->comment = NULL;
 		c->chmp[i]->infos = NULL;
-		c->chmp[i]->pc = 0 + (MEM_SIZE / c->vm->nb_player) * i;
-		c->chmp[i]->pc_b = c->chmp[i]->pc;
-		c->chmp[i]->exec = 0;
-		c->chmp[i]->lives = 0;
-		c->chmp[i]->last_live = 0;
-		c->chmp[i]->op_size = 0;
-		while (++j < REG_NUMBER)
-			c->chmp[i]->reg[j] = 0;
 		init_num_chmp(c, i);
-		c->chmp[i]->carry = 0;
+		add_element_end(c->proc, c, c->chmp[i], i);
 	}
 }
 
@@ -91,8 +74,8 @@ void	init_vm(t_cor *c, char **av, int ac)
 	j = -1;
 	c->vm = ft_memalloc(sizeof(t_vm));
 	c->vm->cycle_delta = CYCLE_DELTA;
-	c->cycle_to_die = 1536;
-	c->vm->nb_live = NBR_LIVE;
+	c->vm->cycle_to_die = CYCLE_TO_DIE;
+	c->vm->nb_live = 0;
 	c->vm->nb_player = 0;
 	if (!(c->vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE))))
 		ft_exit(1);
