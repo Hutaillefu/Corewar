@@ -259,7 +259,15 @@ char	i_aff(t_node *proc, t_vm *vm)
 void	i_fork(t_node *proc, t_cor *cor)
 {
 	int p1;
+	t_node *child;
+
 
 	p1 = get_param_value(cor->vm, proc, proc->param[0], 1);
-	// add_process(vm, proc, p1)
+	printf("Fork execution with param %d\n", p1);
+	if (!(child = clone_proc(proc)))
+		return ;
+	child->pc = proc->pc + (p1 % (proc->pc_b + IDX_MOD));
+	child->pc_b = child->pc;
+	push_back(&(cor->proc), child);
+	printf("New proc added\n");
 }

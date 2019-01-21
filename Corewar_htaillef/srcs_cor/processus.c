@@ -15,15 +15,13 @@
 
 void	start_processus(t_cor *cor, t_node *proc)
 {
-//	printf("Exec instruction %d for chmp %s\n", chmp->op.opcode, chmp->name);
+	printf("Exec instruction %s of size %d\n", proc->op.name, proc->op_size);
 	if (proc->op.opcode == 1)
 		i_live(proc, cor);
 	if (proc->op.opcode == 2)
 		i_ld(proc, cor->vm);
 	if (proc->op.opcode == 3)
 		i_st(proc, cor->vm);
-	if (proc->op.opcode == 11)
-		i_sti(proc, cor->vm);
 	else if (proc->op.opcode == 4)
 		i_add(proc, cor->vm);
 	else if (proc->op.opcode == 5)
@@ -38,6 +36,10 @@ void	start_processus(t_cor *cor, t_node *proc)
 		i_zjmp(proc, cor->vm);
 	else if (proc->op.opcode == 10)
 		i_ldi(proc, cor->vm);
+	if (proc->op.opcode == 11)
+		i_sti(proc, cor->vm);
+	if (proc->op.opcode == 12)
+		i_fork(proc, cor);
 	else if (proc->op.opcode == 13)
 		i_lld(proc, cor->vm);
 	else if (proc->op.opcode == 14)

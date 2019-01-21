@@ -98,7 +98,9 @@ typedef struct	s_cor
 /*
 ** list
 */
-void	add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
+void			add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
+t_node			*clone_proc(t_node *parent);
+void			push_back(t_list2 **lst, t_node *proc);
 
 
 /*
@@ -160,7 +162,7 @@ void	ft_flag_dump(t_cor *c);
 */
 //void	i_lfork(t_chmp *chmp, t_vm *vm);
 void	i_sti(t_node *proc, t_vm *vm);
-//void	i_fork(t_chmp *chmp, t_vm *vm);
+void	i_fork(t_node *proc, t_cor *cor);
 void	i_lld(t_node *proc, t_vm *vm);
 void	i_ld(t_node *proc, t_vm *vm);
 void	i_add(t_node *proc, t_vm *vm);

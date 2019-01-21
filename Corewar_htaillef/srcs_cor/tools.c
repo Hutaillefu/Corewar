@@ -13,10 +13,10 @@
 
 #include "../include/corewar.h"
 
-t_node	*create_list(t_cor *c, t_chmp *chmp, int i)
+t_node	*create_proc(t_cor *c, t_chmp *chmp, int i)
 {
-	t_node *mll;
-	int j;
+	t_node	*mll;
+	int		j;
 
 	j = -1;
 	if (!(mll = (t_node *)malloc(sizeof(t_node))))
@@ -36,11 +36,33 @@ t_node	*create_list(t_cor *c, t_chmp *chmp, int i)
 	return (mll);
 }
 
+t_node	*clone_proc(t_node *parent)
+{
+	t_node	*mll;
+	int		j;
+
+	j = -1;
+	if (!(mll = (t_node *)malloc(sizeof(t_node))))
+		return (NULL);
+	mll->carry = parent->carry;
+	mll->pc = parent->pc;
+	mll->pc_b = parent->pc_b;
+	mll->op_size = 0;
+	mll->exec = 0;
+	while (++j < REG_NUMBER)
+		mll->reg[j] = parent->reg[j];
+	mll->next = NULL;
+	mll->prev = NULL;
+	mll->last_live = parent->last_live;
+	mll->lives = parent->lives;
+	return (mll);
+}
+
 void	add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i)
 {
 	t_node *new;
 
-	if (!lst || !(new = create_list(c, chmp, i)))
+	if (!lst || !(new = create_proc(c, chmp, i)))
 		return ;
 	if (!((*lst)->tail))
 	{
@@ -51,7 +73,23 @@ void	add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i)
 	{
 		(*lst)->tail->next = new;
 		new->prev = (*lst)->tail;
-		//(*lst)->tail = new;
+	}
+	(*lst)->len++;
+}
+
+void	push_back(t_list2 **lst, t_node *proc)
+{
+	if (!lst)
+		return ;
+	if (!((*lst)->tail))
+	{
+		(*lst)->head = proc;
+		(*lst)->tail = proc;
+	}
+	else
+	{
+		(*lst)->tail->next = proc;
+		proc->prev = (*lst)->tail;
 	}
 	(*lst)->len++;
 }
