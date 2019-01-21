@@ -160,7 +160,7 @@ void	ft_flag_dump(t_cor *c);
 /*
 ** commande
 */
-//void	i_lfork(t_chmp *chmp, t_vm *vm);
+void	i_lfork(t_node *proc, t_cor *cor);
 void	i_sti(t_node *proc, t_vm *vm);
 void	i_fork(t_node *proc, t_cor *cor);
 void	i_lld(t_node *proc, t_vm *vm);

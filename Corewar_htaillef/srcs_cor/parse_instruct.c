@@ -121,12 +121,12 @@ int		extract_params(t_vm *vm, t_node *proc, int coding_byte)
 	init_param(proc);
 	if (proc->op.nb_params >= 1 && !extract_param(vm, proc, 0, coding_byte))
 	{
-		printf("error 1 param\n");
+		//printf("error 1 param\n");
 		return (0);
 	}
 	if (proc->op.nb_params >= 2 && !extract_param(vm, proc, 1, coding_byte))
 	{
-		printf("error 2 param\n");
+		//printf("error 2 param\n");
 		return (0);
 	}
 	if (proc->op.nb_params == 3 && !extract_param(vm, proc, 2, coding_byte))
@@ -155,11 +155,10 @@ int     exec_process(t_vm *vm, t_node *proc)
 	(proc->pc)++;
 	if (!extract_params(vm, proc, coding_byte))
 	{
-		printf("Extract params error for instruction %s with %d params\n", op.name, op.nb_params);
+		//printf("Extract params error for instruction %s with %d params\n", op.name, op.nb_params);
 		return (0);
 	}
 	proc->op_size = proc->pc - pc_base;
-	printf("pc : %d, base : %d\n", proc->pc, pc_base);
 	proc->pc = pc_base;
 	return (1);
 }
