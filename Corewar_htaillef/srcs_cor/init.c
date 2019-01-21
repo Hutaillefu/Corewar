@@ -54,16 +54,18 @@ void	init_chmp(t_cor *c)
 	int i;
 
 	i = -1;
-	c->proc = malloc(sizeof(t_list2)); // a securiser
+	c->proc = (t_list2 *)malloc(sizeof(t_list2)); // a securiser
+	c->proc->head = NULL;
+	c->proc->tail = NULL;
 	while (++i < c->vm->nb_player)
 	{
-		c->chmp[i] = malloc(sizeof(t_chmp));
+		c->chmp[i] = (t_chmp *)malloc(sizeof(t_chmp));
 		c->chmp[i]->champ_size = 0;
 		c->chmp[i]->name = NULL;
 		c->chmp[i]->comment = NULL;
 		c->chmp[i]->infos = NULL;
 		init_num_chmp(c, i);
-		add_element_end(c->proc, c, c->chmp[i], i);
+		add_element_end(&(c->proc), c, c->chmp[i], i);
 	}
 }
 
@@ -77,6 +79,7 @@ void	init_vm(t_cor *c, char **av, int ac)
 	c->vm->cycle_to_die = CYCLE_TO_DIE;
 	c->vm->nb_live = 0;
 	c->vm->nb_player = 0;
+	c->vm->chmp_win_num = 0;
 	if (!(c->vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE))))
 		ft_exit(1);
 	ft_memset(c->vm->area, 0, MEM_SIZE);

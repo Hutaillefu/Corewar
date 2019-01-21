@@ -19,46 +19,41 @@ t_node	*create_list(t_cor *c, t_chmp *chmp, int i)
 	int j;
 
 	j = -1;
-	if (!(mll = malloc(sizeof(t_node))))
+	if (!(mll = (t_node *)malloc(sizeof(t_node))))
 		return (NULL);
-	if (mll)
-	{
-		mll->carry = 0;
-		mll->pc = 0 + (MEM_SIZE / c->vm->nb_player) * i;
-		mll->pc_b = mll->pc;
-		mll->op_size = 0;
-		mll->exec = 0;
-		while (++j < REG_NUMBER)
-			mll->reg[j] = 0;
-		mll->reg[1] = chmp->num;
-		printf("%d\n", mll->reg[1]);
-		mll->next = NULL;
-		mll->prev = NULL;
-		mll->last_live = 0;
-		mll->lives = 0;
-	}
+	mll->carry = 0;
+	mll->pc = 0 + (MEM_SIZE / c->vm->nb_player) * i;
+	mll->pc_b = mll->pc;
+	mll->op_size = 0;
+	mll->exec = 0;
+	while (++j < REG_NUMBER)
+		mll->reg[j] = 0;
+	mll->reg[0] = chmp->num;
+	mll->next = NULL;
+	mll->prev = NULL;
+	mll->last_live = 0;
+	mll->lives = 0;
 	return (mll);
 }
 
-void	add_element_end(t_list2 *lst, t_cor *c, t_chmp *chmp, int i)
+void	add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i)
 {
 	t_node *new;
 
-	new = create_list(c, chmp, i);
-	if (lst->tail == NULL)
+	if (!lst || !(new = create_list(c, chmp, i)))
+		return ;
+	if (!((*lst)->tail))
 	{
-		printf("ici\n");
-		new->prev = NULL;
-		lst->head = new;
-		lst->tail = new;
+		(*lst)->head = new;
+		(*lst)->tail = new;
 	}
 	else
 	{
-		lst->tail->next = new;
-		new->prev = lst->tail;
-		lst->tail = new;
+		(*lst)->tail->next = new;
+		new->prev = (*lst)->tail;
+		//(*lst)->tail = new;
 	}
-	// lst->len++;
+	(*lst)->len++;
 }
 
 // void	del_element_end(t_list2 *lst)

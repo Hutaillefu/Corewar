@@ -26,18 +26,17 @@ void	cycle(t_cor *c)
 	int max;
 
 	max = 0;
-	tmp = c->proc->head;
 	while (c->vm->cycle_to_die > 0)
 	{
 		cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			while (tmp->next)
+			tmp = c->proc->head;
+			while (tmp)
 			{
 				if (tmp->exec == c->vm->cycle)
 					start_processus(c, tmp);
-				if (tmp->exec == 0)
-					if (exec_process(c->vm, tmp) == 1)
+				if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
 						load_processus(c->vm->cycle, tmp);
 				tmp = tmp->next;
 			}

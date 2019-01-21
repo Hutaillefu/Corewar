@@ -81,6 +81,7 @@ typedef struct		s_vm
 	int				champ_msize;
 	unsigned int	prog_size;
 	int				dump;
+	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
 }					t_vm;
@@ -97,7 +98,7 @@ typedef struct	s_cor
 /*
 ** list
 */
-void	add_element_end(t_list2 *lst, t_cor *c, t_chmp *chmp, int i);
+void	add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
 
 
 /*
@@ -153,18 +154,26 @@ void	load_processus(int start, t_node *proc);
 */
 void	ft_flag_dump(t_cor *c);
 
+
 /*
 ** commande
 */
-void	i_add(t_node *proc, t_vm *vm);
+//void	i_lfork(t_chmp *chmp, t_vm *vm);
 void	i_sti(t_node *proc, t_vm *vm);
-void	i_sub(t_node *proc, t_vm *vm);
-void	i_and(t_node *proc, t_vm *vm);
-void	i_or(t_node *proc, t_vm *vm);
-void	i_xor(t_node *proc, t_vm *vm);
-void	i_live(t_node *proc, t_cor *cor);
-void	i_ld(t_node *proc, t_vm *vm);
+//void	i_fork(t_chmp *chmp, t_vm *vm);
 void	i_lld(t_node *proc, t_vm *vm);
+void	i_ld(t_node *proc, t_vm *vm);
+void	i_add(t_node *proc, t_vm *vm);
+void	i_zjmp(t_node *proc, t_vm *vm);
+void	i_sub(t_node *proc, t_vm *vm);
+void	i_ldi(t_node *proc, t_vm *vm);
+void	i_or(t_node *proc, t_vm *vm);
+void	i_st(t_node *proc, t_vm *vm);
+char	i_aff(t_node *proc, t_vm *vm);
+void	i_live(t_node *proc, t_cor *cor);
+void	i_xor(t_node *proc, t_vm *vm);
+void	i_lldi(t_node *proc, t_vm *vm);
+void	i_and(t_node *proc, t_vm *vm);
 
 // <br>* Champion sans nom / sans commentaire
 // <br>* Champion avec un nom ou un commentaire trop long
