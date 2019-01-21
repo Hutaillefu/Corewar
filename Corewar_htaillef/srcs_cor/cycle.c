@@ -13,35 +13,47 @@
 
 #include "../include/corewar.h"
 
+void	ft_check_cycle(t_cor *c)
+{
+	if (c->vm->nb_live >= NBR_LIVE)
+		c->vm->cycle_to_die -= c->vm->cycle_delta;
+}
+
 void	cycle(t_cor *c)
 {
 	int cycle;
-	int player;
+	t_node *tmp;
+	int max;
 
-	while (c->cycle_to_die > 0)
+	max = 0;
+	tmp = c->proc->head;
+	while (c->vm->cycle_to_die > 0)
 	{
 		cycle = 0;
-		while (++cycle <= c->cycle_to_die)
+		while (++cycle <= c->vm->cycle_to_die)
 		{
-			player = -1;
-			while (++player < c->vm->nb_player)
+			while (tmp->next)
 			{
-				if (c->chmp[player]->exec == c->vm->cycle)
-					start_processus(c, c->chmp[player]);
-				if (c->chmp[player]->exec == 0)
-					if (exec_process(c->vm, c->chmp[player]) == 1)
-						load_processus(c->vm->cycle, c->chmp[player]);
-				// else
-					// continue ;
+				if (tmp->exec == c->vm->cycle)
+					start_processus(c, tmp);
+				if (tmp->exec == 0)
+					if (exec_process(c->vm, tmp) == 1)
+						load_processus(c->vm->cycle, tmp);
+				tmp = tmp->next;
 			}
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
 			c->vm->cycle++;
-			if (cycle == c->cycle_to_die)
+			if (cycle == c->vm->cycle_to_die)
 			{
+				if (c->vm->nb_live >= NBR_LIVE)
+					c->vm->cycle_to_die -= c->vm->cycle_delta;
+				else
+					max++;
 				cycle = 0;
-				c->cycle_to_die -= c->vm->cycle_delta;
 			}
+			if (max == MAX_CHECKS)
+				c->vm->cycle_to_die -= c->vm->cycle_delta;
 		}
 	}
 }

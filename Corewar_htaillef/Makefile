@@ -22,7 +22,7 @@ SRCS_C = srcs_cor/
 S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c $(SRCS_C)parse.c \
 	$(SRCS_C)cycle.c $(SRCS_C)error.c $(SRCS_C)read_infos.c $(SRCS_C)op.c \
 	$(SRCS_C)parse_instruct.c $(SRCS_C)instructions.c $(SRCS_C)processus.c \
-	$(SRCS_C)flags.c
+	$(SRCS_C)flags.c $(SRCS_C)tools.c
 
 #S_A = fichier asm 
 

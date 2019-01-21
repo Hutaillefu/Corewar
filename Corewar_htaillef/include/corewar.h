@@ -35,13 +35,8 @@ typedef struct	s_op
 	int		dir_size;
 }				t_op;
 
-typedef struct		s_chmp
+typedef struct s_node
 {
-	unsigned int	magic;
-	unsigned int	champ_size;
-	char			*name;
-	char			*comment;
-	char			*infos;
 	int				carry;
 	int				pc;
 	int				pc_b;
@@ -50,7 +45,26 @@ typedef struct		s_chmp
 	int				exec;
 	int				param[3][2];
 	int				reg[REG_NUMBER];
+	int				last_live;
 	int				lives;
+	struct s_node	*next;
+	struct s_node	*prev;
+}				t_node;
+
+typedef struct s_list2
+{
+	t_node *head;
+	t_node *tail;
+	int 	len;
+}				t_list2;
+
+typedef struct		s_chmp
+{
+	unsigned int	magic;
+	unsigned int	champ_size;
+	char			*name;
+	char			*comment;
+	char			*infos;
 	int				last_live;
 	int				num;
 }					t_chmp;
@@ -67,6 +81,7 @@ typedef struct		s_vm
 	int				champ_msize;
 	unsigned int	prog_size;
 	int				dump;
+	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
 }					t_vm;
 
@@ -74,10 +89,16 @@ extern	t_op op_tab[17];
 
 typedef struct	s_cor
 {
-	int				cycle_to_die;
 	struct s_vm		*vm;
 	struct s_chmp	*chmp[MAX_PLAYERS];
+	struct s_list2	*proc;
 }					t_cor;
+
+/*
+** list
+*/
+void	add_element_end(t_list2 *lst, t_cor *c, t_chmp *chmp, int i);
+
 
 /*
 ** error
@@ -119,13 +140,13 @@ int    read_next_uint(t_vm *vm, int index, int bytes_len);
 */
 void				cycle(t_cor *c);
 
-int     	exec_process(t_vm *vm, t_chmp *chmp);
+int     	exec_process(t_vm *vm, t_node *proc);
 
 /*
 ** processus
 */
-void	start_processus(t_cor *cor, t_chmp *chmp);
-void	load_processus(int start, t_chmp *chmp);
+void	start_processus(t_cor *cor, t_node *proc);
+void	load_processus(int start, t_node *proc);
 
 /*
 ** flags
@@ -135,29 +156,15 @@ void	ft_flag_dump(t_cor *c);
 /*
 ** commande
 */
-//void	i_lfork(t_chmp *chmp, t_vm *vm);
-void	i_sti(t_chmp *chmp, t_vm *vm);
-//void	i_fork(t_chmp *chmp, t_vm *vm);
-void	i_lld(t_chmp *chmp, t_vm *vm);
-void	i_ld(t_chmp *chmp, t_vm *vm);
-void	i_add(t_chmp *chmp, t_vm *vm);
-void	i_zjmp(t_chmp *chmp, t_vm *vm);
-void	i_sub(t_chmp *chmp, t_vm *vm);
-void	i_ldi(t_chmp *chmp, t_vm *vm);
-void	i_or(t_chmp *chmp, t_vm *vm);
-void	i_st(t_chmp *chmp, t_vm *vm);
-char	i_aff(t_chmp *chmp, t_vm *vm);
-void	i_live(t_chmp *chmp, t_cor *cor);
-void	i_xor(t_chmp *chmp, t_vm *vm);
-void	i_lldi(t_chmp *chmp, t_vm *vm);
-void	i_and(t_chmp *chmp, t_vm *vm);
-
-
-
-
-
-
-
+void	i_add(t_node *proc, t_vm *vm);
+void	i_sti(t_node *proc, t_vm *vm);
+void	i_sub(t_node *proc, t_vm *vm);
+void	i_and(t_node *proc, t_vm *vm);
+void	i_or(t_node *proc, t_vm *vm);
+void	i_xor(t_node *proc, t_vm *vm);
+void	i_live(t_node *proc, t_cor *cor);
+void	i_ld(t_node *proc, t_vm *vm);
+void	i_lld(t_node *proc, t_vm *vm);
 
 // <br>* Champion sans nom / sans commentaire
 // <br>* Champion avec un nom ou un commentaire trop long

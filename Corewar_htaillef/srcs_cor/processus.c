@@ -13,42 +13,37 @@
 
 #include "../include/corewar.h"
 
-void	start_processus(t_cor *cor, t_chmp *chmp)
+void	start_processus(t_cor *cor, t_node *proc)
 {
-//	printf("Exec instruction %d for chmp %s\n", chmp->op.opcode, chmp->name);
-	if (chmp->op.opcode == 1)
-		i_live(chmp, cor);
-	if (chmp->op.opcode == 2)
-		i_ld(chmp, cor->vm);
-	if (chmp->op.opcode == 3)
-		i_st(chmp, cor->vm);
-	if (chmp->op.opcode == 11)
-		i_sti(chmp, cor->vm);
-	else if (chmp->op.opcode == 4)
-		i_add(chmp, cor->vm);
-	else if (chmp->op.opcode == 5)
-		i_sub(chmp, cor->vm);
-	else if (chmp->op.opcode == 6)
-		i_and(chmp, cor->vm);	
-	else if (chmp->op.opcode == 7)
-		i_or(chmp, cor->vm);	
-	else if (chmp->op.opcode == 8)
-		i_xor(chmp, cor->vm);
-	else if (chmp->op.opcode == 9)
-		i_zjmp(chmp, cor->vm);
-	else if (chmp->op.opcode == 10)
-		i_ldi(chmp, cor->vm);
-	else if (chmp->op.opcode == 13)
-		i_lld(chmp, cor->vm);
-	else if (chmp->op.opcode == 14)
-		i_lldi(chmp, cor->vm);	
-	//printf("pc: %d\n", chmp->pc);
-	chmp->pc += chmp->op_size;
-	printf("pc: %d\n", chmp->pc);
-	chmp->exec = 0;
+	printf("Exec instruction %d\n", proc->op.opcode);
+	if (proc->op.opcode == 1)
+		i_live(proc, cor);
+	if (proc->op.opcode == 2)
+	{
+		printf("Calling ld\n");
+		i_ld(proc, cor->vm);
+	}
+	if (proc->op.opcode == 11)
+		i_sti(proc, cor->vm);
+	else if (proc->op.opcode == 4)
+		i_add(proc, cor->vm);
+	else if (proc->op.opcode == 5)
+		i_sub(proc, cor->vm);
+	else if (proc->op.opcode == 6)
+		i_and(proc, cor->vm);	
+	else if (proc->op.opcode == 7)
+		i_or(proc, cor->vm);	
+	else if (proc->op.opcode == 8)
+		i_xor(proc, cor->vm);
+	else if (proc->op.opcode == 13)
+		i_lld(proc, cor->vm);	
+	//printf("pc: %d\n", proc->pc);
+	proc->pc += proc->op_size;
+	//printf("pc: %d\n", proc->pc);
+	proc->exec = 0;
 }
 
-void	load_processus(int start, t_chmp *chmp)
+void	load_processus(int start, t_node *proc)
 {
-	chmp->exec = start + chmp->op.nb_cycles;
+	proc->exec = start + proc->op.nb_cycles;
 }
