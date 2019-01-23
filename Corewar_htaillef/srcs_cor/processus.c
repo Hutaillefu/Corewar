@@ -15,9 +15,8 @@
 
 void	start_processus(t_cor *cor, t_node *proc)
 {
-	//printf("Exec instruction %s at pc %d\n", proc->op.name, proc->pc);
-		if (proc->op.opcode == 0)
-	i_lfork(proc, cor);
+	if (proc->op.opcode == 0)
+		i_lfork(proc, cor);
 	else if (proc->op.opcode == 1)
 		i_live(proc, cor);
 	else if (proc->op.opcode == 2)
@@ -46,9 +45,7 @@ void	start_processus(t_cor *cor, t_node *proc)
 		i_lld(proc, cor->vm);
 	else if (proc->op.opcode == 14)
 		i_lldi(proc, cor->vm);	
-	//printf("pc: %d\n", chmp->pc);
 	proc->pc += proc->op_size;
-	//printf("pc: %d\n", proc->pc);
 	proc->exec = 0;
 }
 

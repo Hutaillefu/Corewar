@@ -125,8 +125,9 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	if (proc->carry)
 	{
-		proc->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : proc->pc += proc->op_size;
-		proc->op_size = p1 % (proc->pc_b + IDX_MOD);
+		proc->op_size = p1 % (proc->pc_b + IDX_MOD);		
+		if (proc->op_size > 0)
+			proc->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : proc->pc += proc->op_size;
 		if (VERBOSE)
 			printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
 	}

@@ -67,9 +67,14 @@ void	cycle(t_cor *c)
 			while (tmp)
 			{
 				if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
-						load_processus(c->vm->cycle, tmp);
+				{
+					load_processus(c->vm->cycle, tmp);
+					//printf("Loading instruction %s for P%d\n", tmp->op.name, tmp->num);					
+				}
 				else if (tmp->exec == c->vm->cycle && c->vm->cycle > 0)
+				{
 					start_processus(c, tmp);
+				}
 				tmp = tmp->next;
 			}
 			if (c->vm->dump == c->vm->cycle)
