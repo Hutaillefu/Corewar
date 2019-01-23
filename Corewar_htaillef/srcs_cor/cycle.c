@@ -19,12 +19,41 @@ void	ft_check_cycle(t_cor *c)
 		c->vm->cycle_to_die -= c->vm->cycle_delta;
 }
 
+void	rm_element(t_list2 **lst, t_node *proc)
+{
+	t_node *tmp;
+
+	if (!lst || !proc)
+		return ;
+	tmp = (*lst)->head;
+	while (tmp)
+	{
+		if (tmp->num == proc->num)
+		{
+			if (tmp->prev)
+			{
+				printf("Remove process of list P%d\n", proc->num);								
+				tmp->prev->next = tmp->next;
+			}
+			else
+			{ 
+				printf("Remove first process of list P%d\n", proc->num);			
+				(*lst)->head = tmp->next;
+				if ((*lst)->head)
+					(*lst)->head->prev = NULL;
+			}
+				return ;
+			// free tmp
+		}
+		tmp = tmp->next;
+	}
+}
+
 void	cycle(t_cor *c)
 {
 	int cycle;
 	t_node *tmp;
 	int max;
-	int i;
 
 	max = 0;
 	while (c->vm->cycle_to_die > 0)
@@ -33,24 +62,32 @@ void	cycle(t_cor *c)
 		while (++cycle <= c->vm->cycle_to_die)
 		{
 			tmp = c->proc->head;
-			i =0;
+			c->vm->cycle++;
+			
 			while (tmp)
 			{
 				if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
 						load_processus(c->vm->cycle, tmp);
 				else if (tmp->exec == c->vm->cycle && c->vm->cycle > 0)
-				{	
-					printf("Start instruction of P%d\n", i);
 					start_processus(c, tmp);
-				}
 				tmp = tmp->next;
-				i++;
 			}
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
-			c->vm->cycle++;
+			//c->vm->cycle++;
 			if (cycle == c->vm->cycle_to_die)
 			{
+				// Kills process unlive
+				tmp = c->proc->head;
+				while (tmp)
+				{
+					if (cycle - tmp->last_live >= c->vm->cycle_to_die)
+						rm_element(&(c->proc), tmp);
+					if (!c->proc->head) // No process any more
+						return ;
+					tmp = tmp->next;
+				}
+
 				if (c->vm->nb_live >= NBR_LIVE)
 					c->vm->cycle_to_die -= c->vm->cycle_delta;
 				else

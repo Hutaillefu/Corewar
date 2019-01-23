@@ -17,6 +17,8 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
+# define VERBOSE 1
+
 typedef struct		s_line
 {
 	char			*line;
@@ -47,6 +49,7 @@ typedef struct s_node
 	int				reg[REG_NUMBER];
 	int				last_live;
 	int				lives;
+	int				num;
 	struct s_node	*next;
 	struct s_node	*prev;
 }				t_node;

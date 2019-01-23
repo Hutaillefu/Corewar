@@ -81,7 +81,10 @@ int		extract_param(t_vm *vm, t_node *proc, int param_index, int coding_byte)
 	}
 	else if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == DIR_CODE : 1 && (T_DIR & mask) == T_DIR)
 	{
-		res = read_next_uint(vm, proc->pc, proc->op.dir_size == 0 ? 4 : 2);
+		if (proc->op.dir_size == 0)
+			res = read_next_uint(vm, proc->pc, 4);
+		else
+			res = (short)read_next_uint(vm, proc->pc, 2);		
 		proc->param[param_index][0] = res;
 		proc->param[param_index][1] = DIR_CODE;
 		proc->pc += proc->op.dir_size == 0 ? 4 : 2;
@@ -89,7 +92,7 @@ int		extract_param(t_vm *vm, t_node *proc, int param_index, int coding_byte)
 	}
 	else if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == IND_CODE : 1 && (T_IND & mask) == T_IND)
 	{
-		res = read_next_uint(vm, proc->pc, 2);
+		res = (short)read_next_uint(vm, proc->pc, 2);
 		proc->param[param_index][0] = res;
 		proc->param[param_index][1] = IND_CODE;
 		proc->pc += 2;

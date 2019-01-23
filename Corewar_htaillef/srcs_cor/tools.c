@@ -33,6 +33,7 @@ t_node	*create_proc(t_cor *c, t_chmp *chmp, int i)
 	mll->prev = NULL;
 	mll->last_live = 0;
 	mll->lives = 0;
+	mll->num = i + 1;
 	return (mll);
 }
 

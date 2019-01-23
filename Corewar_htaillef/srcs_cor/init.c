@@ -57,6 +57,7 @@ void	init_chmp(t_cor *c)
 	c->proc = (t_list2 *)malloc(sizeof(t_list2)); // a securiser
 	c->proc->head = NULL;
 	c->proc->tail = NULL;
+	c->proc->len = 0;
 	while (++i < c->vm->nb_player)
 	{
 		c->chmp[i] = (t_chmp *)malloc(sizeof(t_chmp));

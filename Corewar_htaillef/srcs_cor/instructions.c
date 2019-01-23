@@ -90,6 +90,9 @@ void	i_live(t_node *proc, t_cor *cor)
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
 	cor->vm->chmp_win_num = champ_num;
+
+	if (VERBOSE)
+		printf("P\t%d | live %d\n", proc->num, champ_num);
 }
 
 // Should be ok
@@ -107,6 +110,12 @@ void	i_sti(t_node *proc, t_vm *vm)
 	addr = (proc->pc + p1 + p2) % (proc->pc_b + IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	write_uint(vm, p3, addr, REG_SIZE);
+
+	if (VERBOSE)
+	{
+		ft_printf("P\t%d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
+		ft_printf(" \t  | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+	}
 }
 
 void	i_zjmp(t_node *proc, t_vm *vm)
@@ -118,6 +127,8 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	{
 		proc->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : proc->pc += proc->op_size;
 		proc->op_size = p1 % (proc->pc_b + IDX_MOD);
+		if (VERBOSE)
+			printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
 	}
 }
 
@@ -164,7 +175,8 @@ void	i_st(t_node *proc, t_vm *vm)
 	}
 	else if (proc->param[1][1] == REG_CODE)
 		proc->reg[p2 - 1] = p1;
-	
+	if (VERBOSE)
+		printf("P\t%d | st r%d %d\n", proc->num, proc->param[0][0], p2);
 }
 
 // Should be ok
@@ -234,6 +246,9 @@ void	i_ld(t_node *proc, t_vm *vm)
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	proc->reg[proc->param[1][0] - 1] = p1;
 	proc->carry = !proc->reg[proc->param[1][0] - 1];
+
+	if (VERBOSE)
+		printf("P\t%d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
 }
 
 void	i_lld(t_node *proc, t_vm *vm)
@@ -267,10 +282,12 @@ void	i_fork(t_node *proc, t_cor *cor)
 		return ;
 	child->pc = proc->pc + (p1 % (proc->pc_b + IDX_MOD));
 	//child->pc = child->pc < 0 ? MEM_SIZE -(-child->pc) : child->pc;
-	printf("New proc pc :%d\n", child->pc);
 	child->pc_b = child->pc;
 	push_back(&(cor->proc), child);
-	//printf("New proc added\n");
+	child->num = cor->proc->len;	
+
+	if (VERBOSE)
+		printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);
 }
 
 void	i_lfork(t_node *proc, t_cor *cor)
