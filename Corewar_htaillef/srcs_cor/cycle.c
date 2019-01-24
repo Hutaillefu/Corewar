@@ -61,14 +61,15 @@ void	cycle(t_cor *c)
 		cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			tmp = c->proc->head;
 			c->vm->cycle++;
+			//printf("Is is now cycle %d\n", cycle);
+			tmp = c->proc->head;
 			
 			while (tmp)
 			{
 				if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
 					load_processus(c->vm->cycle, tmp);
-				else if (tmp->exec == c->vm->cycle && c->vm->cycle > 0)
+				else if (tmp->exec - 1== c->vm->cycle)
 					start_processus(c, tmp);
 				else if (tmp->exec == 0)
 					tmp->pc = (tmp->pc + 1) % MEM_SIZE;
