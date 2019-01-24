@@ -67,19 +67,15 @@ void	cycle(t_cor *c)
 			while (tmp)
 			{
 				if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
-				{
 					load_processus(c->vm->cycle, tmp);
-					//printf("Loading instruction %s for P%d\n", tmp->op.name, tmp->num);					
-				}
 				else if (tmp->exec == c->vm->cycle && c->vm->cycle > 0)
-				{
 					start_processus(c, tmp);
-				}
+				else if (tmp->exec == 0)
+					tmp->pc = (tmp->pc + 1) % MEM_SIZE;
 				tmp = tmp->next;
 			}
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
-			//c->vm->cycle++;
 			if (cycle == c->vm->cycle_to_die)
 			{
 				// Kills process unlive
@@ -87,7 +83,10 @@ void	cycle(t_cor *c)
 				while (tmp)
 				{
 					if (cycle - tmp->last_live >= c->vm->cycle_to_die)
+					{
+						printf("%d >= %d\n", cycle - tmp->last_live, c->vm->cycle_to_die);
 						rm_element(&(c->proc), tmp);
+					}
 					if (!c->proc->head) // No process any more
 						return ;
 					tmp = tmp->next;

@@ -123,14 +123,16 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	int p1;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
+	proc->op_size = p1 % (proc->pc_b + MEM_SIZE);
 	if (proc->carry)
 	{
-		proc->op_size = p1 % (proc->pc_b + IDX_MOD);		
-		if (proc->op_size > 0)
-			proc->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : proc->pc += proc->op_size;
 		if (VERBOSE)
 			printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
+		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
+		proc->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : proc->pc += proc->op_size;
 	}
+	else if (VERBOSE)
+			printf("P\t%d | zjmp %d FAILED\n", proc->num, proc->op_size);
 }
 
 // Should be ok
@@ -190,6 +192,9 @@ void	i_add(t_node *proc, t_vm *vm)
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	proc->reg[proc->param[2][0] - 1] = p1 + p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
+
+	if (VERBOSE)
+		printf("P\t%d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 }
 
 // Should be ok
