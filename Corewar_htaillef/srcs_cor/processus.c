@@ -46,6 +46,7 @@ void	start_processus(t_cor *cor, t_node *proc)
 	else if (proc->op.opcode == 14)
 		i_lldi(proc, cor->vm);	
 	proc->pc += proc->op_size;
+	//printf("PC %d\n", proc->pc);
 	proc->exec = 0;
 }
 

@@ -129,7 +129,6 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 		if (VERBOSE)
 			printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
 		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
-		proc->pc = 0; // pc = 0 car apres l'execution de l'instruction dans processus.c : proc->pc += proc->op_size;
 	}
 	else if (VERBOSE)
 			printf("P\t%d | zjmp %d FAILED\n", proc->num, proc->op_size);

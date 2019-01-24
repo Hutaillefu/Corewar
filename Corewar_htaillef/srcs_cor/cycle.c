@@ -83,10 +83,7 @@ void	cycle(t_cor *c)
 				while (tmp)
 				{
 					if (cycle - tmp->last_live >= c->vm->cycle_to_die)
-					{
-						printf("%d >= %d\n", cycle - tmp->last_live, c->vm->cycle_to_die);
 						rm_element(&(c->proc), tmp);
-					}
 					if (!c->proc->head) // No process any more
 						return ;
 					tmp = tmp->next;
