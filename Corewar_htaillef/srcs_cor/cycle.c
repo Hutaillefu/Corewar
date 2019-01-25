@@ -55,7 +55,7 @@ void		read_and_process(t_cor *c, t_node *tmp)
 		load_processus(c->vm->cycle, tmp);
 	if (tmp->exec - 1 == c->vm->cycle) // exec PB
 	{
-		if (start_processus(c, tmp)) // si last instruction is fork, process new process directly 
+		if (start_processus(c, tmp)) // si last instruction is fork, process new processus directly 
 			read_and_process(c, c->proc->head);
 	}
 	else if (tmp->exec == 0)
