@@ -107,7 +107,7 @@ void	i_sti(t_node *proc, t_vm *vm)
 	p1 = get_param_value(vm, proc, proc->param[1], 1);
 	p2 = get_param_value(vm, proc, proc->param[2], 1);
 	p3 = get_param_value(vm, proc, proc->param[0], 1);
-	addr = (proc->pc + p1 + p2) % (proc->pc_b + IDX_MOD);
+	addr = (proc->pc + p1 + p2) % (MEM_SIZE);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	write_uint(vm, p3, addr, REG_SIZE);
 
@@ -288,8 +288,8 @@ void	i_fork(t_node *proc, t_cor *cor)
 	child->pc = proc->pc + (p1 % (proc->pc_b + IDX_MOD));
 	//child->pc = child->pc < 0 ? MEM_SIZE -(-child->pc) : child->pc;
 	child->pc_b = child->pc;
-	push_back(&(cor->proc), child);
-	child->num = cor->proc->len;	
+	push_front(&(cor->proc), child);
+	child->num = cor->proc->len;
 
 	if (VERBOSE)
 		printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);

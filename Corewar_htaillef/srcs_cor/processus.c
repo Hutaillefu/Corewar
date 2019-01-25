@@ -13,7 +13,7 @@
 
 #include "../include/corewar.h"
 
-void	start_processus(t_cor *cor, t_node *proc)
+int	start_processus(t_cor *cor, t_node *proc)
 {
 	if (proc->op.opcode == 0)
 		i_lfork(proc, cor);
@@ -40,7 +40,12 @@ void	start_processus(t_cor *cor, t_node *proc)
 	if (proc->op.opcode == 11)
 		i_sti(proc, cor->vm);
 	if (proc->op.opcode == 12)
+	{
 		i_fork(proc, cor);
+		proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
+		proc->exec = 0;
+		return (1);
+	}
 	else if (proc->op.opcode == 13)
 		i_lld(proc, cor->vm);
 	else if (proc->op.opcode == 14)
@@ -48,6 +53,7 @@ void	start_processus(t_cor *cor, t_node *proc)
 	proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
 	// printf("PC %d\n", proc->pc);
 	proc->exec = 0;
+	return (0);
 }
 
 void	load_processus(int start, t_node *proc)

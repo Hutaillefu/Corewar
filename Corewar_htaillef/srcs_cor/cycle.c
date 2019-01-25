@@ -49,6 +49,19 @@ void	rm_element(t_list2 **lst, t_node *proc)
 	}
 }
 
+void		read_and_process(t_cor *c, t_node *tmp)
+{
+	if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
+		load_processus(c->vm->cycle, tmp);
+	if (tmp->exec - 1 == c->vm->cycle) // exec PB
+	{
+		if (start_processus(c, tmp)) // si last instruction is fork, process new process directly 
+			read_and_process(c, c->proc->head);
+	}
+	else if (tmp->exec == 0)
+			tmp->pc = (tmp->pc + 1) % MEM_SIZE;
+}
+
 void	cycle(t_cor *c)
 {
 	int cycle;
@@ -61,20 +74,16 @@ void	cycle(t_cor *c)
 		cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			c->vm->cycle++;
-			//printf("Is is now cycle %d\n", cycle);
 			tmp = c->proc->head;
-			
+			c->vm->cycle++;
+			printf("Is is now cycle %d\n", c->vm->cycle);
+
 			while (tmp)
 			{
-				if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
-					load_processus(c->vm->cycle, tmp);
-				else if (tmp->exec - 1== c->vm->cycle)
-					start_processus(c, tmp);
-				else if (tmp->exec == 0)
-					tmp->pc = (tmp->pc + 1) % MEM_SIZE;
+				read_and_process(c, tmp);
 				tmp = tmp->next;
 			}
+
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
 			if (cycle == c->vm->cycle_to_die)

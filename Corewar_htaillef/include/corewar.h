@@ -104,6 +104,7 @@ typedef struct	s_cor
 void			add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
 t_node			*clone_proc(t_node *parent);
 void			push_back(t_list2 **lst, t_node *proc);
+void			push_front(t_list2 **lst, t_node *proc);
 
 
 /*
@@ -151,7 +152,7 @@ int     	exec_process(t_vm *vm, t_node *proc);
 /*
 ** processus
 */
-void	start_processus(t_cor *cor, t_node *proc);
+int		start_processus(t_cor *cor, t_node *proc);
 void	load_processus(int start, t_node *proc);
 
 /*

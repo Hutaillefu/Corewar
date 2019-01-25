@@ -95,6 +95,26 @@ void	push_back(t_list2 **lst, t_node *proc)
 	(*lst)->len++;
 }
 
+
+void	push_front(t_list2 **lst, t_node *proc)
+{
+	if (!lst)
+		return ;
+	if (!((*lst)->head))
+	{
+		(*lst)->head = proc;
+		(*lst)->tail = proc;
+	}
+	else
+	{
+		proc->prev = NULL;
+		proc->next = (*lst)->head;
+		(*lst)->head = proc;
+	}
+	(*lst)->len++;
+}
+
+
 // void	del_element_end(t_list2 *lst)
 // {
 // 	t_node *tmp;
