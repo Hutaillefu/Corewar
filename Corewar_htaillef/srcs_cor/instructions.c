@@ -172,7 +172,8 @@ void	i_st(t_node *proc, t_vm *vm)
 	p2 = proc->param[1][0];
 	if (proc->param[1][1] == IND_CODE)
 	{
-		addr = (proc->pc + p2) % (proc->pc_b + IDX_MOD); 
+		addr = proc->pc + (p2 % IDX_MOD); 
+		addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 		write_uint(vm, p1, addr, REG_SIZE);
 	}
 	else if (proc->param[1][1] == REG_CODE)
@@ -290,7 +291,6 @@ void	i_fork(t_node *proc, t_cor *cor)
 	child->pc_b = child->pc;
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->len;
-
 	if (VERBOSE)
 		printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);
 }

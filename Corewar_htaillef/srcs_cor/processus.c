@@ -58,5 +58,7 @@ int	start_processus(t_cor *cor, t_node *proc)
 
 void	load_processus(int start, t_node *proc)
 {
+	if (start == 1)
+		start = 0;
 	proc->exec = start + proc->op.nb_cycles;
 }

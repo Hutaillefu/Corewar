@@ -53,13 +53,45 @@ void		read_and_process(t_cor *c, t_node *tmp)
 {
 	if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
 		load_processus(c->vm->cycle, tmp);
-	if (tmp->exec - 1 == c->vm->cycle) // exec PB
+	if (tmp->exec == c->vm->cycle) // PROBLEM HERE WITH EXEC BAD VALUE
 	{
-		if (start_processus(c, tmp)) // si last instruction is fork, process new processus directly 
+		if (start_processus(c, tmp)) // if last instruction is fork, process new processus directly 
 			read_and_process(c, c->proc->head);
+		if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
+			load_processus(c->vm->cycle, tmp);
 	}
 	else if (tmp->exec == 0)
 			tmp->pc = (tmp->pc + 1) % MEM_SIZE;
+}
+
+/*
+  ** Return 1 if not processus and prog should stop
+*/
+int	cycle_to_die(t_cor *c, int cycle, int *max)
+{
+	 t_node *tmp;
+
+	if (cycle == c->vm->cycle_to_die)
+	{
+		// Kills process unlive
+		tmp = c->proc->head;
+		while (tmp)
+		{
+			if (cycle - tmp->last_live >= c->vm->cycle_to_die)
+				rm_element(&(c->proc), tmp);
+			if (!c->proc->head) // No process any more
+				return (1);
+			tmp = tmp->next;
+		}
+		if (c->vm->nb_live >= NBR_LIVE)
+			c->vm->cycle_to_die -= c->vm->cycle_delta;
+		else
+			(*max)++;
+		cycle = 0;
+	}
+	if (*max == MAX_CHECKS)
+		c->vm->cycle_to_die -= c->vm->cycle_delta;
+	return (0);
 }
 
 void	cycle(t_cor *c)
@@ -74,10 +106,10 @@ void	cycle(t_cor *c)
 		cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			tmp = c->proc->head;
 			c->vm->cycle++;
 			printf("Is is now cycle %d\n", c->vm->cycle);
 
+			tmp = c->proc->head;
 			while (tmp)
 			{
 				read_and_process(c, tmp);
@@ -86,27 +118,10 @@ void	cycle(t_cor *c)
 
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
-			if (cycle == c->vm->cycle_to_die)
-			{
-				// Kills process unlive
-				tmp = c->proc->head;
-				while (tmp)
-				{
-					if (cycle - tmp->last_live >= c->vm->cycle_to_die)
-						rm_element(&(c->proc), tmp);
-					if (!c->proc->head) // No process any more
-						return ;
-					tmp = tmp->next;
-				}
 
-				if (c->vm->nb_live >= NBR_LIVE)
-					c->vm->cycle_to_die -= c->vm->cycle_delta;
-				else
-					max++;
-				cycle = 0;
-			}
-			if (max == MAX_CHECKS)
-				c->vm->cycle_to_die -= c->vm->cycle_delta;
+			if (cycle_to_die(c, cycle, &max))
+				return ;
+
 		}
 	}
 }
