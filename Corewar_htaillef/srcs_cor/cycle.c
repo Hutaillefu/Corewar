@@ -115,13 +115,10 @@ void	cycle(t_cor *c)
 				read_and_process(c, tmp);
 				tmp = tmp->next;
 			}
-
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
-
 			if (cycle_to_die(c, cycle, &max))
 				return ;
-
 		}
 	}
 }
