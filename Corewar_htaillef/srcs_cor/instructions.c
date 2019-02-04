@@ -283,11 +283,9 @@ void	i_fork(t_node *proc, t_cor *cor)
 	t_node *child;
 
 	p1 = get_param_value(cor->vm, proc, proc->param[0], 1);
-	//printf("Fork execution with param %d\n", p1);
 	if (!(child = clone_proc(proc)))
 		return ;
 	child->pc = proc->pc + (p1 % (proc->pc_b + IDX_MOD));
-	//child->pc = child->pc < 0 ? MEM_SIZE -(-child->pc) : child->pc;
 	child->pc_b = child->pc;
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->len;

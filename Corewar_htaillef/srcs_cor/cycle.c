@@ -53,7 +53,7 @@ void		read_and_process(t_cor *c, t_node *tmp)
 {
 	if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
 		load_processus(c->vm->cycle, tmp);
-	if (tmp->exec == c->vm->cycle) // PROBLEM HERE WITH EXEC BAD VALUE
+	if (tmp->exec == c->vm->cycle)
 	{
 		if (start_processus(c, tmp)) // if last instruction is fork, process new processus directly 
 			read_and_process(c, c->proc->head);
