@@ -65,11 +65,11 @@ void		read_and_process(t_cor *c, t_node *tmp)
 }
 
 /*
-  ** Return 1 if not processus and prog should stop
+  ** Return 1 if no more processus and prog should stop
 */
 int	cycle_to_die(t_cor *c, int cycle, int *max)
 {
-	 t_node *tmp;
+	t_node *tmp;
 
 	if (cycle == c->vm->cycle_to_die)
 	{
@@ -96,9 +96,9 @@ int	cycle_to_die(t_cor *c, int cycle, int *max)
 
 void	cycle(t_cor *c)
 {
-	int cycle;
-	t_node *tmp;
-	int max;
+	int		cycle;
+	t_node	*tmp;
+	int		max;
 
 	max = 0;
 	while (c->vm->cycle_to_die > 0)
@@ -106,8 +106,11 @@ void	cycle(t_cor *c)
 		cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
+			if (c->vm->dump == c->vm->cycle)
+				ft_flag_dump(c);
+
 			c->vm->cycle++;
-			printf("Is is now cycle %d\n", c->vm->cycle);
+			printf("It is now cycle %d\n", c->vm->cycle);
 
 			tmp = c->proc->head;
 			while (tmp)
@@ -115,8 +118,7 @@ void	cycle(t_cor *c)
 				read_and_process(c, tmp);
 				tmp = tmp->next;
 			}
-			if (c->vm->dump == c->vm->cycle)
-				ft_flag_dump(c);
+
 			if (cycle_to_die(c, cycle, &max))
 				return ;
 		}
