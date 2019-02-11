@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 16:11:09 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/11 12:23:21 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,9 +51,9 @@ void	rm_element(t_list2 **lst, t_node *proc)
 
 void		read_and_process(t_cor *c, t_node *tmp)
 {
-	if (tmp->exec == 0 && exec_process(c->vm, tmp) == 1)
+	if (tmp->exec == 0)
 		load_processus(c->vm->cycle, tmp);
-	if (tmp->exec == c->vm->cycle)
+	if (tmp->exec == c->vm->cycle &&  exec_process(c->vm, tmp))
 	{
 		if (start_processus(c, tmp)) // if last instruction is fork, process new processus directly 
 			read_and_process(c, c->proc->head);
@@ -106,21 +106,18 @@ void	cycle(t_cor *c)
 		cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			if (c->vm->dump == c->vm->cycle)
-				ft_flag_dump(c);
-
-			c->vm->cycle++;
 			printf("It is now cycle %d\n", c->vm->cycle);
-
 			tmp = c->proc->head;
 			while (tmp)
 			{
 				read_and_process(c, tmp);
 				tmp = tmp->next;
 			}
-
 			if (cycle_to_die(c, cycle, &max))
 				return ;
+			if (c->vm->dump == c->vm->cycle)
+				ft_flag_dump(c);
+			c->vm->cycle++;
 		}
 	}
 }

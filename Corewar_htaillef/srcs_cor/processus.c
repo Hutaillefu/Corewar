@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/16 13:45:58 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 18:13:41 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/11 11:30:54 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,7 +58,7 @@ int	start_processus(t_cor *cor, t_node *proc)
 
 void	load_processus(int start, t_node *proc)
 {
-	if (start == 1)
-		start = 0;
+	// if (start == 1)
+	// 	start = 0;
 	proc->exec = start + proc->op.nb_cycles;
 }
