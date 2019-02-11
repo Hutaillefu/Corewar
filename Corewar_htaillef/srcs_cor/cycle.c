@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/11 12:23:21 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/11 12:46:57 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -51,7 +51,7 @@ void	rm_element(t_list2 **lst, t_node *proc)
 
 void		read_and_process(t_cor *c, t_node *tmp)
 {
-	if (tmp->exec == 0)
+	if (tmp->exec == 0  &&  exec_process(c->vm, tmp))
 		load_processus(c->vm->cycle, tmp);
 	if (tmp->exec == c->vm->cycle &&  exec_process(c->vm, tmp))
 	{

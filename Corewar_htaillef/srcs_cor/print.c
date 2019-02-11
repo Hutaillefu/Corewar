@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 13:24:34 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/11 17:02:53 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,10 @@ void	print_map(t_cor *c, int octet)
 {
 	int i;
 	int j;
+	int draw;
+	t_node *tmp;
 
+	tmp = c->proc->head;
 	i = -1;
 	j = 0;
 	ft_printf("0x0000 :");
@@ -26,7 +29,20 @@ void	print_map(t_cor *c, int octet)
 		if (i != 0 && j == 0)
 			ft_printf("%#06x :", i);
 		++j;
-		ft_printf("%3.2x", c->vm->area[i]);
+		draw = 0;
+		tmp = c->proc->head;
+		while (tmp)
+		{
+			if (tmp->pc == i)
+			{
+				ft_printf("\033[32;01m%3.2x\033[00m", c->vm->area[i]);
+				draw = 1;
+				break;
+			}
+			tmp = tmp->next;
+		}
+		if (!draw)
+			ft_printf("%3.2x", c->vm->area[i]);
 		if (j == octet)
 		{
 			j = 0;
