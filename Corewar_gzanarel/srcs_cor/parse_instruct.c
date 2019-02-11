@@ -53,7 +53,9 @@ t_op    get_op_by_opcode(int opcode)
 	while (op_tab[i].name)
 	{
 		if (op_tab[i].opcode == opcode)
+		{
 			return (op_tab[i]);
+		}
 		i++;
 	}
 	return (op_tab[i]);
@@ -117,11 +119,47 @@ void	init_param(t_node *proc)
 	proc->param[2][1] = -1;
 }
 
+int 	check_coding_byte(t_node *proc, int coding_byte)
+{
+	int param;
+	int mask;
+
+	param = 0;
+	while (++param <= proc->op.nb_params)
+	{
+		mask = proc->op.param_mask[param - 1];
+		if ((read_coding_byte(coding_byte, param) == IND_CODE))
+		{
+			if (!(1 && (T_IND & mask) == T_IND))
+				return (2);
+			else
+				proc->op_size += 2;
+		}
+		if ((read_coding_byte(coding_byte, param) == DIR_CODE))
+		{
+			if (!(1 && (T_DIR & mask) == T_DIR))
+				return (2);
+			else 
+				proc->op_size += proc->op.dir_size == 0 ? 4 : 2;
+		}
+		if ((read_coding_byte(coding_byte, param) == REG_CODE))
+		{
+			if (!(1 && (T_REG & mask)))
+				return (2);
+			else
+				proc->op_size += 2;
+		}
+	}
+	return (1);
+}
+
 int		extract_params(t_vm *vm, t_node *proc, int coding_byte)
 {
 	if (!vm || !(vm->area) || !(proc))
 		return (0);
 	init_param(proc);
+	if (check_coding_byte(proc, coding_byte) == 2)
+		proc->op.coding_byte = -1;
 	if (proc->op.nb_params >= 1 && !extract_param(vm, proc, 0, coding_byte))
 	{
 		//printf("error 1 param\n");
@@ -150,7 +188,10 @@ int     exec_process(t_vm *vm, t_node *proc)
 		return (0);
 	pc_base = proc->pc;
 	if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
+	{
+		proc->exec = 0;
 		return (0);
+	}
 	proc->op = op;
 	coding_byte = -1;
 	if (op.coding_byte)
@@ -158,7 +199,7 @@ int     exec_process(t_vm *vm, t_node *proc)
 	(proc->pc)++;
 	if (!extract_params(vm, proc, coding_byte))
 	{
-		//printf("Extract params error for instruction %s with %d params\n", op.name, op.nb_params);
+		// printf("Extract params error for instruction %s with %d params\n", op.name, op.nb_params);
 		return (0);
 	}
 	proc->op_size = proc->pc - pc_base;

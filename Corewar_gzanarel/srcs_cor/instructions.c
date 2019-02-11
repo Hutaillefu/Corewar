@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 18:20:28 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/11 19:05:56 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -90,7 +90,7 @@ void	i_live(t_node *proc, t_cor *cor)
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
 	cor->vm->chmp_win_num = champ_num;
-
+	cor->vm->last_live = cor->vm->cycle;
 	if (VERBOSE)
 		printf("P\t%d | live %d\n", proc->num, champ_num);
 }
