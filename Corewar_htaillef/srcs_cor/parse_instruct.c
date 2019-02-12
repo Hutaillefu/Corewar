@@ -137,6 +137,25 @@ int		extract_params(t_vm *vm, t_node *proc, int coding_byte)
 	return (1);
 }
 
+int 	check_coding_byte(t_node *proc, int coding_byte)
+{
+	int param;
+	int mask;
+
+	param = 0;
+	while (++param <= proc->op.nb_params)
+	{
+		mask = proc->op.param_mask[param - 1];
+		if (read_coding_byte(coding_byte, param) == IND_CODE && !(1 && (T_IND & mask) == T_IND))
+			return (0);
+		else if (read_coding_byte(coding_byte, param) == DIR_CODE && !(1 && (T_DIR & mask) == T_DIR))
+			return (0);
+		else if (read_coding_byte(coding_byte, param) == REG_CODE && !(1 && (T_REG & mask)))
+			return (0);
+	}
+	return (1);
+}
+
 /*
   ** Read the next instruction.
 */
@@ -148,20 +167,41 @@ int     exec_process(t_vm *vm, t_node *proc)
 
 	if (!vm || !(vm->area) || !proc)
 		return (0);
+
 	pc_base = proc->pc;
+
 	if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
+	{
+		printf("OP code inconnu at index %x\n", vm->area[proc->pc]);
 		return (0);
+	}
 	proc->op = op;
+
+	ft_printf("OP name : %s\n", op.name);
+
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc)];
+	if (op.coding_byte && !check_coding_byte(proc, coding_byte))
+	{
+		ft_printf("Bad coding byte\n");
+		proc->op.opcode = -1;
+		proc->pc = pc_base;
+		proc->op_size = 1 + 1 + proc->op.nb_params * 2;
+		return (1);
+	}
+
 	(proc->pc)++;
 	if (!extract_params(vm, proc, coding_byte))
 	{
-		//printf("Extract params error for instruction %s with %d params\n", op.name, op.nb_params);
-		return (0);
+		proc->op.opcode = -1;
+		proc->pc = pc_base;
+		proc->op_size = 1 + 1 + proc->op.nb_params * 2;
+		return (1);
 	}
+
 	proc->op_size = proc->pc - pc_base;
 	proc->pc = pc_base;
+
 	return (1);
 }

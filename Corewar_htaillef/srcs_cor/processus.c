@@ -15,6 +15,7 @@
 
 int	start_processus(t_cor *cor, t_node *proc)
 {
+	ft_printf("opcode to exec : %d\n", proc->op.opcode);
 	if (proc->op.opcode == 0)
 		i_lfork(proc, cor);
 	else if (proc->op.opcode == 1)
@@ -37,9 +38,9 @@ int	start_processus(t_cor *cor, t_node *proc)
 		i_zjmp(proc, cor->vm);
 	else if (proc->op.opcode == 10)
 		i_ldi(proc, cor->vm);
-	if (proc->op.opcode == 11)
+	else if (proc->op.opcode == 11)
 		i_sti(proc, cor->vm);
-	if (proc->op.opcode == 12)
+	else if (proc->op.opcode == 12)
 	{
 		i_fork(proc, cor);
 		proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
@@ -51,14 +52,12 @@ int	start_processus(t_cor *cor, t_node *proc)
 	else if (proc->op.opcode == 14)
 		i_lldi(proc, cor->vm);	
 	proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
-	// printf("PC %d\n", proc->pc);
+	printf("New pc is %d\n", proc->pc);
 	proc->exec = 0;
 	return (0);
 }
 
 void	load_processus(int start, t_node *proc)
 {
-	// if (start == 1)
-	// 	start = 0;
 	proc->exec = start + proc->op.nb_cycles;
 }
