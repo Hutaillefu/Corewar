@@ -20,9 +20,16 @@ void	print_map(t_cor *c, int octet)
 	int draw;
 	t_node *tmp;
 
-	tmp = c->proc->head;
 	i = -1;
 	j = 0;
+
+	tmp = c->proc->head;
+	while (tmp)
+	{
+		ft_printf("PC is %d\n", tmp->pc);
+		tmp = tmp->next;
+	}
+	printf("%d processus.\n", c->proc->len);
 	ft_printf("0x0000 :");
 	while (++i < MEM_SIZE)
 	{

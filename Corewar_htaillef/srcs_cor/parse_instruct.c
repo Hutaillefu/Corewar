@@ -170,21 +170,25 @@ int     exec_process(t_vm *vm, t_node *proc)
 
 	pc_base = proc->pc;
 
+	proc->op.coding_byte = -1;
+	proc->op.nb_cycles = 1;
+	proc->op.opcode = -1;
+	proc->op.name = NULL;
+	proc->op.nb_params = 0;
+
 	if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
 	{
-		printf("OP code inconnu at index %x\n", vm->area[proc->pc]);
+		proc->op.opcode = -1;
+		proc->op_size = 1;
 		return (0);
 	}
 	proc->op = op;
-
-	ft_printf("OP name : %s\n", op.name);
 
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc)];
 	if (op.coding_byte && !check_coding_byte(proc, coding_byte))
 	{
-		ft_printf("Bad coding byte\n");
 		proc->op.opcode = -1;
 		proc->pc = pc_base;
 		proc->op_size = 1 + 1 + proc->op.nb_params * 2;

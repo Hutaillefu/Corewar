@@ -16,7 +16,7 @@
 int	start_processus(t_cor *cor, t_node *proc)
 {
 	ft_printf("opcode to exec : %d\n", proc->op.opcode);
-	if (proc->op.opcode == 0)
+	if (proc->op.opcode == 15)
 		i_lfork(proc, cor);
 	else if (proc->op.opcode == 1)
 		i_live(proc, cor);
@@ -52,7 +52,6 @@ int	start_processus(t_cor *cor, t_node *proc)
 	else if (proc->op.opcode == 14)
 		i_lldi(proc, cor->vm);	
 	proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
-	printf("New pc is %d\n", proc->pc);
 	proc->exec = 0;
 	return (0);
 }
