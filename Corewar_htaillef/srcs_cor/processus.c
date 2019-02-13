@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/16 13:45:58 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/11 11:30:54 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/13 11:34:51 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 int	start_processus(t_cor *cor, t_node *proc)
 {
-	ft_printf("opcode to exec : %d\n", proc->op.opcode);
+	// ft_printf("opcode to exec : %d\n", proc->op.opcode);
 	if (proc->op.opcode == 15)
 		i_lfork(proc, cor);
 	else if (proc->op.opcode == 1)

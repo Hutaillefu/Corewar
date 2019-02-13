@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/11 12:46:57 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/13 15:27:32 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -34,6 +34,7 @@ void	rm_element(t_list2 **lst, t_node *proc)
 			{
 				printf("Remove process of list P%d\n", proc->num);								
 				tmp->prev->next = tmp->next;
+				(*lst)->len--;
 			}
 			else
 			{ 
@@ -41,6 +42,7 @@ void	rm_element(t_list2 **lst, t_node *proc)
 				(*lst)->head = tmp->next;
 				if ((*lst)->head)
 					(*lst)->head->prev = NULL;
+				(*lst)->len--;			
 			}
 				return ;
 			// free tmp
@@ -51,6 +53,7 @@ void	rm_element(t_list2 **lst, t_node *proc)
 
 void		read_and_process(t_cor *c, t_node *tmp)
 {
+	exec_process(c->vm, tmp);
 	if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
 		read_and_process(c, c->proc->head);
 	if (tmp->exec == 0)
@@ -73,7 +76,7 @@ int	cycle_to_die(t_cor *c, int cycle, int *max)
 		tmp = c->proc->head;
 		while (tmp)
 		{
-			if (cycle - tmp->last_live >= c->vm->cycle_to_die)
+			if (c->vm->cycle - tmp->last_live >= c->vm->cycle_to_die)
 				rm_element(&(c->proc), tmp);
 			if (!c->proc->head) // No process any more
 				return (1);
@@ -100,7 +103,8 @@ void	cycle(t_cor *c)
 	while (c->vm->cycle_to_die > 0)
 	{
 		cycle = 0;
-		while (++cycle <= c->vm->cycle_to_die)
+		ft_printf("Cycle_to_die: %d\n", c->vm->cycle_to_die);
+		while (cycle++ <= c->vm->cycle_to_die)
 		{
 			ft_printf("It is now cycle %d\n", c->vm->cycle);
 			tmp = c->proc->head;
