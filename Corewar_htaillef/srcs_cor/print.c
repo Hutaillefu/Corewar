@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/11 17:02:53 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/13 12:13:06 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -26,7 +26,7 @@ void	print_map(t_cor *c, int octet)
 	tmp = c->proc->head;
 	while (tmp)
 	{
-		ft_printf("PC is %d\n", tmp->pc);
+		ft_printf("PC is %d | last_live: %d\n", tmp->pc, tmp->last_live);
 		tmp = tmp->next;
 	}
 	printf("%d processus.\n", c->proc->len);
