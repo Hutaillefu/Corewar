@@ -141,7 +141,7 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
 	}
 	else if (VERBOSE)
-			ft_printf("P\t%d | zjmp %d FAILED\n", proc->num, proc->op_size);
+			ft_printf("P\t%d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
 }
 
 // Should be ok
