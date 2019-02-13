@@ -59,4 +59,5 @@ int	start_processus(t_cor *cor, t_node *proc)
 void	load_processus(int start, t_node *proc)
 {
 	proc->exec = start + proc->op.nb_cycles;
+	//ft_printf("Instruction %s will be proceed at cycle %d\n", proc->op.name, proc->exec);
 }

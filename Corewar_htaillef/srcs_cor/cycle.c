@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/13 15:27:32 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/13 16:08:23 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,7 +54,7 @@ void	rm_element(t_list2 **lst, t_node *proc)
 void		read_and_process(t_cor *c, t_node *tmp)
 {
 	exec_process(c->vm, tmp);
-	if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
+	if (c->vm->cycle == tmp->exec && tmp->exec != 0 && start_processus(c, tmp))
 		read_and_process(c, c->proc->head);
 	if (tmp->exec == 0)
 	{
@@ -83,7 +83,10 @@ int	cycle_to_die(t_cor *c, int cycle, int *max)
 			tmp = tmp->next;
 		}
 		if (c->vm->nb_live >= NBR_LIVE)
+		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
+			c->vm->nb_live = 0;
+		}
 		else
 			(*max)++;
 		cycle = 0;
@@ -103,10 +106,11 @@ void	cycle(t_cor *c)
 	while (c->vm->cycle_to_die > 0)
 	{
 		cycle = 0;
-		ft_printf("Cycle_to_die: %d\n", c->vm->cycle_to_die);
 		while (cycle++ <= c->vm->cycle_to_die)
 		{
-			ft_printf("It is now cycle %d\n", c->vm->cycle);
+			ft_printf("It is now cycle %d || CTD: %d\n", c->vm->cycle, c->vm->cycle_to_die);
+			if (c->vm->dump == c->vm->cycle)
+				ft_flag_dump(c);
 			tmp = c->proc->head;
 			while (tmp)
 			{
@@ -115,8 +119,6 @@ void	cycle(t_cor *c)
 			}
 			if (cycle_to_die(c, cycle, &max))
 				return ;
-			if (c->vm->dump == c->vm->cycle)
-				ft_flag_dump(c);
 			c->vm->cycle++;
 		}
 	}

@@ -13,6 +13,10 @@
 
 #include "corewar.h"
 
+int		is_regnum_valid(int regnum)
+{
+	return (regnum >=0 && regnum <= 15);
+}
 
 /*
   ** Write in the memory at start_index value coded on bytes_len.
@@ -103,6 +107,13 @@ void	i_sti(t_node *proc, t_vm *vm)
 	int p2;
 	int	p3;
 
+	if (!is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (proc->param[2][1] == REG_CODE && !is_regnum_valid(proc->param[2][0] - 1))
+		return ;
+
 	addr = 0;
 	p1 = get_param_value(vm, proc, proc->param[1], 1);
 	p2 = get_param_value(vm, proc, proc->param[2], 1);
@@ -141,6 +152,13 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	int p2;
 	int addr;
 
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
+
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	addr = (proc->pc + p1 + p2) % (proc->pc_b + IDX_MOD);
@@ -153,6 +171,13 @@ void	i_lldi(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 	int addr;
+
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 0);
 	p2 = get_param_value(vm, proc, proc->param[1], 0);
@@ -168,6 +193,8 @@ void	i_st(t_node *proc, t_vm *vm)
 	int	p2;
 	int addr;
 
+	if (!is_regnum_valid(proc->param[0][0] - 1))
+		return ;
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = proc->param[1][0];
 	if (proc->param[1][1] == IND_CODE)
@@ -177,7 +204,11 @@ void	i_st(t_node *proc, t_vm *vm)
 		write_uint(vm, p1, addr, REG_SIZE);
 	}
 	else if (proc->param[1][1] == REG_CODE)
+	{
+		if (!is_regnum_valid(p2 - 1))
+			return ;
 		proc->reg[p2 - 1] = p1;
+	}
 	if (VERBOSE)
 		printf("P\t%d | st r%d %d\n", proc->num, proc->param[0][0], p2);
 }
@@ -187,6 +218,11 @@ void	i_add(t_node *proc, t_vm *vm)
 {
 	int p1;
 	int p2;
+
+	if (!is_regnum_valid(proc->param[0][0] - 1) ||
+		!is_regnum_valid(proc->param[1][0] - 1) ||
+		!is_regnum_valid(proc->param[2][0] - 1))
+	return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -203,6 +239,11 @@ void	i_sub(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
+	if (!is_regnum_valid(proc->param[0][0] - 1) ||
+		!is_regnum_valid(proc->param[1][0] - 1) ||
+		!is_regnum_valid(proc->param[2][0] - 1))
+	return ;
+
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	proc->reg[proc->param[2][0] - 1] = p1 - p2;
@@ -214,6 +255,13 @@ void	i_and(t_node *proc, t_vm *vm)
 {
 	int p1;
 	int p2;
+
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -227,6 +275,13 @@ void	i_or(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
+
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	proc->reg[proc->param[2][0] - 1] = p1 | p2;
@@ -239,6 +294,14 @@ void	i_xor(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
+
+
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	proc->reg[proc->param[2][0] - 1] = p1 ^ p2;
@@ -250,6 +313,8 @@ void	i_ld(t_node *proc, t_vm *vm)
 	int p1;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
+	if (!is_regnum_valid(proc->param[1][0] - 1))
+		return ;
 	proc->reg[proc->param[1][0] - 1] = p1;
 	proc->carry = !proc->reg[proc->param[1][0] - 1];
 
@@ -260,6 +325,9 @@ void	i_ld(t_node *proc, t_vm *vm)
 void	i_lld(t_node *proc, t_vm *vm)
 {
 	int p1;
+
+	if (!is_regnum_valid(proc->param[1][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 0);
 	proc->reg[proc->param[1][0] - 1] = p1;
@@ -273,6 +341,8 @@ char	i_aff(t_node *proc, t_vm *vm)
 {
 	int p1;
 
+	if (!is_regnum_valid(proc->param[0][0] - 1))
+		return 0;
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	return ((unsigned char)(p1 % 256));
 }
