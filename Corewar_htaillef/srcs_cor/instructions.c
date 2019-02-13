@@ -106,12 +106,12 @@ void	i_sti(t_node *proc, t_vm *vm)
 	int p2;
 	int	p3;
 
-	// if (!is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
-	// if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
-	// 	return ;
-	// if (proc->param[2][1] == REG_CODE && !is_regnum_valid(proc->param[2][0] - 1))
-	// 	return ;
+	if (!is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (proc->param[2][1] == REG_CODE && !is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	addr = 0;
 	p1 = get_param_value(vm, proc, proc->param[1], 1);
@@ -151,12 +151,12 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	int p2;
 	int addr;
 
-	// if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
-	// if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
-	// 	return ;
-	// if (!is_regnum_valid(proc->param[2][0] - 1))
-	// 	return ;
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -171,12 +171,12 @@ void	i_lldi(t_node *proc, t_vm *vm)
 	int p2;
 	int addr;
 
-	// if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
-	// if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
-	// 	return ;
-	// if (!is_regnum_valid(proc->param[2][0] - 1))
-	// 	return ;
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 0);
 	p2 = get_param_value(vm, proc, proc->param[1], 0);
@@ -192,8 +192,8 @@ void	i_st(t_node *proc, t_vm *vm)
 	int	p2;
 	int addr;
 
-	// if (!is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
+	if (!is_regnum_valid(proc->param[0][0] - 1))
+		return ;
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = proc->param[1][0];
 	if (proc->param[1][1] == IND_CODE)
@@ -204,8 +204,8 @@ void	i_st(t_node *proc, t_vm *vm)
 	}
 	else if (proc->param[1][1] == REG_CODE)
 	{
-		// if (!is_regnum_valid(p2 - 1))
-		// 	return ;
+		if (!is_regnum_valid(p2 - 1))
+			return ;
 		proc->reg[p2 - 1] = p1;
 	}
 	if (VERBOSE)
@@ -218,10 +218,10 @@ void	i_add(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
-	// if (!is_regnum_valid(proc->param[0][0] - 1) ||
-	// 	!is_regnum_valid(proc->param[1][0] - 1) ||
-	// 	!is_regnum_valid(proc->param[2][0] - 1))
-	// return ;
+	if (!is_regnum_valid(proc->param[0][0] - 1) ||
+		!is_regnum_valid(proc->param[1][0] - 1) ||
+		!is_regnum_valid(proc->param[2][0] - 1))
+	return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -238,10 +238,10 @@ void	i_sub(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
-	// if (!is_regnum_valid(proc->param[0][0] - 1) ||
-	// 	!is_regnum_valid(proc->param[1][0] - 1) ||
-	// 	!is_regnum_valid(proc->param[2][0] - 1))
-	// return ;
+	if (!is_regnum_valid(proc->param[0][0] - 1) ||
+		!is_regnum_valid(proc->param[1][0] - 1) ||
+		!is_regnum_valid(proc->param[2][0] - 1))
+	return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -258,12 +258,12 @@ void	i_and(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
-	// if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
-	// if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
-	// 	return ;
-	// if (!is_regnum_valid(proc->param[2][0] - 1))
-	// 	return ;
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -277,12 +277,12 @@ void	i_or(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
-	// if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
-	// if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
-	// 	return ;
-	// if (!is_regnum_valid(proc->param[2][0] - 1))
-	// 	return ;
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -296,12 +296,12 @@ void	i_xor(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
-	// if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
-	// 	return ;
-	// if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
-	// 	return ;
-	// if (!is_regnum_valid(proc->param[2][0] - 1))
-	// 	return ;
+	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+		return ;
+	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+		return ;
+	if (!is_regnum_valid(proc->param[2][0] - 1))
+		return ;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -342,8 +342,8 @@ char	i_aff(t_node *proc, t_vm *vm)
 {
 	int p1;
 
-	// if (!is_regnum_valid(proc->param[0][0] - 1))
-	// 	return 0;
+	if (!is_regnum_valid(proc->param[0][0] - 1))
+		return 0;
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	return ((unsigned char)(p1 % 256));
 }
