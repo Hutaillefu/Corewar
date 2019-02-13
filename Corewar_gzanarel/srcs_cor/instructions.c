@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/11 19:05:56 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/13 15:35:36 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -90,7 +90,7 @@ void	i_live(t_node *proc, t_cor *cor)
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
 	cor->vm->chmp_win_num = champ_num;
-	cor->vm->last_live = cor->vm->cycle;
+
 	if (VERBOSE)
 		printf("P\t%d | live %d\n", proc->num, champ_num);
 }
@@ -304,7 +304,7 @@ void	i_lfork(t_node *proc, t_cor *cor)
 		return ;
 	child->pc = (proc->pc + p1) % MEM_SIZE;
 	child->pc = child->pc < 0 ? MEM_SIZE -(-child->pc) : child->pc;
-	printf("New proc pc :%d\n", child->pc);
+	// printf("New proc pc :%d\n", child->pc);
 	child->pc_b = child->pc;
 	push_back(&(cor->proc), child);
 	//printf("New proc added\n");
