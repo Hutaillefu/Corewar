@@ -141,19 +141,21 @@ int 	check_coding_byte(t_node *proc, int coding_byte)
 {
 	int param;
 	int mask;
+	int size;
 
+	size = 0;
 	param = 0;
 	while (++param <= proc->op.nb_params)
 	{
 		mask = proc->op.param_mask[param - 1];
 		if (read_coding_byte(coding_byte, param) == IND_CODE && !(1 && (T_IND & mask) == T_IND))
-			return (0);
+			size += 2;
 		else if (read_coding_byte(coding_byte, param) == DIR_CODE && !(1 && (T_DIR & mask) == T_DIR))
-			return (0);
+			size += proc->op.dir_size == 0 ? 4 : 2;
 		else if (read_coding_byte(coding_byte, param) == REG_CODE && !(1 && (T_REG & mask)))
-			return (0);
+			size++;
 	}
-	return (1);
+	return (size);
 }
 
 /*
@@ -164,6 +166,7 @@ int     exec_process(t_vm *vm, t_node *proc)
 	int		coding_byte;
 	int		pc_base;
 	t_op	op;
+	int size;
 
 	if (!vm || !(vm->area) || !proc)
 		return (0);
@@ -187,11 +190,11 @@ int     exec_process(t_vm *vm, t_node *proc)
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc)];
-	if (op.coding_byte && !check_coding_byte(proc, coding_byte))
+	if (op.coding_byte && (size = check_coding_byte(proc, coding_byte)) > 0)
 	{
 		proc->op.opcode = -1;
 		proc->pc = pc_base;
-		proc->op_size = 1 + 1 + proc->op.nb_params * 2;
+		proc->op_size = size + 1 + 1;
 		return (1);
 	}
 
@@ -200,7 +203,7 @@ int     exec_process(t_vm *vm, t_node *proc)
 	{
 		proc->op.opcode = -1;
 		proc->pc = pc_base;
-		proc->op_size = 1 + 1 + proc->op.nb_params * 2;
+		// proc->op_size = 1 + 1 + proc->op.nb_params * 2;
 		return (1);
 	}
 

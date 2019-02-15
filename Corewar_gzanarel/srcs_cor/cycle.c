@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/15 11:19:53 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/15 14:34:00 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,6 +61,7 @@ void		read_and_process(t_cor *c, t_node *tmp)
 		exec_process(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
 	}
+	ft_printf("op_size: %d\n", tmp->op_size);
 }
 
 /*
@@ -86,12 +87,11 @@ int	cycle_to_die(t_cor *c, int cycle)
 		if (c->vm->nb_live >= NBR_LIVE)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
-			// c->vm->nb_live = 0;
+			c->vm->nb_live = 0;
 			c->vm->max_chk = 0;
 		}
 		// else
 		c->vm->max_chk++;
-		c->vm->nb_live = 0;
 			// (*max)++;
 		cycle = 0;
 	}
