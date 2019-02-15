@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/13 16:08:23 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/15 11:19:53 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,12 +66,13 @@ void		read_and_process(t_cor *c, t_node *tmp)
 /*
   ** Return 1 if no more processus and prog should stop
 */
-int	cycle_to_die(t_cor *c, int cycle, int *max)
+int	cycle_to_die(t_cor *c, int cycle)
 {
 	t_node *tmp;
 
 	if (cycle == c->vm->cycle_to_die)
 	{
+		printf("cycle %d\n", cycle);
 		// Kills process unlive
 		tmp = c->proc->head;
 		while (tmp)
@@ -85,14 +86,21 @@ int	cycle_to_die(t_cor *c, int cycle, int *max)
 		if (c->vm->nb_live >= NBR_LIVE)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
-			c->vm->nb_live = 0;
+			// c->vm->nb_live = 0;
+			c->vm->max_chk = 0;
 		}
-		else
-			(*max)++;
+		// else
+		c->vm->max_chk++;
+		c->vm->nb_live = 0;
+			// (*max)++;
 		cycle = 0;
 	}
-	if (*max == MAX_CHECKS)
+	if (c->vm->max_chk == MAX_CHECKS)
+	{
+		c->vm->nb_live = 0;
+		c->vm->max_chk = 0;
 		c->vm->cycle_to_die -= c->vm->cycle_delta;
+	}
 	return (0);
 }
 
@@ -100,24 +108,26 @@ void	cycle(t_cor *c)
 {
 	int		cycle;
 	t_node	*tmp;
-	int		max;
+	// int		max;
 
-	max = 0;
+	cycle = -1;
+	// max = 0;
 	while (c->vm->cycle_to_die > 0)
 	{
-		cycle = 0;
-		while (cycle++ <= c->vm->cycle_to_die)
+		if (cycle > 0)
+			cycle = 0;
+		while (++cycle <= c->vm->cycle_to_die)
 		{
-			ft_printf("It is now cycle %d || CTD: %d\n", c->vm->cycle, c->vm->cycle_to_die);
-			if (c->vm->dump == c->vm->cycle)
-				ft_flag_dump(c);
+			ft_printf("It is now cycle %d || CTD: %d || nb de process: %d\n", c->vm->cycle, c->vm->cycle_to_die, c->proc->len);
 			tmp = c->proc->head;
 			while (tmp)
 			{
 				read_and_process(c, tmp);
 				tmp = tmp->next;
 			}
-			if (cycle_to_die(c, cycle, &max))
+			if (c->vm->dump == c->vm->cycle)
+				ft_flag_dump(c);
+			if (cycle_to_die(c, cycle))
 				return ;
 			c->vm->cycle++;
 		}
