@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/13 15:43:38 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/15 10:54:16 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 1
+# define VERBOSE 0
 
 typedef struct		s_line
 {

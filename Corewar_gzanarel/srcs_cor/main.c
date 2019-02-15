@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 15:04:49 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 18:14:58 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/14 14:23:14 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -41,6 +41,7 @@ void		ft_print_winner(t_cor *c)
 			win = j;
 		}
 	}
+	ft_printf("last_live_chmp: %s : %d\n", c->chmp[win]->name, c->chmp[win]->last_live);
 	ft_printf("Contestant %d, \"%s\", has won !\n", win + 1, c->chmp[win]->name);
 }
 
@@ -55,8 +56,7 @@ int		main(int ac, char **av)
 	init_map(c);
 	cycle(c);
 	printf("cycle: %d\n", c->vm->cycle);
-	for (int i = 0; i < c->vm->nb_player; i++)
-		printf("last_live[%d]: %d\n", i, c->chmp[i]->last_live);
+	// for (int i = 0; i < c->vm->nb_player; i++)
 	ft_print_winner(c);
 	return (0);
 }

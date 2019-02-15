@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/13 15:35:36 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/15 10:53:01 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -76,7 +76,11 @@ t_chmp	*get_chmp_by_num(t_cor *cor, int champ_num)
 	while (++i < MAX_PLAYERS && cor->chmp[i])
 	{
 		if (cor->chmp[i]->num == champ_num)
+		{
+			cor->chmp[i]->last_live = cor->vm->cycle;
+			cor->vm->nb_live++;
 			return (cor->chmp[i]);
+		}
 	}
 	return (NULL);
 }
@@ -89,14 +93,14 @@ void	i_live(t_node *proc, t_cor *cor)
 
 	i = -1;
 	champ_num = read_next_uint(cor->vm, proc->pc + 1, 4);
-	cor->vm->nb_live++;
+	// cor->vm->nb_live++;
+	// printf("nb_live: %d\n", cor->vm->nb_live);
 	proc->last_live = cor->vm->cycle;
+	if (VERBOSE == 1)
+		ft_printf("P\t%d | live %d\n", proc->num, champ_num);
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
 	cor->vm->chmp_win_num = champ_num;
-
-	if (VERBOSE)
-		printf("P\t%d | live %d\n", proc->num, champ_num);
 }
 
 // Should be ok
@@ -122,7 +126,7 @@ void	i_sti(t_node *proc, t_vm *vm)
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	write_uint(vm, p3, addr, REG_SIZE);
 
-	if (VERBOSE)
+	if (VERBOSE == 1)
 	{
 		ft_printf("P\t%d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
 		ft_printf(" \t  | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
@@ -134,15 +138,15 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	int p1;
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
-	proc->op_size = p1 % (proc->pc_b + MEM_SIZE);
 	if (proc->carry)
 	{
-		if (VERBOSE)
-			printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
+		proc->op_size = p1 % (proc->pc_b + MEM_SIZE);
+		if (VERBOSE == 1)
+			ft_printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
 		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
 	}
-	else if (VERBOSE)
-			printf("P\t%d | zjmp %d FAILED\n", proc->num, proc->op_size);
+	else if (VERBOSE == 1)
+			ft_printf("P\t%d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
 }
 
 // Should be ok
@@ -209,8 +213,8 @@ void	i_st(t_node *proc, t_vm *vm)
 			return ;
 		proc->reg[p2 - 1] = p1;
 	}
-	if (VERBOSE)
-		printf("P\t%d | st r%d %d\n", proc->num, proc->param[0][0], p2);
+	if (VERBOSE == 1)
+		ft_printf("P\t%d | st r%d %d\n", proc->num, proc->param[0][0], p2);
 }
 
 // Should be ok
@@ -229,8 +233,8 @@ void	i_add(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[2][0] - 1] = p1 + p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 
-	if (VERBOSE)
-		printf("P\t%d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+	if (VERBOSE == 1)
+		ft_printf("P\t%d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 }
 
 // Should be ok
@@ -248,6 +252,9 @@ void	i_sub(t_node *proc, t_vm *vm)
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	proc->reg[proc->param[2][0] - 1] = p1 - p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
+
+	if (VERBOSE == 1)
+		ft_printf("P\t%d | sub r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 }
 
 // Should be ok
@@ -301,7 +308,6 @@ void	i_xor(t_node *proc, t_vm *vm)
 	if (!is_regnum_valid(proc->param[2][0] - 1))
 		return ;
 
-
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	proc->reg[proc->param[2][0] - 1] = p1 ^ p2;
@@ -318,8 +324,8 @@ void	i_ld(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[1][0] - 1] = p1;
 	proc->carry = !proc->reg[proc->param[1][0] - 1];
 
-	if (VERBOSE)
-		printf("P\t%d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
+	if (VERBOSE == 1)
+		ft_printf("P\t%d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
 }
 
 void	i_lld(t_node *proc, t_vm *vm)
@@ -359,8 +365,8 @@ void	i_fork(t_node *proc, t_cor *cor)
 	child->pc_b = child->pc;
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->len;
-	if (VERBOSE)
-		printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);
+	if (VERBOSE == 1)
+		ft_printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);
 }
 
 void	i_lfork(t_node *proc, t_cor *cor)
