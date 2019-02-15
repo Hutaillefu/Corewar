@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 17:38:47 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/14 15:15:48 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -85,7 +85,7 @@ void	init_vm(t_cor *c, char **av, int ac)
 		ft_exit(1);
 	ft_memset(c->vm->area, 0, MEM_SIZE);
 	c->vm->area[MEM_SIZE + 1] = '\0';
-	c->vm->max_chk = MAX_CHECKS;
+	c->vm->max_chk = 0;
 	c->vm->champ_msize = CHAMP_MAX_SIZE;
 	c->vm->cycle = 0;
 	c->vm->dump = -1;
