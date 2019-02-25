@@ -137,23 +137,30 @@ int		extract_params(t_vm *vm, t_node *proc, int coding_byte)
 	return (1);
 }
 
+int		is_coding(int code)
+{
+	return (code == REG_CODE || code == IND_CODE || code == REG_CODE);
+}
+
 int 	check_coding_byte(t_node *proc, int coding_byte)
 {
 	int param;
 	int mask;
+	int size;
 
+	size = 0;
 	param = 0;
 	while (++param <= proc->op.nb_params)
 	{
 		mask = proc->op.param_mask[param - 1];
 		if (read_coding_byte(coding_byte, param) == IND_CODE && !(1 && (T_IND & mask) == T_IND))
-			return (0);
+			size += 2;
 		else if (read_coding_byte(coding_byte, param) == DIR_CODE && !(1 && (T_DIR & mask) == T_DIR))
-			return (0);
+			size += proc->op.dir_size == 0 ? 4 : 2;
 		else if (read_coding_byte(coding_byte, param) == REG_CODE && !(1 && (T_REG & mask)))
-			return (0);
+			size++;
 	}
-	return (1);
+	return (size);
 }
 
 /*
@@ -164,46 +171,45 @@ int     exec_process(t_vm *vm, t_node *proc)
 	int		coding_byte;
 	int		pc_base;
 	t_op	op;
+	int size;
 
 	if (!vm || !(vm->area) || !proc)
 		return (0);
 
 	pc_base = proc->pc;
 
-	proc->op.coding_byte = -1;
-	proc->op.nb_cycles = 1;
-	proc->op.opcode = -1;
-	proc->op.name = NULL;
-	proc->op.nb_params = 0;
-
-	if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
+	if (vm->cycle != proc->exec)
 	{
+		proc->op.coding_byte = -1;
+		proc->op.nb_cycles = 1;
 		proc->op.opcode = -1;
-		proc->op_size = 1;
-		return (0);
+		proc->op.name = NULL;
+		proc->op.nb_params = 0;
+
+		if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
+		{
+			proc->op.opcode = -1;
+			proc->op_size = 1;
+			return (0);
+		}
+		proc->op = op;
 	}
-	proc->op = op;
+	else
+		op = proc->op;
 
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc)];
-	if (op.coding_byte && !check_coding_byte(proc, coding_byte))
+	if (op.coding_byte && (size = check_coding_byte(proc, coding_byte)) > 0)
 	{
 		proc->op.opcode = -1;
 		proc->pc = pc_base;
-		proc->op_size = 1 + 1 + proc->op.nb_params * 2;
+		proc->op_size = size + 1 + 1;
 		return (1);
 	}
 
 	(proc->pc)++;
-	if (!extract_params(vm, proc, coding_byte))
-	{
-		proc->op.opcode = -1;
-		proc->pc = pc_base;
-		proc->op_size = 1 + 1 + proc->op.nb_params * 2;
-		return (1);
-	}
-
+	extract_params(vm, proc, coding_byte);
 	proc->op_size = proc->pc - pc_base;
 	proc->pc = pc_base;
 

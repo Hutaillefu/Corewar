@@ -18,6 +18,19 @@ int		is_regnum_valid(int regnum)
 	return (regnum >=0 && regnum <= 15);
 }
 
+void	adv(t_vm *vm, int pc, int opsize)
+{
+	int i;
+
+	i = -1;
+	ft_printf("ADV %d (%#06x  -> %#06x)", opsize, pc, pc + opsize);
+	while (++i < opsize)
+	{
+		ft_printf("%3.2x", vm->area[pc + i]);
+	}
+	ft_printf("\n");
+}
+
 /*
   ** Write in the memory at start_index value coded on bytes_len.
 */
@@ -78,7 +91,7 @@ t_chmp	*get_chmp_by_num(t_cor *cor, int champ_num)
 		if (cor->chmp[i]->num == champ_num)
 		{
 			cor->chmp[i]->last_live = cor->vm->cycle;
-			cor->vm->nb_live++;
+			//cor->vm->nb_live++;
 			return (cor->chmp[i]);
 		}
 	}
@@ -93,14 +106,17 @@ void	i_live(t_node *proc, t_cor *cor)
 
 	i = -1;
 	champ_num = read_next_uint(cor->vm, proc->pc + 1, 4);
-	// cor->vm->nb_live++;
 	// printf("nb_live: %d\n", cor->vm->nb_live);
 	proc->last_live = cor->vm->cycle;
 	if (VERBOSE == 1)
+	{
 		ft_printf("P\t%d | live %d\n", proc->num, champ_num);
+		adv(cor->vm, proc->pc, proc->op_size);
+	}
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
 	cor->vm->chmp_win_num = champ_num;
+	cor->vm->nb_live++;
 }
 
 // Should be ok
@@ -130,6 +146,7 @@ void	i_sti(t_node *proc, t_vm *vm)
 	{
 		ft_printf("P\t%d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
 		ft_printf(" \t  | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+		adv(vm, proc->pc, proc->op_size);
 	}
 }
 
@@ -168,6 +185,13 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	addr = (proc->pc + p1 + p2) % (proc->pc_b + IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
+
+	if (VERBOSE)
+	{
+		ft_printf("P\t%d | ldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
+		ft_printf(" \t  | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+		adv(vm, proc->pc, proc->op_size);
+	}
 }
 
 void	i_lldi(t_node *proc, t_vm *vm)
@@ -214,7 +238,10 @@ void	i_st(t_node *proc, t_vm *vm)
 		proc->reg[p2 - 1] = p1;
 	}
 	if (VERBOSE == 1)
+	{
 		ft_printf("P\t%d | st r%d %d\n", proc->num, proc->param[0][0], p2);
+		adv(vm, proc->pc, proc->op_size);
+	}
 }
 
 // Should be ok
@@ -234,7 +261,10 @@ void	i_add(t_node *proc, t_vm *vm)
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 
 	if (VERBOSE == 1)
+	{
 		ft_printf("P\t%d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		adv(vm, proc->pc, proc->op_size);
+	}
 }
 
 // Should be ok
@@ -254,7 +284,10 @@ void	i_sub(t_node *proc, t_vm *vm)
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 
 	if (VERBOSE == 1)
+	{
 		ft_printf("P\t%d | sub r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		adv(vm, proc->pc, proc->op_size);
+	}
 }
 
 // Should be ok
@@ -325,7 +358,10 @@ void	i_ld(t_node *proc, t_vm *vm)
 	proc->carry = !proc->reg[proc->param[1][0] - 1];
 
 	if (VERBOSE == 1)
+	{
 		ft_printf("P\t%d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
+		adv(vm, proc->pc, proc->op_size);
+	}
 }
 
 void	i_lld(t_node *proc, t_vm *vm)
@@ -366,7 +402,10 @@ void	i_fork(t_node *proc, t_cor *cor)
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->len;
 	if (VERBOSE == 1)
+	{
 		ft_printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);
+		adv(cor->vm, proc->pc, proc->op_size);
+	}
 }
 
 void	i_lfork(t_node *proc, t_cor *cor)
@@ -375,13 +414,16 @@ void	i_lfork(t_node *proc, t_cor *cor)
 	t_node *child;
 
 	p1 = get_param_value(cor->vm, proc, proc->param[0], 1);
-	//printf("LFork execution with param %d\n", p1);
 	if (!(child = clone_proc(proc)))
 		return ;
 	child->pc = (proc->pc + p1) % MEM_SIZE;
 	child->pc = child->pc < 0 ? MEM_SIZE -(-child->pc) : child->pc;
-	// printf("New proc pc :%d\n", child->pc);
 	child->pc_b = child->pc;
-	push_back(&(cor->proc), child);
-	//printf("New proc added\n");
+	push_front(&(cor->proc), child);
+	child->num = cor->proc->len;
+	if (VERBOSE == 1)
+	{
+		ft_printf("P\t%d | lfork %d (%d)\n", proc->num, p1, child->pc);
+		adv(cor->vm, proc->pc, proc->op_size);
+	}
 }
