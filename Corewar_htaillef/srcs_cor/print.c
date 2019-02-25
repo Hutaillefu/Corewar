@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/15 10:57:13 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/25 16:11:41 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -25,11 +25,13 @@ void	print_map(t_cor *c, int octet)
 
 	tmp = c->proc->head;
 	printf("nb_live: %d\n", c->vm->nb_live);
-	while (tmp)
-	{
-		ft_printf("PC is %d | last_live_PC: %d\n", tmp->pc, tmp->last_live);
-		tmp = tmp->next;
-	}
+	// while (tmp)
+	// {
+	// 	ft_printf("PC is %d | last_live PC: %d\n", tmp->pc, tmp->last_live);
+	// 	tmp = tmp->next;
+	// }
+	ft_printf("cycle: %d\n", c->vm->cycle);
+	ft_printf("last live chmp: %d\n", c->chmp[0]->last_live);
 	printf("%d processus.\n", c->proc->len);
 	ft_printf("0x0000 :");
 	while (++i < MEM_SIZE)
@@ -43,7 +45,7 @@ void	print_map(t_cor *c, int octet)
 		{
 			if (tmp->pc == i)
 			{
-				ft_printf("\033[32;01m%3.2x\033[00m", c->vm->area[i]);
+				ft_printf("\033[31;01m%3.2x\033[00m", c->vm->area[i]);
 				draw = 1;
 				break;
 			}

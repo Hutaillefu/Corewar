@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/15 10:54:16 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/25 15:45:08 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 0
+# define VERBOSE 1
 
 typedef struct		s_line
 {
@@ -147,8 +147,8 @@ int    read_next_uint(t_vm *vm, int index, int bytes_len);
 */
 void				cycle(t_cor *c);
 
-int     	exec_process(t_vm *vm, t_node *proc);
-
+int     exec_process(t_vm *vm, t_node *proc);
+int     check_processus(t_vm *vm, t_node *proc);
 /*
 ** processus
 */

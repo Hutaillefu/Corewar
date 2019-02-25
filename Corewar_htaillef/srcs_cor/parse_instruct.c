@@ -137,11 +137,6 @@ int		extract_params(t_vm *vm, t_node *proc, int coding_byte)
 	return (1);
 }
 
-int		is_coding(int code)
-{
-	return (code == REG_CODE || code == IND_CODE || code == REG_CODE);
-}
-
 int 	check_coding_byte(t_node *proc, int coding_byte)
 {
 	int param;
@@ -163,6 +158,31 @@ int 	check_coding_byte(t_node *proc, int coding_byte)
 	return (size);
 }
 
+// int     check_processus(t_vm *vm, t_node *proc)
+// {
+// 	int coding_byte;
+// 	int pc_base;
+// 	int size;
+
+// 	pc_base = proc->pc;
+// 	coding_byte = -1;
+// 	if (proc->op.coding_byte)
+// 		coding_byte = (int)vm->area[++(proc->pc)];
+// 	if (proc->op.coding_byte && (size = check_coding_byte(proc, coding_byte)) > 0)
+// 	{
+// 		proc->op.opcode = -1;
+// 		proc->pc = pc_base;
+// 		proc->op_size = size + 1 + 1;
+// 		return (1);
+// 	}
+// 	(proc->pc)++;
+// 	extract_params(vm, proc, coding_byte);
+// 	proc->op_size = proc->pc - pc_base;
+// 	proc->pc = pc_base;
+
+// 	return (1);
+// }
+
 /*
   ** Read the next instruction.
 */
@@ -177,15 +197,13 @@ int     exec_process(t_vm *vm, t_node *proc)
 		return (0);
 
 	pc_base = proc->pc;
-
-	if (vm->cycle != proc->exec)
+	if (vm->cycle != proc->exec || proc->exec == 0)
 	{
 		proc->op.coding_byte = -1;
 		proc->op.nb_cycles = 1;
 		proc->op.opcode = -1;
 		proc->op.name = NULL;
 		proc->op.nb_params = 0;
-
 		if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
 		{
 			proc->op.opcode = -1;
@@ -194,9 +212,8 @@ int     exec_process(t_vm *vm, t_node *proc)
 		}
 		proc->op = op;
 	}
-	else
+	else 
 		op = proc->op;
-
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc)];
@@ -212,6 +229,7 @@ int     exec_process(t_vm *vm, t_node *proc)
 	extract_params(vm, proc, coding_byte);
 	proc->op_size = proc->pc - pc_base;
 	proc->pc = pc_base;
-
+	if (proc->op.opcode <= 0 || proc->op.opcode > 16)
+		proc->op_size = 1;
 	return (1);
 }

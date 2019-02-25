@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/15 14:34:00 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/25 17:08:38 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,15 +53,20 @@ void	rm_element(t_list2 **lst, t_node *proc)
 
 void		read_and_process(t_cor *c, t_node *tmp)
 {
-	exec_process(c->vm, tmp);
-	if (c->vm->cycle == tmp->exec && tmp->exec != 0 && start_processus(c, tmp))
-		read_and_process(c, c->proc->head);
+	// printf("Num: %d - Avant Opcode: %d\n", tmp->num, tmp->op.opcode);
+	// printf("Num; %d || size; %d\n", tmp->num, tmp->op_size);
+	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
+	{
+		exec_process(c->vm, tmp);
+		if (start_processus(c, tmp))
+			read_and_process(c, c->proc->head);
+	}
 	if (tmp->exec == 0)
 	{
 		exec_process(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
 	}
-	//ft_printf("op_size: %d\n", tmp->op_size);
+	// printf("Num: %d - Apres Opcode: %d\n", tmp->num, tmp->op.opcode);
 }
 
 /*

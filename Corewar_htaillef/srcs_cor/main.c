@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 15:04:49 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/14 14:23:14 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/02/25 16:10:09 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,7 +55,7 @@ int		main(int ac, char **av)
 	check_infos(c);
 	init_map(c);
 	cycle(c);
-	printf("cycle: %d\n", c->vm->cycle);
+	ft_printf("cycle: %d\n", c->vm->cycle);
 	// for (int i = 0; i < c->vm->nb_player; i++)
 	ft_print_winner(c);
 	return (0);
