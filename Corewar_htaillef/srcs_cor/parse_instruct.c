@@ -213,7 +213,14 @@ int     exec_process(t_vm *vm, t_node *proc)
 		proc->op = op;
 	}
 	else 
+	{
 		op = proc->op;
+		if (proc->op.opcode <= 0 || proc->op.opcode > 16)
+		{
+			proc->op_size = 1;
+			return (0);
+		}
+	}
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc)];
@@ -229,7 +236,6 @@ int     exec_process(t_vm *vm, t_node *proc)
 	extract_params(vm, proc, coding_byte);
 	proc->op_size = proc->pc - pc_base;
 	proc->pc = pc_base;
-	if (proc->op.opcode <= 0 || proc->op.opcode > 16)
-		proc->op_size = 1;
+
 	return (1);
 }

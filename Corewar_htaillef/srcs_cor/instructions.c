@@ -73,6 +73,7 @@ int		get_param_value(t_vm *vm, t_node *proc, int param[2], int mod)
 		else 
 			addr = (proc->pc + param[0]) % MEM_SIZE;
 		addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+		//addr %= MEM_SIZE;
 		return (read_next_uint(vm, addr, 4));
 	}
 	return (-1);
@@ -115,6 +116,8 @@ void	i_live(t_node *proc, t_cor *cor)
 	}
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 		return ;
+	if (VERBOSE)
+		ft_printf("Player %d (%s) is said to be alive\n", -chmp->num, chmp->name);
 	cor->vm->chmp_win_num = champ_num;
 	cor->vm->nb_live++;
 }
@@ -140,6 +143,7 @@ void	i_sti(t_node *proc, t_vm *vm)
 	p3 = get_param_value(vm, proc, proc->param[0], 1);
 	addr = (proc->pc + p1 + p2) % (MEM_SIZE);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+	//addr %= MEM_SIZE;
 	write_uint(vm, p3, addr, REG_SIZE);
 
 	if (VERBOSE == 1)
@@ -184,6 +188,7 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	addr = (proc->pc + p1 + p2) % (proc->pc_b + IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+	//addr %= MEM_SIZE;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
 
 	if (VERBOSE)
@@ -211,6 +216,7 @@ void	i_lldi(t_node *proc, t_vm *vm)
 	p2 = get_param_value(vm, proc, proc->param[1], 0);
 	addr = (proc->pc + p1 + p2) % MEM_SIZE;
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+	//addr %= MEM_SIZE;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 }
@@ -229,6 +235,7 @@ void	i_st(t_node *proc, t_vm *vm)
 	{
 		addr = proc->pc + (p2 % IDX_MOD); 
 		addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+		addr %= MEM_SIZE;
 		write_uint(vm, p1, addr, REG_SIZE);
 	}
 	else if (proc->param[1][1] == REG_CODE)
