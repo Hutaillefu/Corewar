@@ -40,7 +40,7 @@ void	print_map(t_cor *c, int octet)
 			ft_printf("%#06x :", i);
 		++j;
 		draw = 0;
-		/*tmp = c->proc->head;
+		tmp = c->proc->head;
 		while (tmp)
 		{
 			if (tmp->pc == i)
@@ -50,7 +50,7 @@ void	print_map(t_cor *c, int octet)
 				break;
 			}
 			tmp = tmp->next;
-		}*/
+		}
 		if (!draw)
 			ft_printf("%3.2x", c->vm->area[i]);
 		if (j == octet)

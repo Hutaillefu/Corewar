@@ -92,6 +92,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 		if (c->vm->nb_live >= NBR_LIVE)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
+			ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 			c->vm->nb_live = 0;
 			c->vm->max_chk = 0;
 		}
@@ -105,6 +106,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 		c->vm->nb_live = 0;
 		c->vm->max_chk = 0;
 		c->vm->cycle_to_die -= c->vm->cycle_delta;
+		ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 	}
 	return (0);
 }

@@ -113,14 +113,18 @@ void	i_live(t_node *proc, t_cor *cor)
 	// printf("nb_live: %d\n", cor->vm->nb_live);
 	proc->last_live = cor->vm->cycle;
 	if (VERBOSE == 1)
+		ft_printf("P% 5d | live %d\n", proc->num, champ_num);
+	if (!(chmp = get_chmp_by_num(cor, champ_num)))
 	{
-		ft_printf("P    %d | live %d\n", proc->num, champ_num);
+		if (VERBOSE)
+			adv(cor->vm, proc->pc, proc->op_size);
+		return ;
+	}
+	if (VERBOSE)
+	{
+		ft_printf("Player %d (%s) is said to be alive\n", -chmp->num, chmp->name);
 		adv(cor->vm, proc->pc, proc->op_size);
 	}
-	if (!(chmp = get_chmp_by_num(cor, champ_num)))
-		return ;
-	if (VERBOSE)
-		ft_printf("Player %d (%s) is said to be alive\n", -chmp->num, chmp->name);
 	cor->vm->chmp_win_num = champ_num;
 	cor->vm->nb_live++;
 }
@@ -166,11 +170,11 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	{
 		proc->op_size = p1 % (proc->pc_b + MEM_SIZE);
 		if (VERBOSE == 1)
-			ft_printf("P    %d | zjmp %d OK\n", proc->num, proc->op_size);
+			ft_printf("P% 5d | zjmp %d OK\n", proc->num, proc->op_size);
 		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
 	}
 	else if (VERBOSE == 1)
-			ft_printf("P    %d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
+			ft_printf("P% 5d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
 }
 
 // Should be ok
@@ -231,7 +235,10 @@ void	i_st(t_node *proc, t_vm *vm)
 	int addr;
 
 	if (!is_regnum_valid(proc->param[0][0] - 1))
+	{
+		adv(vm, proc->pc, proc->op_size);
 		return ;
+	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = proc->param[1][0];
 	if (proc->param[1][1] == IND_CODE)
@@ -249,7 +256,7 @@ void	i_st(t_node *proc, t_vm *vm)
 	}
 	if (VERBOSE == 1)
 	{
-		ft_printf("P    %d | st r%d %d\n", proc->num, proc->param[0][0], p2);
+		ft_printf("P% 5d | st r%d %d\n", proc->num, proc->param[0][0], p2);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -369,7 +376,7 @@ void	i_ld(t_node *proc, t_vm *vm)
 
 	if (VERBOSE == 1)
 	{
-		ft_printf("P    %d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
+		ft_printf("P% 5d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -413,7 +420,7 @@ void	i_fork(t_node *proc, t_cor *cor)
 	child->num = cor->proc->len;
 	if (VERBOSE == 1)
 	{
-		ft_printf("P    %d | fork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf("P% 5d | fork %d (%d)\n", proc->num, p1, child->pc);
 		adv(cor->vm, proc->pc, proc->op_size);
 	}
 }
