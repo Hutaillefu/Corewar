@@ -41,16 +41,16 @@ void	print_map(t_cor *c, int octet)
 		++j;
 		draw = 0;
 		tmp = c->proc->head;
-		while (tmp)
-		{
-			if (tmp->pc == i)
-			{
-				ft_printf("\033[31;01m%3.2x\033[00m", c->vm->area[i]);
-				draw = 1;
-				break;
-			}
-			tmp = tmp->next;
-		}
+		// while (tmp)
+		// {
+		// 	if (tmp->pc == i)
+		// 	{
+		// 		ft_printf("\033[31;01m%3.2x\033[00m", c->vm->area[i]);
+		// 		draw = 1;
+		// 		break;
+		// 	}
+		// 	tmp = tmp->next;
+		// }
 		if (!draw)
 			ft_printf("%3.2x", c->vm->area[i]);
 		if (j == octet)
