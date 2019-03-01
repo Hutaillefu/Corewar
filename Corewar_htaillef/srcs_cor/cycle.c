@@ -32,13 +32,13 @@ void	rm_element(t_list2 **lst, t_node *proc)
 		{
 			if (tmp->prev)
 			{
-				printf("Remove process of list P%d\n", proc->num);								
+				//printf("Remove process of list P%d\n", proc->num);								
 				tmp->prev->next = tmp->next;
 				(*lst)->len--;
 			}
 			else
 			{ 
-				printf("Remove first process of list P%d\n", proc->num);			
+				//printf("Remove first process of list P%d\n", proc->num);			
 				(*lst)->head = tmp->next;
 				if ((*lst)->head)
 					(*lst)->head->prev = NULL;
@@ -78,7 +78,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 
 	if (cycle == c->vm->cycle_to_die)
 	{
-		printf("cycle %d\n", cycle);
+		//printf("cycle %d\n", cycle);
 		// Kills process unlive
 		tmp = c->proc->head;
 		while (tmp)
@@ -123,7 +123,8 @@ void	cycle(t_cor *c)
 			cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			ft_printf("It is now cycle %d || CTD: %d || nb de process: %d\n", c->vm->cycle, c->vm->cycle_to_die, c->proc->len);
+			if (c->vm->cycle > 0)
+				ft_printf("It is now cycle %d\n"/* || CTD: %d || nb de process: %d\n"*/, c->vm->cycle/*, c->vm->cycle_to_die, c->proc->len*/);
 			tmp = c->proc->head;
 			while (tmp)
 			{

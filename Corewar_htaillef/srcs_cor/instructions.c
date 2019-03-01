@@ -23,12 +23,15 @@ void	adv(t_vm *vm, int pc, int opsize)
 	int i;
 
 	i = -1;
-	ft_printf("ADV %d (%#06x  -> %#06x)", opsize, pc, pc + opsize);
+	if (pc == 0)
+		ft_printf("ADV %d (0x0000 -> %#06x)", opsize, pc + opsize);
+	else
+		ft_printf("ADV %d (%#06x -> %#06x)", opsize, pc, pc + opsize);
 	while (++i < opsize)
 	{
 		ft_printf("%3.2x", vm->area[pc + i]);
 	}
-	ft_printf("\n");
+	ft_printf(" \n");
 }
 
 /*
@@ -73,7 +76,7 @@ int		get_param_value(t_vm *vm, t_node *proc, int param[2], int mod)
 		else 
 			addr = (proc->pc + param[0]) % MEM_SIZE;
 		addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
-		//addr %= MEM_SIZE;
+		addr %= MEM_SIZE;
 		return (read_next_uint(vm, addr, 4));
 	}
 	return (-1);
@@ -111,7 +114,7 @@ void	i_live(t_node *proc, t_cor *cor)
 	proc->last_live = cor->vm->cycle;
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | live %d\n", proc->num, champ_num);
+		ft_printf("P    %d | live %d\n", proc->num, champ_num);
 		adv(cor->vm, proc->pc, proc->op_size);
 	}
 	if (!(chmp = get_chmp_by_num(cor, champ_num)))
@@ -148,8 +151,8 @@ void	i_sti(t_node *proc, t_vm *vm)
 
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
-		ft_printf(" \t  | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+		ft_printf("P    %d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
+		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -163,11 +166,11 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	{
 		proc->op_size = p1 % (proc->pc_b + MEM_SIZE);
 		if (VERBOSE == 1)
-			ft_printf("P\t%d | zjmp %d OK\n", proc->num, proc->op_size);
+			ft_printf("P    %d | zjmp %d OK\n", proc->num, proc->op_size);
 		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
 	}
 	else if (VERBOSE == 1)
-			ft_printf("P\t%d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
+			ft_printf("P    %d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
 }
 
 // Should be ok
@@ -193,8 +196,8 @@ void	i_ldi(t_node *proc, t_vm *vm)
 
 	if (VERBOSE)
 	{
-		ft_printf("P\t%d | ldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
-		ft_printf(" \t  | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+		ft_printf("P    %d | ldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
+		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -246,7 +249,7 @@ void	i_st(t_node *proc, t_vm *vm)
 	}
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | st r%d %d\n", proc->num, proc->param[0][0], p2);
+		ft_printf("P    %d | st r%d %d\n", proc->num, proc->param[0][0], p2);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -269,7 +272,7 @@ void	i_add(t_node *proc, t_vm *vm)
 
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		ft_printf("P    %d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -292,7 +295,7 @@ void	i_sub(t_node *proc, t_vm *vm)
 
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | sub r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		ft_printf("P    %d | sub r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -366,7 +369,7 @@ void	i_ld(t_node *proc, t_vm *vm)
 
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
+		ft_printf("P    %d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
 		adv(vm, proc->pc, proc->op_size);
 	}
 }
@@ -410,7 +413,7 @@ void	i_fork(t_node *proc, t_cor *cor)
 	child->num = cor->proc->len;
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | fork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf("P    %d | fork %d (%d)\n", proc->num, p1, child->pc);
 		adv(cor->vm, proc->pc, proc->op_size);
 	}
 }
@@ -430,7 +433,7 @@ void	i_lfork(t_node *proc, t_cor *cor)
 	child->num = cor->proc->len;
 	if (VERBOSE == 1)
 	{
-		ft_printf("P\t%d | lfork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf("P    %d | lfork %d (%d)\n", proc->num, p1, child->pc);
 		adv(cor->vm, proc->pc, proc->op_size);
 	}
 }

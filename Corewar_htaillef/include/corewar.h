@@ -17,7 +17,7 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 0
+# define VERBOSE 1
 
 typedef struct		s_line
 {
