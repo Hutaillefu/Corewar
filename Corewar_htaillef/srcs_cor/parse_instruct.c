@@ -192,10 +192,9 @@ int     exec_process(t_vm *vm, t_node *proc)
 	int		pc_base;
 	t_op	op;
 	int size;
-
+		
 	if (!vm || !(vm->area) || !proc)
 		return (0);
-
 	pc_base = proc->pc;
 	if (vm->cycle != proc->exec || proc->exec == 0)
 	{
@@ -207,6 +206,7 @@ int     exec_process(t_vm *vm, t_node *proc)
 		if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
 		{
 			proc->op.opcode = -1;
+			proc->exec = vm->cycle;
 			proc->op_size = 1;
 			return (0);
 		}
@@ -214,9 +214,23 @@ int     exec_process(t_vm *vm, t_node *proc)
 	}
 	else 
 	{
+		op = get_op_by_opcode((int)vm->area[proc->pc]);
+		if (op.opcode != proc->op.opcode && (op.opcode >= 1 && op.opcode <= 16))
+		{
+			if (op.nb_cycles > proc->op.nb_cycles)
+			{
+				proc->exec += op.nb_cycles - proc->op.nb_cycles;
+				proc->op = op;
+				return (0);
+			}
+			proc->op = op;
+			proc->op.name = NULL;
+		}
 		op = proc->op;
 		if (proc->op.opcode <= 0 || proc->op.opcode > 16)
 		{
+			proc->op.opcode = -1; 
+			proc->exec = vm->cycle;
 			proc->op_size = 1;
 			return (0);
 		}

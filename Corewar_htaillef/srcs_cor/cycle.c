@@ -53,12 +53,10 @@ void	rm_element(t_list2 **lst, t_node *proc)
 
 void		read_and_process(t_cor *c, t_node *tmp)
 {
-	// printf("Num: %d - Avant Opcode: %d\n", tmp->num, tmp->op.opcode);
-	// printf("Num; %d || size; %d\n", tmp->num, tmp->op_size);
 	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
 	{
 		exec_process(c->vm, tmp);
-		if (start_processus(c, tmp))
+		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
 			read_and_process(c, c->proc->head);
 	}
 	if (tmp->exec == 0)
@@ -66,7 +64,6 @@ void		read_and_process(t_cor *c, t_node *tmp)
 		exec_process(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
 	}
-	// printf("Num: %d - Apres Opcode: %d\n", tmp->num, tmp->op.opcode);
 }
 
 /*

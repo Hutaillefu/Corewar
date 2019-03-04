@@ -106,11 +106,16 @@ void	i_live(t_node *proc, t_cor *cor)
 {
 	int 	champ_num;
 	t_chmp	*chmp;
-	int i;
 
-	i = -1;
 	champ_num = read_next_uint(cor->vm, proc->pc + 1, 4);
-	// printf("nb_live: %d\n", cor->vm->nb_live);
+
+	if (!proc->op.name)
+	{
+		if (champ_num <= cor->proc->len)
+			adv(cor->vm, proc->pc, proc->op_size);
+		return ;
+	}
+
 	proc->last_live = cor->vm->cycle;
 	if (VERBOSE == 1)
 		ft_printf("P% 5d | live %d\n", proc->num, champ_num);
@@ -234,7 +239,7 @@ void	i_st(t_node *proc, t_vm *vm)
 	int	p2;
 	int addr;
 
-	if (!is_regnum_valid(proc->param[0][0] - 1))
+	if (!is_regnum_valid(proc->param[0][0] - 1) || !proc->op.name)
 	{
 		adv(vm, proc->pc, proc->op_size);
 		return ;
