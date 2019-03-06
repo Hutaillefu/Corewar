@@ -55,13 +55,13 @@ void		read_and_process(t_cor *c, t_node *tmp)
 {
 	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
 	{
-		exec_process(c->vm, tmp);
+		exec(c->vm, tmp);
 		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
 			read_and_process(c, c->proc->head);
 	}
 	if (tmp->exec == 0)
 	{
-		exec_process(c->vm, tmp);
+		load(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
 	}
 }

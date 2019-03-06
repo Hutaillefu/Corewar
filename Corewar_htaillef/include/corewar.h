@@ -148,6 +148,8 @@ int    read_next_uint(t_vm *vm, int index, int bytes_len);
 void				cycle(t_cor *c);
 
 int     exec_process(t_vm *vm, t_node *proc);
+int		load(t_vm *vm, t_node *proc);
+int		exec(t_vm *vm, t_node *proc);
 int     check_processus(t_vm *vm, t_node *proc);
 /*
 ** processus
