@@ -41,7 +41,7 @@ void		ft_print_winner(t_cor *c)
 			win = j;
 		}
 	}
-	ft_printf("last_live_chmp: %s : %d\n", c->chmp[win]->name, c->chmp[win]->last_live);
+	//ft_printf("last_live_chmp: %s : %d\n", c->chmp[win]->name, c->chmp[win]->last_live);
 	ft_printf("Contestant %d, \"%s\", has won !\n", win + 1, c->chmp[win]->name);
 }
 
@@ -55,7 +55,7 @@ int		main(int ac, char **av)
 	check_infos(c);
 	init_map(c);
 	cycle(c);
-	ft_printf("cycle: %d\n", c->vm->cycle);
+	//ft_printf("cycle: %d\n", c->vm->cycle);
 	// for (int i = 0; i < c->vm->nb_player; i++)
 	ft_print_winner(c);
 	return (0);

@@ -32,13 +32,13 @@ void	rm_element(t_list2 **lst, t_node *proc)
 		{
 			if (tmp->prev)
 			{
-				printf("Remove process of list P%d\n", proc->num);								
+				//printf("Remove process of list P%d\n", proc->num);								
 				tmp->prev->next = tmp->next;
 				(*lst)->len--;
 			}
 			else
 			{ 
-				printf("Remove first process of list P%d\n", proc->num);			
+				//printf("Remove first process of list P%d\n", proc->num);			
 				(*lst)->head = tmp->next;
 				if ((*lst)->head)
 					(*lst)->head->prev = NULL;
@@ -53,12 +53,10 @@ void	rm_element(t_list2 **lst, t_node *proc)
 
 void		read_and_process(t_cor *c, t_node *tmp)
 {
-	// printf("Num: %d - Avant Opcode: %d\n", tmp->num, tmp->op.opcode);
-	// printf("Num; %d || size; %d\n", tmp->num, tmp->op_size);
 	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
 	{
 		exec_process(c->vm, tmp);
-		if (start_processus(c, tmp))
+		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
 			read_and_process(c, c->proc->head);
 	}
 	if (tmp->exec == 0)
@@ -66,7 +64,6 @@ void		read_and_process(t_cor *c, t_node *tmp)
 		exec_process(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
 	}
-	// printf("Num: %d - Apres Opcode: %d\n", tmp->num, tmp->op.opcode);
 }
 
 /*
@@ -78,7 +75,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 
 	if (cycle == c->vm->cycle_to_die)
 	{
-		printf("cycle %d\n", cycle);
+		//printf("cycle %d\n", cycle);
 		// Kills process unlive
 		tmp = c->proc->head;
 		while (tmp)
@@ -92,6 +89,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 		if (c->vm->nb_live >= NBR_LIVE)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
+			ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 			c->vm->nb_live = 0;
 			c->vm->max_chk = 0;
 		}
@@ -105,6 +103,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 		c->vm->nb_live = 0;
 		c->vm->max_chk = 0;
 		c->vm->cycle_to_die -= c->vm->cycle_delta;
+		ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 	}
 	return (0);
 }
@@ -123,7 +122,8 @@ void	cycle(t_cor *c)
 			cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			ft_printf("It is now cycle %d || CTD: %d || nb de process: %d\n", c->vm->cycle, c->vm->cycle_to_die, c->proc->len);
+			if (c->vm->cycle > 0)
+				ft_printf("It is now cycle %d\n"/* || CTD: %d || nb de process: %d\n"*/, c->vm->cycle/*, c->vm->cycle_to_die, c->proc->len*/);
 			tmp = c->proc->head;
 			while (tmp)
 			{

@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 16:25:31 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/06 10:57:17 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -18,6 +18,8 @@ int		check_num(t_cor *c, char **av, int i)
 	int j;
 
 	j = -1;
+	if (!av[i])
+		ft_exit(5);
 	while (av[i][++j])
 		if (ft_isalnum(av[i][j]) == 0)
 			ft_exit(5);
@@ -30,6 +32,8 @@ int		check_dump(t_cor *c, char **av, int i)
 	int j;
 
 	j = -1;
+	if (!av[i])
+		ft_exit(5);
 	while (av[i][++j])
 		if (ft_isalnum(av[i][j]) == 0)
 			ft_exit(5);
@@ -53,6 +57,8 @@ int     check_parse(t_cor *c, char **av, int ac)
 			i += check_dump(c, av, i + 1);
 		else if (!ft_strcmp(av[i], "-n"))
 			i += check_num(c, av, i + 1);
+		else if (!ft_strcmp(av[i], "-v"))
+			c->vm->verbose = 1;
 		else if ((len = ft_strlen(av[i])) > 4)
 		{
 			tmp = ft_strsub(av[i], (len - 4), len);
@@ -61,6 +67,8 @@ int     check_parse(t_cor *c, char **av, int ac)
 			if (c->vm->nb_player < MAX_PLAYERS)
 				c->vm->player[c->vm->nb_player++] = ft_strdup(av[i]);
 		}
+		else
+			ft_exit(2);
 		if (i < ac)
 			i++;
 		else

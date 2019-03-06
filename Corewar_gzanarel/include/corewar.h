@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/25 15:45:08 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/06 10:56:48 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 1
+# define VERBOSE 0
 
 typedef struct		s_line
 {
@@ -87,6 +87,7 @@ typedef struct		s_vm
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
+	int				verbose;
 }					t_vm;
 
 extern	t_op op_tab[17];

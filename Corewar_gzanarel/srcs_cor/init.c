@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/25 15:30:51 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/06 10:57:30 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -80,6 +80,7 @@ void	init_vm(t_cor *c, char **av, int ac)
 	c->vm->cycle_to_die = CYCLE_TO_DIE;
 	c->vm->nb_live = 0;
 	c->vm->nb_player = 0;
+	c->vm->verbose = 0;
 	c->vm->chmp_win_num = 0;
 	if (!(c->vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE))))
 		ft_exit(1);
