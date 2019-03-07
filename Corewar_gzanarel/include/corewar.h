@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/06 10:56:48 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 13:09:28 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,7 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 0
+# define VERBOSE 1
 
 typedef struct		s_line
 {
@@ -111,14 +111,15 @@ void			push_front(t_list2 **lst, t_node *proc);
 /*
 ** error
 */
-void				ft_exit(int error);
+void				ft_exit(int error, char *s);
 
 /*
 ** init
 */
-void				init_vm(t_cor *c, char **av, int ac);
+t_cor	*init_cor(char **av, int ac);
+void				init_vm(t_vm *vm);
 void				init_map(t_cor *c);
-void				init_chmp(t_cor *c);
+void				init_proc(t_cor *c, t_list2 *proc);
 void				init_num_chmp(t_cor *c, int i);
 
 /*
@@ -130,10 +131,9 @@ void		ft_print_winner(t_cor *c);
 /*
 **parse
 */
-int					check_parse(t_cor *c, char **av, int ac);
-void				check_infos(t_cor *c);
-int		check_num(t_cor *c, char **av, int i);
-int		check_dump(t_cor *c, char **av, int i);
+int					check_parse(t_vm *vm, char **av, int ac);
+int		check_num(t_vm *vm, char **av, int i);
+int		check_dump(t_vm *vm, char **av, int i);
 
 /*
 ** read_infos
@@ -149,6 +149,8 @@ int    read_next_uint(t_vm *vm, int index, int bytes_len);
 void				cycle(t_cor *c);
 
 int     exec_process(t_vm *vm, t_node *proc);
+int		load(t_vm *vm, t_node *proc);
+int		exec(t_vm *vm, t_node *proc);
 int     check_processus(t_vm *vm, t_node *proc);
 /*
 ** processus

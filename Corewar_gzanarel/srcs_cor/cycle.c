@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/25 17:08:38 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 13:32:22 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -55,13 +55,13 @@ void		read_and_process(t_cor *c, t_node *tmp)
 {
 	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
 	{
-		exec_process(c->vm, tmp);
+		exec(c->vm, tmp);
 		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
 			read_and_process(c, c->proc->head);
 	}
 	if (tmp->exec == 0)
 	{
-		exec_process(c->vm, tmp);
+		load(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
 	}
 }
@@ -122,8 +122,8 @@ void	cycle(t_cor *c)
 			cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			if (c->vm->cycle > 0)
-				ft_printf("It is now cycle %d\n"/* || CTD: %d || nb de process: %d\n"*/, c->vm->cycle/*, c->vm->cycle_to_die, c->proc->len*/);
+			if (c->vm->cycle > 0 && c->vm->verbose)
+				ft_printf("It is now cycle %d\n", c->vm->cycle);
 			tmp = c->proc->head;
 			while (tmp)
 			{

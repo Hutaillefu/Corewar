@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/06 10:57:30 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 14:23:48 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,9 +21,12 @@ void	init_map(t_cor *c)
 
 	player = -1;
 	start = MEM_SIZE / c->vm->nb_player;
+	ft_printf("Introducing contestants...\n");
 	while (++player < c->vm->nb_player)
 	{
-		ft_printf("* Player %d (nb: %X(%d)), weighing %u bytes, \"%s\" (%s) !\n", (player + 1), c->chmp[player]->num, c->chmp[player]->num, c->chmp[player]->champ_size, c->chmp[player]->name, c->chmp[player]->comment);
+		ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n",
+		(player + 1), c->chmp[player]->champ_size, c->chmp[player]->name,
+		c->chmp[player]->comment);
 		ft_memsub(c->vm->area, c->chmp[player]->infos, (start * player), c->chmp[player]->champ_size);
 	}
 }
@@ -44,55 +47,59 @@ void	init_num_chmp(t_cor *c, int i)
 		c->chmp[i]->num = c->vm->num[i] * -1;
 	}
 	else
-	{
 		c->chmp[i]->num = (i + 1) * -1;
-	}
 }
 
-void	init_chmp(t_cor *c)
+void	init_proc(t_cor *c, t_list2 *proc)
 {
 	int i;
 
 	i = -1;
-	c->proc = (t_list2 *)malloc(sizeof(t_list2)); // a securiser
-	c->proc->head = NULL;
-	c->proc->tail = NULL;
-	c->proc->len = 0;
+	ft_memset(proc, 0, sizeof(t_list2));
 	while (++i < c->vm->nb_player)
 	{
-		c->chmp[i] = (t_chmp *)malloc(sizeof(t_chmp));
+		if (!(c->chmp[i] = (t_chmp *)ft_memalloc(sizeof(t_chmp))))
+			ft_exit(8, NULL);
 		c->chmp[i]->champ_size = 0;
 		c->chmp[i]->name = NULL;
 		c->chmp[i]->comment = NULL;
 		c->chmp[i]->infos = NULL;
 		init_num_chmp(c, i);
-		add_element_end(&(c->proc), c, c->chmp[i], i);
+		add_element_end(&(proc), c, c->chmp[i], i);
 	}
 }
 
-void	init_vm(t_cor *c, char **av, int ac)
+void	init_vm(t_vm *vm)
 {
 	int j;
 
 	j = -1;
-	c->vm = ft_memalloc(sizeof(t_vm));
-	c->vm->cycle_delta = CYCLE_DELTA;
-	c->vm->cycle_to_die = CYCLE_TO_DIE;
-	c->vm->nb_live = 0;
-	c->vm->nb_player = 0;
-	c->vm->verbose = 0;
-	c->vm->chmp_win_num = 0;
-	if (!(c->vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE))))
-		ft_exit(1);
-	ft_memset(c->vm->area, 0, MEM_SIZE);
-	c->vm->area[MEM_SIZE + 1] = '\0';
-	c->vm->max_chk = 0;
-	c->vm->champ_msize = CHAMP_MAX_SIZE;
-	c->vm->cycle = 0;
-	c->vm->dump = -1;
+	ft_memset(vm, 0, sizeof(t_vm));
+	vm->cycle_delta = CYCLE_DELTA;
+	vm->cycle_to_die = CYCLE_TO_DIE;
+	if (!(vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE))))
+		ft_exit(8, NULL);
+	ft_memset(vm->area, 0, MEM_SIZE);
+	vm->area[MEM_SIZE + 1] = '\0';
+	vm->champ_msize = CHAMP_MAX_SIZE;
+	vm->dump = -1;
 	while (++j < MAX_PLAYERS)
-		c->vm->num[j] = -1;
-	if (check_parse(c, av, ac) == 1)
-		ft_exit(1);
-	init_chmp(c);
+		vm->num[j] = -1;
+}
+
+t_cor	*init_cor(char **av, int ac)
+{
+	t_cor *c;
+
+	if(!(c = ft_memalloc(sizeof(t_cor))))
+		ft_exit(8, NULL);
+	if(!(c->vm = ft_memalloc(sizeof(t_vm))))
+		ft_exit(8, NULL);
+	if(!(c->proc = ft_memalloc(sizeof(t_list2))))
+		ft_exit(8, NULL);
+	init_vm(c->vm);
+	if (check_parse(c->vm, av, ac) == 1)
+		ft_exit(1, NULL);
+	init_proc(c, c->proc);
+	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:32:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 15:29:02 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 13:09:23 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -38,16 +38,11 @@ void		read_infos(t_cor *c)
 		c->chmp[i]->magic = little_endian(h->magic);
 		c->chmp[i]->name = ft_strdup(h->prog_name);
 		c->chmp[i]->comment = ft_strdup(h->comment);
-		c->chmp[i]->champ_size = little_endian(h->prog_size);
+		if ((c->chmp[i]->champ_size = little_endian(h->prog_size)) > 682)
+			ft_exit(3, c->chmp[i]->name);
 		c->chmp[i]->infos = ft_strnew(c->chmp[i]->champ_size);
 		read(fd, c->chmp[i]->infos, c->chmp[i]->champ_size);
 		close(fd);
 		free(h);
-		// printf("PLAYER %d:\n", i + 1);
-		// printf("magic: %u\n", c->chmp[i]->magic);
-		// printf("name: %s\n", c->chmp[i]->name);
-		// printf("comm: %s\n", c->chmp[i]->comment);
-		// printf("size: %u\n", c->chmp[i]->champ_size);
-		// printf("\n----------------------\n\n");
 	}
 }

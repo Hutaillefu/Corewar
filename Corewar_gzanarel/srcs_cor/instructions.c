@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/06 10:57:08 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 11:04:26 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -142,8 +142,11 @@ void	i_sti(t_node *proc, t_vm *vm)
 	int p2;
 	int	p3;
 
-	if (!is_regnum_valid(proc->param[0][0] - 1))
+	if (!is_regnum_valid(proc->param[0][0] - 1) || !proc->op.name)
+	{
+		adv(vm, proc->pc, proc->op_size);
 		return ;
+	}
 	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
 		return ;
 	if (proc->param[2][1] == REG_CODE && !is_regnum_valid(proc->param[2][0] - 1))
@@ -190,12 +193,20 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	int addr;
 
 	if (proc->param[0][1] == REG_CODE && !is_regnum_valid(proc->param[0][0] - 1))
+	{
+		adv(vm, proc->pc, proc->op_size);	
 		return ;
+	}
 	if (proc->param[1][1] == REG_CODE && !is_regnum_valid(proc->param[1][0] - 1))
+	{
+		adv(vm, proc->pc, proc->op_size);	
 		return ;
+	}
 	if (!is_regnum_valid(proc->param[2][0] - 1))
+	{
+		adv(vm, proc->pc, proc->op_size);
 		return ;
-
+	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	addr = (proc->pc + p1 + p2) % (proc->pc_b + IDX_MOD);
@@ -275,7 +286,10 @@ void	i_add(t_node *proc, t_vm *vm)
 	if (!is_regnum_valid(proc->param[0][0] - 1) ||
 		!is_regnum_valid(proc->param[1][0] - 1) ||
 		!is_regnum_valid(proc->param[2][0] - 1))
-	return ;
+	{
+		adv(vm, proc->pc, proc->op_size);
+		return ;
+	}
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -295,10 +309,11 @@ void	i_sub(t_node *proc, t_vm *vm)
 	int p1;
 	int p2;
 
-	if (!is_regnum_valid(proc->param[0][0] - 1) ||
-		!is_regnum_valid(proc->param[1][0] - 1) ||
-		!is_regnum_valid(proc->param[2][0] - 1))
-	return ;
+	if (!is_regnum_valid(proc->param[0][0] - 1) || !is_regnum_valid(proc->param[1][0] - 1) || !is_regnum_valid(proc->param[2][0] - 1))
+	{
+		adv(vm, proc->pc, proc->op_size);
+		return ;
+	}
 
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
@@ -406,8 +421,12 @@ char	i_aff(t_node *proc, t_vm *vm)
 	int p1;
 
 	if (!is_regnum_valid(proc->param[0][0] - 1))
-		return 0;
+	{
+		adv(vm, proc->pc, proc->op_size);
+		return (0);
+	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
+	adv(vm, proc->pc, proc->op_size);
 	return ((unsigned char)(p1 % 256));
 }
 
