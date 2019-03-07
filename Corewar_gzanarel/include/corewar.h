@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 13:09:28 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 15:46:13 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -87,7 +87,7 @@ typedef struct		s_vm
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
-	int				verbose;
+	char				verbose;
 }					t_vm;
 
 extern	t_op op_tab[17];
@@ -98,6 +98,13 @@ typedef struct	s_cor
 	struct s_chmp	*chmp[MAX_PLAYERS];
 	struct s_list2	*proc;
 }					t_cor;
+
+/*
+** verbose
+*/
+void    ft_verbose(t_vm *vm, char *s);
+int     get_in_bit(char verbose, const char index);
+
 
 /*
 ** list

@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 11:04:26 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 15:46:45 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -296,7 +296,7 @@ void	i_add(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[2][0] - 1] = p1 + p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 
-	if (vm->verbose == 1)
+	if (vm->verbose)
 	{
 		ft_printf("P    %d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 		adv(vm, proc->pc, proc->op_size);

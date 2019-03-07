@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 13:41:59 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 15:49:50 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,8 +58,7 @@ int     check_parse(t_vm *vm, char **av, int ac)
 		else if (!ft_strcmp(av[i], "-n"))
 			i += check_num(vm, av, i + 1);
 		else if (!ft_strcmp(av[i], "-v"))
-			vm->verbose = 1;
-			// i += ft_verbose(vm, av[i + 1]);
+			vm->verbose = ft_atoi(av[++i]);
 		else if ((len = ft_strlen(av[i])) > 4)
 		{
 			if (open(av[i], 1) < 0)

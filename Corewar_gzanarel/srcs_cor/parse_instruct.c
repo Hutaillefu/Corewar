@@ -212,7 +212,7 @@ int		load(t_vm *vm, t_node *proc)
 		coding_byte = (int)vm->area[++(proc->pc)];
 	if (op.coding_byte && !is_codingbyte_valid(proc, coding_byte))
 	{
-		proc->op.opcode = -1;
+		// proc->op.opcode = -1;
 		proc->pc = pc_base;
 		proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;
 		return (0);
