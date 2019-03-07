@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 16:53:17 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 17:50:09 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -66,6 +66,8 @@ int     check_parse(t_vm *vm, char **av, int ac)
 			check_num(vm, av[++i]);
 		else if (!ft_strcmp(av[i], "-v"))
 			check_verb(vm, av[++i]);
+		else if (!ft_strcmp(av[i], "-a"))
+			vm->aff = 1;
 		else if ((len = ft_strlen(av[i])) > 4)
 		{
 			if (open(av[i], 1) < 0)

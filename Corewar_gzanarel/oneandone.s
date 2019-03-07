@@ -1,5 +1,5 @@
 .name           "one"
 .comment        "Just a basic Program"
 
-live %-1
-live %-1
+ld %-49,r1
+aff r1

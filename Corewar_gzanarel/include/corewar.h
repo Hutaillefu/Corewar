@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 16:45:55 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 17:58:45 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,11 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 1
+# define V_LIVE 1
+# define V_CYCLE 2
+# define V_OP 4
+# define V_DEATH 8
+# define V_ADV 16
 
 typedef struct		s_line
 {
@@ -84,6 +88,7 @@ typedef struct		s_vm
 	int				champ_msize;
 	unsigned int	prog_size;
 	int				dump;
+	int				aff;
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
@@ -176,7 +181,7 @@ void	i_sub(t_node *proc, t_vm *vm);
 void	i_ldi(t_node *proc, t_vm *vm);
 void	i_or(t_node *proc, t_vm *vm);
 void	i_st(t_node *proc, t_vm *vm);
-char	i_aff(t_node *proc, t_vm *vm);
+void	i_aff(t_node *proc, t_vm *vm);
 void	i_live(t_node *proc, t_cor *cor);
 void	i_xor(t_node *proc, t_vm *vm);
 void	i_lldi(t_node *proc, t_vm *vm);
