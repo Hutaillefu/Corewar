@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 15:45:54 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 16:51:37 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -122,7 +122,7 @@ void	cycle(t_cor *c)
 			cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			if (c->vm->cycle > 0 && get_in_bit(c->vm->verbose, 2))
+			if (c->vm->cycle > 0 && (c->vm->verbose & 4))
 				ft_printf("It is now cycle %d\n", c->vm->cycle);
 			tmp = c->proc->head;
 			while (tmp)

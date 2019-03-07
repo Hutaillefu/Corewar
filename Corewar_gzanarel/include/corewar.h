@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 15:46:13 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 16:45:55 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -100,13 +100,6 @@ typedef struct	s_cor
 }					t_cor;
 
 /*
-** verbose
-*/
-void    ft_verbose(t_vm *vm, char *s);
-int     get_in_bit(char verbose, const char index);
-
-
-/*
 ** list
 */
 void			add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
@@ -139,8 +132,6 @@ void		ft_print_winner(t_cor *c);
 **parse
 */
 int					check_parse(t_vm *vm, char **av, int ac);
-int		check_num(t_vm *vm, char **av, int i);
-int		check_dump(t_vm *vm, char **av, int i);
 
 /*
 ** read_infos
