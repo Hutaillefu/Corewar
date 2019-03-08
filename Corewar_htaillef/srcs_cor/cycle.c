@@ -59,6 +59,21 @@ void		read_and_process(t_cor *c, t_node *tmp)
 		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
 			read_and_process(c, c->proc->head);
 	}
+	// if (tmp->exec == 0)
+	// {
+	// 	load(c->vm, tmp);
+	// 	load_processus(c->vm->cycle, tmp);
+	// }
+}
+
+void		read_and_process1(t_cor *c, t_node *tmp)
+{
+	// if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
+	// {
+	// 	exec(c->vm, tmp);
+	// 	if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
+	// 		read_and_process(c, c->proc->head);
+	// }
 	if (tmp->exec == 0)
 	{
 		load(c->vm, tmp);
@@ -130,12 +145,23 @@ void	cycle(t_cor *c)
 		{
 			if (c->vm->cycle > 0 && (c->vm->verbose & V_CYCLE))
 				ft_printf("It is now cycle %d\n", c->vm->cycle);
+
+			// Exec
 			tmp = c->proc->head;
 			while (tmp)
 			{
 				read_and_process(c, tmp);
 				tmp = tmp->next;
 			}
+
+			// Load
+			tmp = c->proc->head;
+			while (tmp)
+			{
+				read_and_process1(c, tmp);
+				tmp = tmp->next;
+			}
+
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
 			if (cycle_to_die(c, cycle))

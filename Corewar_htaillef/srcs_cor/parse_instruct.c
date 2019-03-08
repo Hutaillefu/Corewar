@@ -199,9 +199,6 @@ int		load(t_vm *vm, t_node *proc)
 	proc->op.name = NULL;
 	proc->op.nb_params = 0;
 
-	if (proc->num == 75 && vm->cycle == 8910)
-		printf("OPCODE MUST BE 01 BUT ITS (70 hexa) %d\n", vm->area[proc->pc]);
-
 	if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
 	{
 		proc->op.opcode = -1;
@@ -220,9 +217,6 @@ int		load(t_vm *vm, t_node *proc)
 		proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;
 		return (0);
 	}
-
-	if (proc->num == 75 && vm->cycle == 8910)
-		printf("ICI\n");
 
 	(proc->pc)++;
 	extract_params(vm, proc, coding_byte);
