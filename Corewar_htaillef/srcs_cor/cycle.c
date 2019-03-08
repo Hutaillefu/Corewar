@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/25 17:08:38 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 18:00:43 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -81,7 +81,11 @@ int	cycle_to_die(t_cor *c, int cycle)
 		while (tmp)
 		{
 			if (c->vm->cycle - tmp->last_live >= c->vm->cycle_to_die)
+			{
+				if (c->vm->verbose & V_DEATH)
+					ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
 				rm_element(&(c->proc), tmp);
+			}
 			if (!c->proc->head) // No process any more
 				return (1);
 			tmp = tmp->next;
@@ -89,7 +93,8 @@ int	cycle_to_die(t_cor *c, int cycle)
 		if (c->vm->nb_live >= NBR_LIVE)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
-			ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
+			if (c->vm->verbose & V_CYCLE)
+				ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 			c->vm->nb_live = 0;
 			c->vm->max_chk = 0;
 		}
@@ -103,7 +108,8 @@ int	cycle_to_die(t_cor *c, int cycle)
 		c->vm->nb_live = 0;
 		c->vm->max_chk = 0;
 		c->vm->cycle_to_die -= c->vm->cycle_delta;
-		ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
+		if (c->vm->verbose & V_CYCLE)
+			ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 	}
 	return (0);
 }
@@ -122,8 +128,8 @@ void	cycle(t_cor *c)
 			cycle = 0;
 		while (++cycle <= c->vm->cycle_to_die)
 		{
-			if (c->vm->cycle > 0)
-				ft_printf("It is now cycle %d\n"/* || CTD: %d || nb de process: %d\n"*/, c->vm->cycle/*, c->vm->cycle_to_die, c->proc->len*/);
+			if (c->vm->cycle > 0 && (c->vm->verbose & V_CYCLE))
+				ft_printf("It is now cycle %d\n", c->vm->cycle);
 			tmp = c->proc->head;
 			while (tmp)
 			{

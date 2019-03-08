@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/25 15:45:08 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 17:58:45 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -17,7 +17,11 @@
 # include "op.h"
 # include "../Libft/includes/libft.h"
 
-# define VERBOSE 1
+# define V_LIVE 1
+# define V_CYCLE 2
+# define V_OP 4
+# define V_DEATH 8
+# define V_ADV 16
 
 typedef struct		s_line
 {
@@ -84,9 +88,11 @@ typedef struct		s_vm
 	int				champ_msize;
 	unsigned int	prog_size;
 	int				dump;
+	int				aff;
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
+	char				verbose;
 }					t_vm;
 
 extern	t_op op_tab[17];
@@ -110,14 +116,15 @@ void			push_front(t_list2 **lst, t_node *proc);
 /*
 ** error
 */
-void				ft_exit(int error);
+void				ft_exit(int error, char *s);
 
 /*
 ** init
 */
-void				init_vm(t_cor *c, char **av, int ac);
+t_cor	*init_cor(char **av, int ac);
+void				init_vm(t_vm *vm);
 void				init_map(t_cor *c);
-void				init_chmp(t_cor *c);
+void				init_proc(t_cor *c, t_list2 *proc);
 void				init_num_chmp(t_cor *c, int i);
 
 /*
@@ -129,10 +136,7 @@ void		ft_print_winner(t_cor *c);
 /*
 **parse
 */
-int					check_parse(t_cor *c, char **av, int ac);
-void				check_infos(t_cor *c);
-int		check_num(t_cor *c, char **av, int i);
-int		check_dump(t_cor *c, char **av, int i);
+int					check_parse(t_vm *vm, char **av, int ac);
 
 /*
 ** read_infos
@@ -177,7 +181,7 @@ void	i_sub(t_node *proc, t_vm *vm);
 void	i_ldi(t_node *proc, t_vm *vm);
 void	i_or(t_node *proc, t_vm *vm);
 void	i_st(t_node *proc, t_vm *vm);
-char	i_aff(t_node *proc, t_vm *vm);
+void	i_aff(t_node *proc, t_vm *vm);
 void	i_live(t_node *proc, t_cor *cor);
 void	i_xor(t_node *proc, t_vm *vm);
 void	i_lldi(t_node *proc, t_vm *vm);

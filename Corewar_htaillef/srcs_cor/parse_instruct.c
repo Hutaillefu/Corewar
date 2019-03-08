@@ -199,6 +199,9 @@ int		load(t_vm *vm, t_node *proc)
 	proc->op.name = NULL;
 	proc->op.nb_params = 0;
 
+	if (proc->num == 75 && vm->cycle == 8910)
+		printf("OPCODE MUST BE 01 BUT ITS (70 hexa) %d\n", vm->area[proc->pc]);
+
 	if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
 	{
 		proc->op.opcode = -1;
@@ -212,11 +215,14 @@ int		load(t_vm *vm, t_node *proc)
 		coding_byte = (int)vm->area[++(proc->pc)];
 	if (op.coding_byte && !is_codingbyte_valid(proc, coding_byte))
 	{
-		proc->op.opcode = -1;
+		// proc->op.opcode = -1;
 		proc->pc = pc_base;
 		proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;
 		return (0);
 	}
+
+	if (proc->num == 75 && vm->cycle == 8910)
+		printf("ICI\n");
 
 	(proc->pc)++;
 	extract_params(vm, proc, coding_byte);
@@ -234,8 +240,7 @@ int		exec(t_vm *vm, t_node *proc)
 
 	pc_base = proc->pc;
 	coding_byte = -1;
-
-	if (proc->op.coding_byte)
+	if (proc->op.coding_byte > 0)
 	{
 		coding_byte = (int)vm->area[++(proc->pc)];
 		if (!is_codingbyte_valid(proc, coding_byte))
@@ -246,7 +251,6 @@ int		exec(t_vm *vm, t_node *proc)
 			return (0);
 		}
 	}
-
 	(proc->pc)++;
 	extract_params(vm, proc, coding_byte);
 	proc->op_size = proc->pc - pc_base;
@@ -254,74 +258,3 @@ int		exec(t_vm *vm, t_node *proc)
 
 	return (1);
 }
-
-/*
-  ** Read the next instruction.
-*/
-// int     exec_process(t_vm *vm, t_node *proc)
-// {
-// 	int		coding_byte;
-// 	int		pc_base;
-// 	t_op	op;
-// 	int size;
-		
-// 	if (!vm || !(vm->area) || !proc)
-// 		return (0);
-
-// 	pc_base = proc->pc;
-// 	if (vm->cycle != proc->exec || proc->exec == 0)
-// 	{
-// 		proc->op.coding_byte = -1;
-// 		proc->op.nb_cycles = 1;
-// 		proc->op.opcode = -1;
-// 		proc->op.name = NULL;
-// 		proc->op.nb_params = 0;
-// 		if (!(op = get_op_by_opcode((int)vm->area[proc->pc])).name)
-// 		{
-// 			proc->op.opcode = -1;
-// 			proc->op_size = 1;
-// 			return (0);
-// 		}
-// 		proc->op = op;
-// 	}
-// 	else 
-// 	{
-// 		op = get_op_by_opcode((int)vm->area[proc->pc]);
-// 		if (op.opcode != proc->op.opcode && (op.opcode >= 1 && op.opcode <= 16))
-// 		{
-// 			if (op.nb_cycles > proc->op.nb_cycles)
-// 			{
-// 			//	proc->exec += op.nb_cycles - proc->op.nb_cycles;
-// 				//proc->op = op;
-// 				return (0);
-// 			}
-// 			proc->op = op;
-// 			proc->op.name = NULL;
-// 		}
-// 		op = proc->op;
-// 		if (proc->op.opcode <= 0 || proc->op.opcode > 16)
-// 		{
-// 			proc->op.opcode = -1; 
-// 			proc->exec = vm->cycle;
-// 			proc->op_size = 1;
-// 			return (0);
-// 		}
-// 	}
-// 	coding_byte = -1;
-// 	if (op.coding_byte)
-// 		coding_byte = (int)vm->area[++(proc->pc)];
-// 	if (op.coding_byte && (size = check_coding_byte(proc, coding_byte)) > 0)
-// 	{
-// 		proc->op.opcode = -1;
-// 		proc->pc = pc_base;
-// 		proc->op_size = size + 1 + 1;
-// 		return (1);
-// 	}
-
-// 	(proc->pc)++;
-// 	extract_params(vm, proc, coding_byte);
-// 	proc->op_size = proc->pc - pc_base;
-// 	proc->pc = pc_base;
-
-// 	return (1);
-// }

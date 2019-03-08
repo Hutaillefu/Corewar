@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/16 13:45:58 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/13 11:34:51 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 11:03:47 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -50,7 +50,9 @@ int	start_processus(t_cor *cor, t_node *proc)
 	else if (proc->op.opcode == 13)
 		i_lld(proc, cor->vm);
 	else if (proc->op.opcode == 14)
-		i_lldi(proc, cor->vm);	
+		i_lldi(proc, cor->vm);
+	else if (proc->op.opcode == 16)
+		i_aff(proc, cor->vm);
 	proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
 	proc->exec = 0;
 	return (0);

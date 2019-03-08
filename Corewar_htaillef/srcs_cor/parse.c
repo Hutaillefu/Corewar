@@ -6,38 +6,49 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/17 16:25:31 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/07 17:50:09 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-int		check_num(t_cor *c, char **av, int i)
+static void	check_verb(t_vm *vm, char *av)
+{
+	if (!av)
+		ft_exit(5, av);
+	vm->verbose = ft_atoi(av);
+	if (vm->verbose < 0 || vm->verbose > 31)
+		vm->verbose = 0;
+}
+
+static void	check_num(t_vm *vm, char *av)
 {
 	int j;
 
 	j = -1;
-	while (av[i][++j])
-		if (ft_isalnum(av[i][j]) == 0)
-			ft_exit(5);
-	c->vm->num[c->vm->nb_player] = ft_atoi(av[i]);
-	return (1);
+	if (!av)
+		ft_exit(5, av);
+	while (av[++j])
+		if (ft_isalnum(av[j]) == 0)
+			ft_exit(5, av);
+	vm->num[vm->nb_player] = ft_atoi(av);
 }
 
-int		check_dump(t_cor *c, char **av, int i)
+static void	check_dump(t_vm *vm, char *av)
 {
 	int j;
 
 	j = -1;
-	while (av[i][++j])
-		if (ft_isalnum(av[i][j]) == 0)
-			ft_exit(5);
-	c->vm->dump = ft_atoi(av[i]);
-	return (1);
+	if (!av)
+		ft_exit(5, av);
+	while (av[++j])
+		if (ft_isalnum(av[j]) == 0)
+			ft_exit(5, av);
+	vm->dump = ft_atoi(av);
 }
 
-int     check_parse(t_cor *c, char **av, int ac)
+int     check_parse(t_vm *vm, char **av, int ac)
 {
 	int i;
 	char *tmp;
@@ -45,26 +56,38 @@ int     check_parse(t_cor *c, char **av, int ac)
 
 	i = 1;
 	if (ac < 2)
-		ft_exit(1);
-	while (av[i])
+		ft_exit(0, av[i]);
+	while (i < ac)
 	{
 		len = 0;
 		if (!ft_strcmp(av[i], "-d"))
-			i += check_dump(c, av, i + 1);
+			check_dump(vm, av[++i]);
 		else if (!ft_strcmp(av[i], "-n"))
-			i += check_num(c, av, i + 1);
+			check_num(vm, av[++i]);
+		else if (!ft_strcmp(av[i], "-v"))
+			check_verb(vm, av[++i]);
+		else if (!ft_strcmp(av[i], "-a"))
+			vm->aff = 1;
 		else if ((len = ft_strlen(av[i])) > 4)
 		{
+			if (open(av[i], 1) < 0)
+				ft_exit(7, av[i]);
 			tmp = ft_strsub(av[i], (len - 4), len);
 			if (ft_strcmp(".cor", tmp))
-				ft_exit(2);
-			if (c->vm->nb_player < MAX_PLAYERS)
-				c->vm->player[c->vm->nb_player++] = ft_strdup(av[i]);
+				ft_exit(2, av[i]);
+			else if (vm->nb_player < MAX_PLAYERS)
+				vm->player[vm->nb_player++] = ft_strdup(av[i]);
+			else if (vm->nb_player >= MAX_PLAYERS)
+				ft_exit(6, av[i]);
 		}
+		else
+			ft_exit(2, av[i]);
 		if (i < ac)
 			i++;
 		else
 			break ;
 	}
+	if (vm->nb_player == 0)
+		ft_exit(5, av[i]);
 	return (0);
 }
