@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/08 17:12:18 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/11 16:36:06 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,12 @@ void	print_map(t_cor *c, int octet)
 	j = 0;
 
 	// ft_printf("nb_proc: %d\n", c->proc->len);
+	// tmp = c->proc->head;
+	// while (tmp)
+	// {
+	// 	ft_printf("proc: %d\n", tmp->num);
+	// 	tmp = tmp->next;
+	// }
 	tmp = c->proc->head;
 	ft_printf("0x0000 :");
 	while (++i < MEM_SIZE)

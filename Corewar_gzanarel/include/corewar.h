@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/08 13:15:18 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/11 12:09:41 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -63,6 +63,7 @@ typedef struct s_list2
 	t_node *head;
 	t_node *tail;
 	int 	len;
+	int		nb; //nombre de procs créé durant la partie
 }				t_list2;
 
 typedef struct		s_chmp

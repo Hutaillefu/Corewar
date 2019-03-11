@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/08 13:39:35 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/11 18:26:32 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -22,33 +22,73 @@ void	ft_check_cycle(t_cor *c)
 void	rm_element(t_list2 **lst, t_node *proc)
 {
 	t_node *tmp;
+	tmp = (*lst)->head;
 
 	if (!lst || !proc)
 		return ;
-	tmp = (*lst)->head;
-	while (tmp)
+	if (proc->num == (*lst)->head->num)
 	{
-		if (tmp->num == proc->num)
-		{
-			if (tmp->prev)
-			{
-				//printf("Remove process of list P%d\n", proc->num);								
-				tmp->prev->next = tmp->next;
-				(*lst)->len--;
-			}
-			else
-			{ 
-				//printf("Remove first process of list P%d\n", proc->num);			
-				(*lst)->head = tmp->next;
-				if ((*lst)->head)
-					(*lst)->head->prev = NULL;
-				(*lst)->len--;			
-			}
-				return ;
-			// free tmp
-		}
-		tmp = tmp->next;
+		(*lst)->head = (*lst)->head->next;
+		if ((*lst)->head)
+			(*lst)->head->prev = NULL;
+		(*lst)->len--;
+		if ((*lst)->len == 1)
+			(*lst)->head = (*lst)->tail;
+		// free(tmp);
 	}
+	else if (proc->num == (*lst)->tail->num)
+	{
+		(*lst)->tail = (*lst)->tail->prev;
+		if ((*lst)->tail)
+			(*lst)->tail->next = NULL;
+		// free(tmp);
+		(*lst)->len--;
+		if ((*lst)->len == 1)
+			(*lst)->head = (*lst)->tail;
+	}
+	else
+	{
+		while (tmp)
+		{
+			if (tmp->num == proc->num)
+			{
+
+				tmp->prev->next = tmp->next;
+				tmp->next->prev = tmp->prev;
+				(*lst)->len--;
+				// free(tmp);
+				return ;
+			}
+			tmp = tmp->next;
+		}
+	}
+	
+	// while (tmp)
+	// {
+	// 	if (tmp->num == proc->num)
+	// 	{
+	// 		if (tmp->prev)
+	// 		{
+	// 			//printf("Remove process of list P%d\n", proc->num);								
+	// 			tmp = tmp->prev;
+	// 			stk = tmp->next;
+	// 			tmp = tmp->next;
+	// 			tmp->prev->next = tmp->next;
+	// 			(*lst)->len--;
+	// 		}
+	// 		else
+	// 		{ 
+	// 			//printf("Remove first process of list P%d\n", proc->num);			
+	// 			(*lst)->head = tmp->next;
+	// 			if ((*lst)->head)
+	// 				(*lst)->head->prev = NULL;
+	// 			(*lst)->len--;			
+	// 		}
+	// 			return ;
+	// 		// free tmp
+	// 	}
+	// 	tmp = tmp->next;
+	// }
 }
 
 void		read_and_process(t_cor *c, t_node *tmp)
@@ -137,7 +177,7 @@ void	cycle(t_cor *c)
 
 	cycle = -1;
 	// max = 0;
-	while (c->vm->cycle_to_die > 0)
+	while (c->vm->cycle_to_die > 0 && c->proc->head)
 	{
 		if (cycle > 0)
 			cycle = 0;
@@ -161,12 +201,28 @@ void	cycle(t_cor *c)
 				read_and_process1(c, tmp);
 				tmp = tmp->next;
 			}
-
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
-			if (cycle_to_die(c, cycle))
-				return ;
+			cycle_to_die(c, cycle);
 			c->vm->cycle++;
+			if (c->vm->cycle_to_die <= 0)
+			{
+				ft_printf("It is now cycle %d\n", c->vm->cycle);				
+				tmp = c->proc->head;
+				while (tmp)
+				{
+					read_and_process(c, tmp);
+					tmp = tmp->next;
+				}
+				tmp = c->proc->head;
+				while (tmp)
+				{
+					ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+					rm_element(&(c->proc), tmp);
+					tmp = tmp->next;
+				}
+				return ;
+			}
 		}
 	}
 }
