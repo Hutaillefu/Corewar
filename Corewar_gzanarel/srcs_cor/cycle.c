@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/11 18:26:32 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/12 14:58:16 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -207,7 +207,8 @@ void	cycle(t_cor *c)
 			c->vm->cycle++;
 			if (c->vm->cycle_to_die <= 0)
 			{
-				ft_printf("It is now cycle %d\n", c->vm->cycle);				
+				if (c->vm->verbose & V_CYCLE)
+					ft_printf("It is now cycle %d\n", c->vm->cycle);				
 				tmp = c->proc->head;
 				while (tmp)
 				{
@@ -217,7 +218,8 @@ void	cycle(t_cor *c)
 				tmp = c->proc->head;
 				while (tmp)
 				{
-					ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+					if (c->vm->verbose & V_DEATH)
+						ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
 					rm_element(&(c->proc), tmp);
 					tmp = tmp->next;
 				}

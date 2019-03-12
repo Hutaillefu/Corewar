@@ -2,7 +2,7 @@ cycle=500
 
 for corfile in ./*.cor; do
 
-    for i in {1..50}; do
+    for i in {1..56}; do
 
         y=$(($i * 500))
         echo $y

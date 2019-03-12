@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/11 18:07:33 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/12 16:39:20 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -152,7 +152,7 @@ void	i_sti(t_node *proc, t_vm *vm)
 	write_uint(vm, p3, addr, REG_SIZE);
 	if (vm->verbose & V_OP)
 	{
-		addr %= MEM_SIZE;
+		// addr %= MEM_SIZE;
 		ft_printf("P%5d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
 	}
@@ -471,7 +471,7 @@ void	i_fork(t_node *proc, t_cor *cor)
 	p1 = get_param_value(cor->vm, proc, proc->param[0], 1);
 	if (!(child = clone_proc(proc)))
 		return ;
-	child->pc = proc->pc + (p1 % (proc->pc_b + IDX_MOD));
+	child->pc = proc->pc + p1 % (proc->pc_b + IDX_MOD);
 	child->pc_b = child->pc;
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->nb;
