@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 13:06:48 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/13 15:49:17 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,7 +30,7 @@ void		ft_print_winner(t_cor *c)
 			win = j;
 		}
 	}
-	ft_printf("Contestant %d, \"%s\", has won !\n", win + 1, c->chmp[win]->name);
+	ft_printf(&(c->vm->logs), "Contestant %d, \"%s\", has won !\n", win + 1, c->chmp[win]->name);
 }
 
 
@@ -44,31 +44,39 @@ void	print_map(t_cor *c, int octet)
 	i = -1;
 	j = 0;
 
+	// ft_printf("nb_proc: %d\n", c->proc->len);
+	// tmp = c->proc->head;
+	// while (tmp)
+	// {
+	// 	ft_printf("proc: %d\n", tmp->num);
+	// 	tmp = tmp->next;
+	// }
+	// printf("NB Procs: %d\n", c->proc->len);
 	tmp = c->proc->head;
-	ft_printf("0x0000 :");
+	ft_printf(&(c->vm->logs), "0x0000 :");
 	while (++i < MEM_SIZE)
 	{
 		if (i != 0 && j == 0)
-			ft_printf("%#06x :", i);
+			ft_printf(&(c->vm->logs), "%#06x :", i);
 		++j;
 		draw = 0;
 		tmp = c->proc->head;
-		while (tmp)
-		{
-			if (tmp->pc == i)
-			{
-				ft_printf("\033[31;01m%3.2x\033[00m", c->vm->area[i]);
-				draw = 1;
-				break;
-			}
-			tmp = tmp->next;
-		}
+		// while (tmp)
+		// {
+		// 	if (tmp->pc == i)
+		// 	{
+		// 		ft_printf("\033[31;01m%3.2x\033[00m", c->vm->area[i]);
+		// 		draw = 1;
+		// 		break;
+		// 	}
+		// 	tmp = tmp->next;
+		// }
 		if (!draw)
-			ft_printf("%3.2x", c->vm->area[i]);
+			ft_printf(&(c->vm->logs), "%3.2x", c->vm->area[i]);
 		if (j == octet)
 		{
 			j = 0;
-			ft_printf(" \n");
+			ft_printf(&(c->vm->logs), " \n");
 		}
 	}
 }

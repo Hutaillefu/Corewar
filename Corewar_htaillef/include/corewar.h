@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 17:58:45 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/11 12:09:41 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,6 +16,7 @@
 
 # include "op.h"
 # include "../Libft/includes/libft.h"
+# include "../ft_printf/includes/ft_printf.h"
 
 # define V_LIVE 1
 # define V_CYCLE 2
@@ -63,6 +64,7 @@ typedef struct s_list2
 	t_node *head;
 	t_node *tail;
 	int 	len;
+	int		nb; //nombre de procs créé durant la partie
 }				t_list2;
 
 typedef struct		s_chmp
@@ -92,6 +94,7 @@ typedef struct		s_vm
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
+	t_logs			logs;
 	char				verbose;
 }					t_vm;
 
@@ -116,7 +119,7 @@ void			push_front(t_list2 **lst, t_node *proc);
 /*
 ** error
 */
-void				ft_exit(int error, char *s);
+void				ft_exit(t_logs *logs, int error, char *s);
 
 /*
 ** init

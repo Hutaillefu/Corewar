@@ -22,5 +22,6 @@ int		main(int ac, char **av)
 	init_map(c);
 	cycle(c);
 	ft_print_winner(c);
+	dump_logs(&(c->vm->logs));
 	return (0);
 }

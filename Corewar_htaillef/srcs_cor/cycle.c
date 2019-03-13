@@ -6,78 +6,74 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 18:00:43 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/13 17:18:19 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-void	ft_check_cycle(t_cor *c)
-{
-	if (c->vm->nb_live >= NBR_LIVE)
-		c->vm->cycle_to_die -= c->vm->cycle_delta;
-}
-
 void	rm_element(t_list2 **lst, t_node *proc)
 {
 	t_node *tmp;
+	tmp = (*lst)->head;
 
 	if (!lst || !proc)
 		return ;
-	tmp = (*lst)->head;
-	while (tmp)
+	if (proc->num == (*lst)->head->num)
 	{
-		if (tmp->num == proc->num)
+		(*lst)->head = (*lst)->head->next;
+		if ((*lst)->head)
+			(*lst)->head->prev = NULL;
+		(*lst)->len--;
+		if ((*lst)->len == 1)
+			(*lst)->head = (*lst)->tail;
+		// free(tmp);
+	}
+	else if (proc->num == (*lst)->tail->num)
+	{
+		(*lst)->tail = (*lst)->tail->prev;
+		if ((*lst)->tail)
+			(*lst)->tail->next = NULL;
+		// free(tmp);
+		(*lst)->len--;
+		if ((*lst)->len == 1)
+			(*lst)->head = (*lst)->tail;
+	}
+	else
+	{
+		while (tmp)
 		{
-			if (tmp->prev)
+			if (tmp->num == proc->num)
 			{
-				//printf("Remove process of list P%d\n", proc->num);								
+
 				tmp->prev->next = tmp->next;
+				tmp->next->prev = tmp->prev;
 				(*lst)->len--;
-			}
-			else
-			{ 
-				//printf("Remove first process of list P%d\n", proc->num);			
-				(*lst)->head = tmp->next;
-				if ((*lst)->head)
-					(*lst)->head->prev = NULL;
-				(*lst)->len--;			
-			}
+				// free(tmp);
 				return ;
-			// free tmp
+			}
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
 	}
 }
 
-void		read_and_process(t_cor *c, t_node *tmp)
+static void		read_and_load(t_cor *c, t_node *tmp)
+{
+	if (tmp->exec == 0)
+	{
+		load(c->vm, tmp);
+		load_processus(c->vm->cycle, tmp);
+	}
+}
+
+static void		read_and_exec(t_cor *c, t_node *tmp)
 {
 	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
 	{
 		exec(c->vm, tmp);
 		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
-			read_and_process(c, c->proc->head);
-	}
-	// if (tmp->exec == 0)
-	// {
-	// 	load(c->vm, tmp);
-	// 	load_processus(c->vm->cycle, tmp);
-	// }
-}
-
-void		read_and_process1(t_cor *c, t_node *tmp)
-{
-	// if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
-	// {
-	// 	exec(c->vm, tmp);
-	// 	if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
-	// 		read_and_process(c, c->proc->head);
-	// }
-	if (tmp->exec == 0)
-	{
-		load(c->vm, tmp);
-		load_processus(c->vm->cycle, tmp);
+			read_and_load(c, c->proc->head);
 	}
 }
 
@@ -90,83 +86,97 @@ int	cycle_to_die(t_cor *c, int cycle)
 
 	if (cycle == c->vm->cycle_to_die)
 	{
-		//printf("cycle %d\n", cycle);
-		// Kills process unlive
 		tmp = c->proc->head;
 		while (tmp)
 		{
 			if (c->vm->cycle - tmp->last_live >= c->vm->cycle_to_die)
 			{
 				if (c->vm->verbose & V_DEATH)
-					ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+					ft_printf(&(c->vm->logs), "Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
 				rm_element(&(c->proc), tmp);
 			}
-			if (!c->proc->head) // No process any more
-				return (1);
+			if (!c->proc->head)
+				break ;
 			tmp = tmp->next;
 		}
+		if (c->vm->max_chk >= MAX_CHECKS)
+		{
+			c->vm->max_chk = 1;
+			c->vm->cycle_to_die -= c->vm->cycle_delta;
+			if (c->vm->verbose & V_CYCLE)
+				ft_printf(&(c->vm->logs), "Cycle to die is now %d\n", c->vm->cycle_to_die);
+		}
+		else
+			c->vm->max_chk++;
 		if (c->vm->nb_live >= NBR_LIVE)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
 			if (c->vm->verbose & V_CYCLE)
-				ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
-			c->vm->nb_live = 0;
-			c->vm->max_chk = 0;
+				ft_printf(&(c->vm->logs), "Cycle to die is now %d\n", c->vm->cycle_to_die);
+			c->vm->max_chk = 1;
 		}
-		// else
-		c->vm->max_chk++;
-			// (*max)++;
 		cycle = 0;
-	}
-	if (c->vm->max_chk == MAX_CHECKS)
-	{
 		c->vm->nb_live = 0;
-		c->vm->max_chk = 0;
-		c->vm->cycle_to_die -= c->vm->cycle_delta;
-		if (c->vm->verbose & V_CYCLE)
-			ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
 	}
-	return (0);
+	return (cycle);
 }
 
 void	cycle(t_cor *c)
 {
 	int		cycle;
 	t_node	*tmp;
-	// int		max;
 
 	cycle = -1;
-	// max = 0;
-	while (c->vm->cycle_to_die > 0)
+	while (c->vm->cycle_to_die > 0 && c->proc->head)
 	{
 		if (cycle > 0)
 			cycle = 0;
-		while (++cycle <= c->vm->cycle_to_die)
+		while (++cycle <= c->vm->cycle_to_die && c->proc->head)
 		{
 			if (c->vm->cycle > 0 && (c->vm->verbose & V_CYCLE))
-				ft_printf("It is now cycle %d\n", c->vm->cycle);
-
-			// Exec
+				ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);
 			tmp = c->proc->head;
 			while (tmp)
 			{
-				read_and_process(c, tmp);
+				read_and_exec(c, tmp);
 				tmp = tmp->next;
 			}
-
-			// Load
 			tmp = c->proc->head;
 			while (tmp)
 			{
-				read_and_process1(c, tmp);
+				read_and_load(c, tmp);
 				tmp = tmp->next;
 			}
-
+			// while (tmp)
+			// {
+			// 	read_and_exec(c, tmp);
+			// 	read_and_load(c, tmp);
+			// 	tmp = tmp->next;
+			// }
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
-			if (cycle_to_die(c, cycle))
-				return ;
+			cycle = cycle_to_die(c, cycle);
 			c->vm->cycle++;
+			if (c->vm->cycle_to_die <= 0)
+			{
+				if (c->vm->verbose & V_CYCLE)
+					ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);				
+				tmp = c->proc->head;
+				while (tmp)
+				{
+					read_and_exec(c, tmp);
+					tmp = tmp->next;
+				}
+				tmp = c->proc->head;
+				while (tmp)
+				{
+					if (c->vm->verbose & V_DEATH)
+						ft_printf(&(c->vm->logs), "Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+					rm_element(&(c->proc), tmp);
+					tmp = tmp->next;
+				}
+				return ;
+			}
 		}
 	}
 }

@@ -76,7 +76,7 @@ int		extract_param(t_vm *vm, t_node *proc, int param_index, int coding_byte)
 		res = read_next_uint(vm, proc->pc, 1);
 		proc->param[param_index][0] = res;
 		proc->param[param_index][1] = REG_CODE;
-		(proc->pc)++;
+		proc->pc = (proc->pc + 1) % MEM_SIZE;
 		return (1);
 	}
 	else if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == DIR_CODE : 1 && (T_DIR & mask) == T_DIR)
@@ -87,7 +87,7 @@ int		extract_param(t_vm *vm, t_node *proc, int param_index, int coding_byte)
 			res = (short)read_next_uint(vm, proc->pc, 2);		
 		proc->param[param_index][0] = res;
 		proc->param[param_index][1] = DIR_CODE;
-		proc->pc += proc->op.dir_size == 0 ? 4 : 2;
+		proc->pc = (proc->pc + (proc->op.dir_size == 0 ? 4 : 2)) % MEM_SIZE;
 		return (1);
 	}
 	else if (coding_byte != -1 ? read_coding_byte(coding_byte, param_index + 1) == IND_CODE : 1 && (T_IND & mask) == T_IND)
@@ -95,7 +95,7 @@ int		extract_param(t_vm *vm, t_node *proc, int param_index, int coding_byte)
 		res = (short)read_next_uint(vm, proc->pc, 2);
 		proc->param[param_index][0] = res;
 		proc->param[param_index][1] = IND_CODE;
-		proc->pc += 2;
+		proc->pc = (proc->pc + 2) % MEM_SIZE;
 		return (1);
 	}
 	return (0);
@@ -205,20 +205,17 @@ int		load(t_vm *vm, t_node *proc)
 		proc->op_size = 1;
 		return (0);
 	}
-
 	proc->op = op;
 	coding_byte = -1;
 	if (op.coding_byte)
-		coding_byte = (int)vm->area[++(proc->pc)];
+		coding_byte = (int)vm->area[++(proc->pc) % MEM_SIZE];
 	if (op.coding_byte && !is_codingbyte_valid(proc, coding_byte))
 	{
-		// proc->op.opcode = -1;
 		proc->pc = pc_base;
 		proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;
 		return (0);
 	}
-
-	(proc->pc)++;
+	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	extract_params(vm, proc, coding_byte);
 	proc->op_size = proc->pc - pc_base;
 	proc->pc = pc_base;
@@ -236,7 +233,7 @@ int		exec(t_vm *vm, t_node *proc)
 	coding_byte = -1;
 	if (proc->op.coding_byte > 0)
 	{
-		coding_byte = (int)vm->area[++(proc->pc)];
+		coding_byte = (int)vm->area[++(proc->pc) % MEM_SIZE];
 		if (!is_codingbyte_valid(proc, coding_byte))
 		{
 			proc->op.name = NULL;
@@ -245,9 +242,9 @@ int		exec(t_vm *vm, t_node *proc)
 			return (0);
 		}
 	}
-	(proc->pc)++;
+	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	extract_params(vm, proc, coding_byte);
-	proc->op_size = proc->pc - pc_base;
+	proc->op_size = proc->pc < pc_base ? (MEM_SIZE - pc_base + proc->pc) : proc->pc - pc_base;
 	proc->pc = pc_base;
 
 	return (1);

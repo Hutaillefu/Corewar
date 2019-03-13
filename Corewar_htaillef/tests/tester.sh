@@ -2,12 +2,12 @@ cycle=500
 
 for corfile in ./*.cor; do
 
-    for i in {1..50}; do
+    for i in {1..56}; do
 
         y=$(($i * 500))
         echo $y
-        ./zaz_cor $corfile -d $y -v 31 > zaz_res
-        ./grp_cor $corfile -d $y -v 31 > grp_res
+        ./zaz_cor $corfile -d $y -v 31 | cat -e > zaz_res
+        ./grp_cor $corfile -d $y -v 31 | cat -e > grp_res
 
         res=$(diff zaz_res grp_res -q)
 

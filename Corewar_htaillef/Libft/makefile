@@ -77,29 +77,6 @@ SRC = ft_memset.c \
 	ft_isupper.c \
 	ft_strndup.c \
 	get_next_line.c \
-	ft_printf.c \
-	ft_itoa_base_print.c \
-	ft_putchar_print.c \
-	ft_putstr_print.c \
-	ft_strncpy_print.c \
-	ft_strlen_print.c \
-	ft_isdigit_print.c \
-	ft_strchr_print.c \
-	ft_strsub_print.c \
-	ft_conv_char.c \
-	ft_conv_sgnd.c \
-	ft_conv_usgnd.c \
-	ft_conv_pp.c \
-	ft_flags.c \
-	ft_display.c \
-	ft_display_num.c \
-	ft_display_char.c \
-	ft_check.c \
-	tools.c \
-	ft_conversion.c \
-	ft_conv_wchar.c \
-	utils_w.c \
-	utils_wc2.c \
 	ft_atol.c \
 	free_2d.c \
 	ft_realloc.c \
