@@ -205,7 +205,6 @@ int		load(t_vm *vm, t_node *proc)
 		proc->op_size = 1;
 		return (0);
 	}
-
 	proc->op = op;
 	coding_byte = -1;
 	if (op.coding_byte)

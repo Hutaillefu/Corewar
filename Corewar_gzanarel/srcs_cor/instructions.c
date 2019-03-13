@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/12 17:42:26 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/13 15:49:07 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -116,9 +116,10 @@ void	i_live(t_node *proc, t_cor *cor)
 	// 		adv(cor->vm, proc->pc, proc->op_size);
 	// 	return ;
 	// }
+	cor->vm->nb_live++;
 	proc->last_live = cor->vm->cycle;
 	if (cor->vm->verbose & V_OP)
-		ft_printf("P%5d | live %d\n", proc->num, champ_num);
+		ft_printf("P% 5d | live %d\n", proc->num, champ_num);
 	if ((chmp = get_chmp_by_num(cor, champ_num)) && (cor->vm->verbose & V_LIVE))
 		ft_printf("Player %d (%s) is said to be alive\n", -chmp->num, chmp->name);
 	if (cor->vm->verbose & V_ADV)
@@ -126,7 +127,6 @@ void	i_live(t_node *proc, t_cor *cor)
 	if (!chmp)
 		return ;
 	cor->vm->chmp_win_num = champ_num;
-	cor->vm->nb_live++;
 }
 
 void	i_sti(t_node *proc, t_vm *vm)
@@ -149,11 +149,11 @@ void	i_sti(t_node *proc, t_vm *vm)
 	p2 = get_param_value(vm, proc, proc->param[2], 1);
 	p3 = get_param_value(vm, proc, proc->param[0], 1);
 	addr = (proc->pc + p1 + p2);
-	write_uint(vm, p3, addr % IDX_MOD, REG_SIZE);
+	write_uint(vm, p3, addr, REG_SIZE);
 	if (vm->verbose & V_OP)
 	{
 		// addr %= MEM_SIZE;
-		ft_printf("P%5d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
+		ft_printf("P% 5d | sti r%d %d %d\n", proc->num, proc->param[0][0], p1, p2);
 		ft_printf("       | -> store to %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
 	}
 	if (vm->verbose & V_ADV)
@@ -171,14 +171,14 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 		// 	adv(vm, proc->pc, proc->op_size);
 		proc->op_size = (p1);
 		if (vm->verbose & V_OP)
-			ft_printf("P%5d | zjmp %d OK\n", proc->num, proc->op_size);
-		proc->op_size = (p1) % IDX_MOD;		
+			ft_printf("P% 5d | zjmp %d OK\n", proc->num, proc->op_size);
+		proc->op_size = (p1) % IDX_MOD;
 		proc->op_size = proc->op_size < 0 ? MEM_SIZE -(-(proc->op_size)) : proc->op_size;
 	}
 	else 
 	{
 		if (vm->verbose & V_OP)
-			ft_printf("P%5d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
+			ft_printf("P% 5d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
 		if (vm->verbose & V_ADV)
 			adv(vm, proc->pc, proc->op_size);
 	}
@@ -201,14 +201,14 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
-	addr = (proc->pc + ((p1 + p2) % IDX_MOD));
+	addr = proc->pc + (((p1 % IDX_MOD) + p2) % IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	//addr %= MEM_SIZE;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
 
 	if (vm->verbose & V_OP)
 	{
-		ft_printf("P%5d | ldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
+		ft_printf("P% 5d | ldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
 	}
 	if (vm->verbose & V_ADV)
@@ -238,7 +238,7 @@ void	i_lldi(t_node *proc, t_vm *vm)
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 	if (vm->verbose & V_OP)
 	{
-		ft_printf("P%5d | lldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
+		ft_printf("P% 5d | lldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
 		ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
 	}
 	if (vm->verbose & V_ADV)
@@ -277,7 +277,7 @@ void	i_st(t_node *proc, t_vm *vm)
 		proc->reg[p2 - 1] = p1;
 	}
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | st r%d %d\n", proc->num, proc->param[0][0], p2);
+		ft_printf("P% 5d | st r%d %d\n", proc->num, proc->param[0][0], p2);
 	if (vm->verbose & V_ADV)
 			adv(vm, proc->pc, proc->op_size);
 }
@@ -303,7 +303,7 @@ void	i_add(t_node *proc, t_vm *vm)
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		ft_printf("P% 5d | add r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 	if (vm->verbose & V_ADV)
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -328,7 +328,7 @@ void	i_sub(t_node *proc, t_vm *vm)
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | sub r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		ft_printf("P% 5d | sub r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
 	if (vm->verbose & V_ADV)	
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -351,7 +351,7 @@ void	i_and(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[2][0] - 1] = p1 & p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | and r%d r%d r%d\n", proc->num, proc->param[0][0], proc->param[1][0], proc->param[2][0]);
+		ft_printf("P% 5d | and %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
 	if (vm->verbose & V_ADV)	
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -375,7 +375,7 @@ void	i_or(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[2][0] - 1] = p1 | p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | or %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
+		ft_printf("P% 5d | or %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
 	if (vm->verbose & V_ADV)	
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -399,7 +399,7 @@ void	i_xor(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[2][0] - 1] = p1 ^ p2;
 	proc->carry = !proc->reg[proc->param[2][0] - 1];
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | xor %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
+		ft_printf("P% 5d | xor %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
 	if (vm->verbose & V_ADV)	
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -417,9 +417,8 @@ void	i_ld(t_node *proc, t_vm *vm)
 	}
 	proc->reg[proc->param[1][0] - 1] = p1;
 	proc->carry = !proc->reg[proc->param[1][0] - 1];
-
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
+		ft_printf("P% 5d | ld %d r%d\n", proc->num, p1, proc->param[1][0]);
 	if (vm->verbose & V_ADV)	
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -438,7 +437,7 @@ void	i_lld(t_node *proc, t_vm *vm)
 	proc->reg[proc->param[1][0] - 1] = p1;
 	proc->carry = !proc->reg[proc->param[1][0] - 1];
 	if (vm->verbose & V_OP)
-		ft_printf("P%5d | lld %d r%d\n", proc->num, p1, proc->param[1][0]);
+		ft_printf("P% 5d | lld %d r%d\n", proc->num, p1, proc->param[1][0]);
 	if (vm->verbose & V_ADV)
 		adv(vm, proc->pc, proc->op_size);
 }
@@ -476,7 +475,7 @@ void	i_fork(t_node *proc, t_cor *cor)
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->nb;
 	if (cor->vm->verbose & V_OP)
-		ft_printf("P%5d | fork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf("P% 5d | fork %d (%d)\n", proc->num, p1, child->pc);
 	if (cor->vm->verbose & V_ADV)
 		adv(cor->vm, proc->pc, proc->op_size);
 }
@@ -495,7 +494,7 @@ void	i_lfork(t_node *proc, t_cor *cor)
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->nb;
 	if (cor->vm->verbose & V_OP)
-		ft_printf("P%5d | lfork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf("P% 5d | lfork %d (%d)\n", proc->num, p1, child->pc);
 	if (cor->vm->verbose & V_ADV)
 		adv(cor->vm, proc->pc, proc->op_size);
 }

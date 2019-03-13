@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/11 12:12:19 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/13 11:32:33 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -84,6 +84,7 @@ void	init_vm(t_vm *vm)
 	vm->area[MEM_SIZE + 1] = '\0';
 	vm->champ_msize = CHAMP_MAX_SIZE;
 	vm->dump = -1;
+	vm->max_chk = 1;
 	while (++j < MAX_PLAYERS)
 		vm->num[j] = -1;
 }
