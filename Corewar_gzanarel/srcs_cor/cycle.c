@@ -92,7 +92,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 			if (c->vm->cycle - tmp->last_live >= c->vm->cycle_to_die)
 			{
 				if (c->vm->verbose & V_DEATH)
-					ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+					ft_printf(&(c->vm->logs), "Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
 				rm_element(&(c->proc), tmp);
 			}
 			if (!c->proc->head)
@@ -104,7 +104,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 			c->vm->max_chk = 1;
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
 			if (c->vm->verbose & V_CYCLE)
-				ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
+				ft_printf(&(c->vm->logs), "Cycle to die is now %d\n", c->vm->cycle_to_die);
 		}
 		else
 			c->vm->max_chk++;
@@ -112,7 +112,7 @@ int	cycle_to_die(t_cor *c, int cycle)
 		{
 			c->vm->cycle_to_die -= c->vm->cycle_delta;
 			if (c->vm->verbose & V_CYCLE)
-				ft_printf("Cycle to die is now %d\n", c->vm->cycle_to_die);
+				ft_printf(&(c->vm->logs), "Cycle to die is now %d\n", c->vm->cycle_to_die);
 			c->vm->max_chk = 1;
 		}
 		cycle = 0;
@@ -134,7 +134,7 @@ void	cycle(t_cor *c)
 		while (++cycle <= c->vm->cycle_to_die && c->proc->head)
 		{
 			if (c->vm->cycle > 0 && (c->vm->verbose & V_CYCLE))
-				ft_printf("It is now cycle %d\n", c->vm->cycle);
+				ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);
 			tmp = c->proc->head;
 			while (tmp)
 			{
@@ -160,7 +160,7 @@ void	cycle(t_cor *c)
 			if (c->vm->cycle_to_die <= 0)
 			{
 				if (c->vm->verbose & V_CYCLE)
-					ft_printf("It is now cycle %d\n", c->vm->cycle);				
+					ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);				
 				tmp = c->proc->head;
 				while (tmp)
 				{
@@ -171,7 +171,7 @@ void	cycle(t_cor *c)
 				while (tmp)
 				{
 					if (c->vm->verbose & V_DEATH)
-						ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+						ft_printf(&(c->vm->logs), "Process %d hasn't lived for %d cycles (CTD %d)\n", tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
 					rm_element(&(c->proc), tmp);
 					tmp = tmp->next;
 				}

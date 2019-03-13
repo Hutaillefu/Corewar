@@ -16,6 +16,7 @@
 
 # include "op.h"
 # include "../Libft/includes/libft.h"
+# include "../ft_printf/includes/ft_printf.h"
 
 # define V_LIVE 1
 # define V_CYCLE 2
@@ -93,6 +94,7 @@ typedef struct		s_vm
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
+	t_logs			logs;
 	char				verbose;
 }					t_vm;
 
@@ -117,7 +119,7 @@ void			push_front(t_list2 **lst, t_node *proc);
 /*
 ** error
 */
-void				ft_exit(int error, char *s);
+void				ft_exit(t_logs *logs, int error, char *s);
 
 /*
 ** init

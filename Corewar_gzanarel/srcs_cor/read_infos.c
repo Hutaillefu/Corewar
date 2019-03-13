@@ -39,7 +39,7 @@ void		read_infos(t_cor *c)
 		c->chmp[i]->name = ft_strdup(h->prog_name);
 		c->chmp[i]->comment = ft_strdup(h->comment);
 		if ((c->chmp[i]->champ_size = little_endian(h->prog_size)) > 682)
-			ft_exit(3, c->chmp[i]->name);
+			ft_exit(&(c->vm->logs), 3, c->chmp[i]->name);
 		c->chmp[i]->infos = ft_strnew(c->chmp[i]->champ_size);
 		read(fd, c->chmp[i]->infos, c->chmp[i]->champ_size);
 		close(fd);

@@ -211,7 +211,6 @@ int		load(t_vm *vm, t_node *proc)
 		coding_byte = (int)vm->area[++(proc->pc) % MEM_SIZE];
 	if (op.coding_byte && !is_codingbyte_valid(proc, coding_byte))
 	{
-		// proc->op.opcode = -1;
 		proc->pc = pc_base;
 		proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;
 		return (0);
@@ -245,7 +244,6 @@ int		exec(t_vm *vm, t_node *proc)
 	}
 	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	extract_params(vm, proc, coding_byte);
-	// proc->op_size = proc->pc - pc_base;
 	proc->op_size = proc->pc < pc_base ? (MEM_SIZE - pc_base + proc->pc) : proc->pc - pc_base;
 	proc->pc = pc_base;
 

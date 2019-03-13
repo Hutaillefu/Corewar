@@ -13,7 +13,7 @@
 
 #include "includes/libft.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlen1(const char *str)
 {
 	unsigned int i;
 

@@ -44,15 +44,17 @@ FLAGS = -Werror -Wextra -Wall
 all: $(NAME)
 
 $(NAME): $(OBJ_C)
+	@$(MAKE) -C ft_printf/
 	@$(MAKE) -C Libft/
-	@gcc $(OBJ_C) -I $(INC) $(LIB_LNK) $(FLAGS) -o $(NAME)
+	@gcc $(OBJ_C) -I ft_printf/includes  -I $(INC) $(LIB_LNK) $(FLAGS) -o $(NAME) ft_printf/libftprintf.a
 	@echo "\n\033[32;01m./corewar.. done !\033[00m\n"
 
 %.o:%.c $(INC)
-	@gcc -I $(INC) $(FLAGS) -c $< -o $@
+	@gcc -I ft_printf/includes -I $(INC) $(FLAGS) -c $< -o $@
 
 clean:
 	@rm -rf srcs_cor/*.o
+	@ cd ft_printf && make clean
 	@rm -rf srcs_asm/*.o
 	@rm -rf $(L_FT)/objs/*.o
 	@echo "\n\033[31;01mClean..\033[00m\n"
@@ -60,6 +62,7 @@ clean:
 fclean: clean
 	@rm -rf $(NAME)
 	@rm -rf $(L_FT)/libft.a
+	@ cd ft_printf && make fclean
 	@echo "\n\033[31;01mFclean..\033[00m\n"
 
 re: fclean all

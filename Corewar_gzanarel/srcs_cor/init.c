@@ -21,10 +21,10 @@ void	init_map(t_cor *c)
 
 	player = -1;
 	start = MEM_SIZE / c->vm->nb_player;
-	ft_printf("Introducing contestants...\n");
+	ft_printf(&(c->vm->logs), "Introducing contestants...\n");
 	while (++player < c->vm->nb_player)
 	{
-		ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n",
+		ft_printf(&(c->vm->logs), "* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n",
 		(player + 1), c->chmp[player]->champ_size, c->chmp[player]->name,
 		c->chmp[player]->comment);
 		ft_memsub(c->vm->area, c->chmp[player]->infos, (start * player), c->chmp[player]->champ_size);
@@ -59,7 +59,7 @@ void	init_proc(t_cor *c, t_list2 *proc)
 	while (++i < c->vm->nb_player)
 	{
 		if (!(c->chmp[i] = (t_chmp *)ft_memalloc(sizeof(t_chmp))))
-			ft_exit(8, NULL);
+			ft_exit(&(c->vm->logs), 8, NULL);
 		c->chmp[i]->champ_size = 0;
 		c->chmp[i]->name = NULL;
 		c->chmp[i]->comment = NULL;
@@ -79,12 +79,13 @@ void	init_vm(t_vm *vm)
 	vm->cycle_delta = CYCLE_DELTA;
 	vm->cycle_to_die = CYCLE_TO_DIE;
 	if (!(vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE))))
-		ft_exit(8, NULL);
+		ft_exit(&(vm->logs), 8, NULL);
 	ft_memset(vm->area, 0, MEM_SIZE);
 	vm->area[MEM_SIZE + 1] = '\0';
 	vm->champ_msize = CHAMP_MAX_SIZE;
 	vm->dump = -1;
 	vm->max_chk = 1;
+	init_logs(&(vm->logs));
 	while (++j < MAX_PLAYERS)
 		vm->num[j] = -1;
 }
@@ -94,14 +95,14 @@ t_cor	*init_cor(char **av, int ac)
 	t_cor *c;
 
 	if(!(c = ft_memalloc(sizeof(t_cor))))
-		ft_exit(8, NULL);
+		ft_exit(NULL, 8, NULL);
 	if(!(c->vm = ft_memalloc(sizeof(t_vm))))
-		ft_exit(8, NULL);
+		ft_exit(NULL, 8, NULL);
 	if(!(c->proc = ft_memalloc(sizeof(t_list2))))
-		ft_exit(8, NULL);
+		ft_exit(NULL, 8, NULL);
 	init_vm(c->vm);
 	if (check_parse(c->vm, av, ac) == 1)
-		ft_exit(1, NULL);
+		ft_exit(&(c->vm->logs), 1, NULL);
 	init_proc(c, c->proc);
 	return (c);
 }

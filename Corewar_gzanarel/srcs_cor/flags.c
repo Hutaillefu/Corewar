@@ -16,6 +16,7 @@
 void	ft_flag_dump(t_cor *c)
 {
 	print_map(c, 64);
+	dump_logs(&(c->vm->logs));
 	//free avant de sortir 
 	exit(0);
 }
