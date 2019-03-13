@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/13 15:32:36 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/13 17:18:19 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,22 +58,22 @@ void	rm_element(t_list2 **lst, t_node *proc)
 	}
 }
 
-static void		read_and_exec(t_cor *c, t_node *tmp)
-{
-	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
-	{
-		exec(c->vm, tmp);
-		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
-			read_and_exec(c, c->proc->head);
-	}
-}
-
 static void		read_and_load(t_cor *c, t_node *tmp)
 {
 	if (tmp->exec == 0)
 	{
 		load(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp);
+	}
+}
+
+static void		read_and_exec(t_cor *c, t_node *tmp)
+{
+	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
+	{
+		exec(c->vm, tmp);
+		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
+			read_and_load(c, c->proc->head);
 	}
 }
 

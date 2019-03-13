@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/13 15:49:07 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/13 17:19:51 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -262,7 +262,7 @@ void	i_st(t_node *proc, t_vm *vm)
 	if (proc->param[1][1] == IND_CODE)
 	{
 		addr = proc->pc + (p2 % IDX_MOD); 
-		// addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
+		addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 		// addr %= MEM_SIZE;
 		write_uint(vm, p1, addr, REG_SIZE);
 	}
