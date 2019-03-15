@@ -85,7 +85,6 @@ void	init_vm(t_vm *vm)
 	vm->champ_msize = CHAMP_MAX_SIZE;
 	vm->dump = -1;
 	vm->max_chk = 1;
-	vm->last_opcode = 1;
 	init_logs(&(vm->logs));
 	while (++j < MAX_PLAYERS)
 		vm->num[j] = -1;

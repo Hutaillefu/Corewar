@@ -235,23 +235,8 @@ int		exec(t_vm *vm, t_node *proc)
 	int		coding_byte;
 	int		pc_base;
 
-	// ??????
-	if (vm->last_opcode == 1 && proc->op.opcode != vm->area[proc->pc] && (vm->area[proc->pc] <= 0 || vm->area[proc->pc] > 16) && vm->area[proc->pc] != 0) // 1ere fois changement opcode vers un mauvais sauf 0
-		vm->last_opcode = 0;
-	else if (vm->last_opcode == 0 && proc->op.opcode != vm->area[proc->pc] && (vm->area[proc->pc] == 0)) // 2eme fois changement opcode vers 0
-		vm->last_opcode = -1;
-	else
-		vm->last_opcode = 1;
-
-	// ??????
-	if (vm->last_opcode == -1)
-	{
-		proc->op = get_op_by_opcode((int)vm->area[proc->pc]);
-		vm->last_opcode = 1;
-	}
-
 	// if (proc->op.opcode != vm->area[proc->pc])
-	// 	ft_printf(&(vm->logs), "last opcode : %d, %d -> %d\n", vm->last_opcode, proc->op.opcode, vm->area[proc->pc]);
+	// 	ft_printf(&(vm->logs), "%d -> %d\n", proc->op.opcode, vm->area[proc->pc]);
 
 	pc_base = proc->pc;
 	coding_byte = -1;
@@ -260,6 +245,7 @@ int		exec(t_vm *vm, t_node *proc)
 		coding_byte = (int)vm->area[++(proc->pc) % MEM_SIZE];
 		if (!is_codingbyte_valid(proc, coding_byte))
 		{
+		
 			proc->op.name = NULL;
 			proc->pc = pc_base;
 			proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;

@@ -94,7 +94,6 @@ typedef struct		s_vm
 	int				chmp_win_num;
 	int				cycle_to_die;
 	int				num[MAX_PLAYERS];
-	int				last_opcode;
 	t_logs			logs;
 	char				verbose;
 }					t_vm;

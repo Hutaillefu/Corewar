@@ -65,7 +65,7 @@ void	print_map(t_cor *c, int octet)
 		// {
 		// 	if (tmp->pc == i)
 		// 	{
-		// 		ft_printf("\033[31;01m%3.2x\033[00m", c->vm->area[i]);
+		// 		ft_printf(&(c->vm->logs), "\033[31;01m%3.2x\033[00m", c->vm->area[i]);
 		// 		draw = 1;
 		// 		break;
 		// 	}
