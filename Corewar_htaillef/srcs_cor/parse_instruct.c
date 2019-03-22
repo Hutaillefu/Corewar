@@ -209,6 +209,12 @@ int		load(t_vm *vm, t_node *proc)
 	coding_byte = -1;
 	if (op.coding_byte)
 		coding_byte = (int)vm->area[++(proc->pc) % MEM_SIZE];
+
+	// if ( (proc->num == 2074 || proc->num == 1746 || proc->num == 964 || proc->num == 640 || proc->num == 263) 
+	// 	&& vm->cycle == 25340)
+	// 	ft_printf(&(vm->logs), "proc num %d previous coding byte was %d\n", proc->num, coding_byte);
+
+
 	if (op.coding_byte && !is_codingbyte_valid(proc, coding_byte))
 	{
 		proc->pc = pc_base;
@@ -229,6 +235,9 @@ int		exec(t_vm *vm, t_node *proc)
 	int		coding_byte;
 	int		pc_base;
 
+	// if (proc->op.opcode != vm->area[proc->pc])
+	// 	ft_printf(&(vm->logs), "%d -> %d\n", proc->op.opcode, vm->area[proc->pc]);
+
 	pc_base = proc->pc;
 	coding_byte = -1;
 	if (proc->op.coding_byte > 0)
@@ -236,12 +245,14 @@ int		exec(t_vm *vm, t_node *proc)
 		coding_byte = (int)vm->area[++(proc->pc) % MEM_SIZE];
 		if (!is_codingbyte_valid(proc, coding_byte))
 		{
+		
 			proc->op.name = NULL;
 			proc->pc = pc_base;
 			proc->op_size = get_codingbyte_len(proc, coding_byte) + 1 + 1;
 			return (0);
 		}
 	}
+	
 	proc->pc = (proc->pc + 1) % MEM_SIZE;
 	extract_params(vm, proc, coding_byte);
 	proc->op_size = proc->pc < pc_base ? (MEM_SIZE - pc_base + proc->pc) : proc->pc - pc_base;
