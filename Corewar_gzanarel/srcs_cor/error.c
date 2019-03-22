@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:37:01 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 15:16:24 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 19:11:08 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -31,13 +31,7 @@ void    ft_exit(t_logs *logs, int error, char *s, t_cor *c)
 		ft_printf(logs, "Can't read source file %s\n", s);
 	if (error == 8)
 		ft_putstr("Error malloc\n");
-	if (error >= 11)
-		free(c);
-		if (error >= 12)
-		free(c->vm);
-		if (error == 13)
-			free(c->proc);
+	free(c);
 	dump_logs(logs);
-	printf("Sortie du programme\n");
 	exit(1);
 }

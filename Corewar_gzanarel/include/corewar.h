@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 16:00:54 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 21:11:27 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -108,14 +108,27 @@ typedef struct	s_cor
 }					t_cor;
 
 /*
-** list
+** cycle_to_die
 */
-void			add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
-t_node			*clone_proc(t_node *parent);
-void			push_back(t_list2 **lst, t_node *proc);
-void			push_front(t_list2 **lst, t_node *proc);
-void			rm_element(t_list2 **lst, t_node *proc);
+int			cycle_to_die(t_cor *c, int cycle);
 
+
+void		rm_element(t_list2 **lst, t_node *proc);
+int		extract_params(t_vm *vm, t_node *proc, int coding_byte);
+
+/*
+** coding_byte
+*/
+int		read_coding_byte(int byte, int index);
+int    read_next_uint(t_vm *vm, int index, int bytes_len);
+t_op	get_op_by_opcode(int opcode);
+int 	is_codingbyte_valid(t_node *proc, int coding_byte);
+int 	get_codingbyte_len(t_node *proc, int coding_byte);
+
+/*
+** cycle
+*/
+void		cycle(t_cor *c);
 
 /*
 ** error
@@ -123,59 +136,17 @@ void			rm_element(t_list2 **lst, t_node *proc);
 void				ft_exit(t_logs *logs, int error, char *s, t_cor *c);
 
 /*
-** init
-*/
-t_cor	*init_cor(char **av, int ac);
-void				init_vm(t_cor *c, t_vm *vm);
-void				init_map(t_cor *c);
-void				init_proc(t_cor *c, t_list2 *proc);
-void				init_num_chmp(t_cor *c, int i);
-
-/*
-** print
-*/
-void				print_map(t_cor *c, int octet);
-void		ft_print_winner(t_cor *c);
-
-/*
-**parse
-*/
-int					check_parse(t_cor *c, t_vm *vm, char **av, int ac);
-
-/*
-** read_infos
-*/
-void		read_infos(t_cor *c);
-int	little_endian(int value);
-int    read_next_uint(t_vm *vm, int index, int bytes_len);
-
-
-/*
-** CTD
-*/
-int     cycle_to_die(t_cor *c, int cycle);
-
-
-/*
-** cycle
-*/
-void				cycle(t_cor *c);
-
-int     exec_process(t_vm *vm, t_node *proc);
-int		load(t_vm *vm, t_node *proc);
-int		exec(t_vm *vm, t_node *proc);
-int     check_processus(t_vm *vm, t_node *proc);
-/*
-** processus
-*/
-void		start_processus(t_cor *cor, t_node *proc);
-void	load_processus(int start, t_node *proc, int i);
-
-/*
 ** flags
 */
 void	ft_flag_dump(t_cor *c);
 
+/*
+** init
+*/
+t_cor				*init_cor(char **av, int ac);
+void				init_vm(t_cor *c, t_vm *vm);
+void				init_map(t_cor *c);
+void				init_proc(t_cor *c, t_list2 *proc);
 
 /*
 ** commande
@@ -197,15 +168,66 @@ void	i_xor(t_node *proc, t_vm *vm);
 void	i_lldi(t_node *proc, t_vm *vm);
 void	i_and(t_node *proc, t_vm *vm);
 
-// <br>* Champion sans nom / sans commentaire
-// <br>* Champion avec un nom ou un commentaire trop long
-// <br>* Champion sans code
-// <br>
-// <br>De nombreuses façons de gérer ces erreurs sont acceptables, comme par exemple :
-// <br>* Refuser de compiler le champion
-// <br>* Refuser de lancer le champion
-// <br>* Corriger automatiquement le champion
-// <br>* Lancer le champion même s'il n'a a
+/*
+** main
+*/
+int		main(int ac, char **av);
 
+/*
+** params
+*/
+int			extract_params(t_vm *vm, t_node *proc, int coding_byte);
+
+/*
+** parse_instruct
+*/
+void		load(t_vm *vm, t_node *proc);
+void		exec(t_vm *vm, t_node *proc);
+
+/*
+** parse
+*/
+int			check_parse(t_cor *c, t_vm *vm, char **av, int ac);
+
+/*************************************/
+
+/*
+** list
+*/
+void			add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
+t_node			*clone_proc(t_node *parent);
+void			push_back(t_list2 **lst, t_node *proc);
+void			push_front(t_list2 **lst, t_node *proc);
+int		is_regnum_valid(int regnum);
+void	adv(t_vm *vm, int pc, int opsize);
+void	write_uint(t_vm *vm, int value, int start_index, int bytes_len);
+int		get_param_value(t_vm *vm, t_node *proc, int param[2], int mod);
+t_chmp	*get_chmp_by_num(t_cor *cor, int champ_num);
+
+
+
+
+/*
+** print
+*/
+void				print_map(t_cor *c, int octet);
+void		ft_print_winner(t_cor *c);
+
+
+/*
+** read_infos
+*/
+void		read_infos(t_cor *c);
+int	little_endian(int value);
+
+
+int     exec_process(t_vm *vm, t_node *proc);
+
+int     check_processus(t_vm *vm, t_node *proc);
+/*
+** processus
+*/
+void		start_processus(t_cor *cor, t_node *proc);
+void	load_processus(int start, t_node *proc, int i);
 
 #endif

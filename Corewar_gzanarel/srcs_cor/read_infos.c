@@ -6,20 +6,24 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:32:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 16:02:30 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 20:21:27 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-int			little_endian(int value)
+/*
+** Convertie le Big Endian - Little Endian
+*/
+
+int		little_endian(int value)
 {
 	return ((value & 0x000000FF) << 24 | (value & 0x0000FF00) << 8 |
 	(value & 0xFF000000) >> 24 | (value & 0x00FF0000) >> 8);
 }
 
-void		read_infos(t_cor *c)
+void	read_infos(t_cor *c)
 {
 	t_header	*h;
 	int			fd;

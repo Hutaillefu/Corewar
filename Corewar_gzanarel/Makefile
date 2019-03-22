@@ -6,7 +6,7 @@
 #    By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2019/01/09 16:36:19 by gzanarel     #+#   ##    ##    #+#        #
-#    Updated: 2019/03/22 14:16:45 by gzanarel    ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/22 20:43:44 by gzanarel    ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
@@ -21,9 +21,11 @@ SRCS_C = srcs_cor/
 
 S_C = $(SRCS_C)main.c $(SRCS_C)init.c $(SRCS_C)print.c $(SRCS_C)parse.c \
 	$(SRCS_C)cycle.c $(SRCS_C)error.c $(SRCS_C)read_infos.c $(SRCS_C)op.c \
-	$(SRCS_C)parse_instruct.c $(SRCS_C)instructions.c $(SRCS_C)processus.c \
+	$(SRCS_C)parse_instruct.c $(SRCS_C)processus.c $(SRCS_C)tools_instruct.c \
 	$(SRCS_C)flags.c $(SRCS_C)tools.c $(SRCS_C)cycle_to_die.c \
-	$(SRCS_C)rm_element.c
+	$(SRCS_C)rm_element.c $(SRCS_C)params.c $(SRCS_C)coding_byte.c \
+	$(SRCS_C)instruct_1to5.c $(SRCS_C)instruct_6to10.c \
+	$(SRCS_C)instruct_11to15.c $(SRCS_C)instruct_16.c
 
 #S_A = fichier asm 
 

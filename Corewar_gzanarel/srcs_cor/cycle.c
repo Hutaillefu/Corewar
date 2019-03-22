@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 15:26:25 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 19:01:00 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -15,7 +15,7 @@
 
 static void	read_and_load(t_cor *c, t_node *tmp, int i)
 {
-	if (!(tmp->exec))
+	if (!tmp->exec)
 	{
 		load(c->vm, tmp);
 		load_processus(c->vm->cycle, tmp, i);
@@ -52,20 +52,23 @@ void		cycle(t_cor *c)
 	int		cycle;
 	t_node	*tmp;
 
-	cycle = -1;
-	while (c->proc->head)
+	cycle = 0;
+	while (c->vm->cycle_to_die > 0 && c->proc->head)
 	{
-		cycle = cycle_to_die(c, cycle);
 		if (c->vm->cycle > 0 && (c->vm->verbose & V_CYCLE))
 			ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);
 		tmp = c->proc->head;
 		read_proc(c, tmp);
 		if (c->vm->dump == c->vm->cycle)
-		{
 			ft_flag_dump(c);
-			return ;
-		}
+		cycle = cycle_to_die(c, cycle);
 		c->vm->cycle++;
 		cycle++;
 	}
+	if (c->vm->cycle_to_die < 0 && (c->vm->verbose & V_CYCLE))
+		ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);
+	tmp = c->proc->head;
+	read_proc(c, tmp);
+	tmp = c->proc->head;
+	cycle_to_die(c, cycle);
 }

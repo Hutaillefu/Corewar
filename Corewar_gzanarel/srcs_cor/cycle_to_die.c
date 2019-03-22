@@ -5,8 +5,8 @@
 /*                                                 +:+:+   +:    +:  +:+:+    */
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
-/*   Created: 2019/03/22 13:35:54 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 15:28:58 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Created: 2019/03/22 18:53:46 by gzanarel     #+#   ##    ##    #+#       */
+/*   Updated: 2019/03/22 21:07:10 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,7 +35,7 @@ int			cycle_to_die(t_cor *c, int cycle)
 {
 	t_node *tmp;
 
-	if (cycle == c->vm->cycle_to_die)
+	if (cycle == c->vm->cycle_to_die || c->vm->cycle_to_die < 0)
 	{
 		tmp = c->proc->head;
 		while (tmp)

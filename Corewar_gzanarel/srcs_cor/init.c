@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 15:31:17 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 21:06:30 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -32,7 +32,7 @@ void	init_map(t_cor *c)
 	}
 }
 
-void	init_num_chmp(t_cor *c, int i)
+static void	init_num_chmp(t_cor *c, int i)
 {
 	int j;
 
@@ -79,8 +79,8 @@ void	init_vm(t_cor *c, t_vm *vm)
 	ft_memset(vm, 0, sizeof(t_vm));
 	vm->cycle_delta = CYCLE_DELTA;
 	vm->cycle_to_die = CYCLE_TO_DIE;
-	if (!(vm->area = malloc(sizeof(unsigned char) * ((MEM_SIZE) + 1))))
-		ft_exit(&(vm->logs), 13, NULL, c);
+	if (!(vm->area = malloc(sizeof(unsigned char) * (MEM_SIZE + 1))))
+		ft_exit(&(vm->logs), 8, NULL, c);
 	ft_memset(vm->area, 0, MEM_SIZE);
 	vm->area[MEM_SIZE] = '\0';
 	vm->champ_msize = CHAMP_MAX_SIZE;
@@ -96,14 +96,14 @@ t_cor	*init_cor(char **av, int ac)
 	t_cor *c;
 
 	if (!(c = ft_memalloc(sizeof(t_cor))))
-		ft_exit(NULL, 11, NULL, c);
+		ft_exit(NULL, 8, NULL, c);
 	if (!(c->vm = ft_memalloc(sizeof(t_vm))))
-		ft_exit(NULL, 12, NULL, c);
+		ft_exit(NULL, 8, NULL, c);
 	if (!(c->proc = ft_memalloc(sizeof(t_list2))))
-		ft_exit(NULL, 13, NULL, c);
+		ft_exit(NULL, 8, NULL, c);
 	init_vm(c, c->vm);
 	if (check_parse(c, c->vm, av, ac) == 1)
-		ft_exit(&(c->vm->logs), 13, NULL, c);
+		ft_exit(&(c->vm->logs), 1, NULL, c);
 	init_proc(c, c->proc);
 	return (c);
 }
