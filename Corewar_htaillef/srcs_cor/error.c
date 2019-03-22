@@ -6,14 +6,14 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:37:01 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 13:24:22 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 15:16:24 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-void    ft_exit(t_logs *logs, int error, char *s)
+void    ft_exit(t_logs *logs, int error, char *s, t_cor *c)
 {
 	if (error == 0)
 		ft_printf(logs, "Usage: ./corewar [-d N -v | -n N] <champion1.cor> <...>\n");
@@ -31,7 +31,13 @@ void    ft_exit(t_logs *logs, int error, char *s)
 		ft_printf(logs, "Can't read source file %s\n", s);
 	if (error == 8)
 		ft_putstr("Error malloc\n");
-		
+	if (error >= 11)
+		free(c);
+		if (error >= 12)
+		free(c->vm);
+		if (error == 13)
+			free(c->proc);
 	dump_logs(logs);
+	printf("Sortie du programme\n");
 	exit(1);
 }

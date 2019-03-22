@@ -119,13 +119,13 @@ void			push_front(t_list2 **lst, t_node *proc);
 /*
 ** error
 */
-void				ft_exit(t_logs *logs, int error, char *s);
+void    ft_exit(t_logs *logs, int error, char *s, t_cor *c);
 
 /*
 ** init
 */
-t_cor	*init_cor(char **av, int ac);
-void				init_vm(t_vm *vm);
+t_cor				*init_cor(char **av, int ac);
+void				init_vm(t_cor *cor, t_vm *vm);
 void				init_map(t_cor *c);
 void				init_proc(t_cor *c, t_list2 *proc);
 void				init_num_chmp(t_cor *c, int i);
@@ -139,7 +139,7 @@ void		ft_print_winner(t_cor *c);
 /*
 **parse
 */
-int					check_parse(t_vm *vm, char **av, int ac);
+int			check_parse(t_cor *c, t_vm *vm, char **av, int ac);
 
 /*
 ** read_infos
@@ -161,7 +161,7 @@ int     check_processus(t_vm *vm, t_node *proc);
 /*
 ** processus
 */
-int		start_processus(t_cor *cor, t_node *proc);
+void	start_processus(t_cor *cor, t_node *proc);
 void	load_processus(int start, t_node *proc, int i);
 
 /*
@@ -189,6 +189,19 @@ void	i_live(t_node *proc, t_cor *cor);
 void	i_xor(t_node *proc, t_vm *vm);
 void	i_lldi(t_node *proc, t_vm *vm);
 void	i_and(t_node *proc, t_vm *vm);
+
+void	adv(t_vm *vm, t_node *p);
+int		is_regnum_valid(int regnum);
+void	write_uint(t_vm *vm, int value, int start_index, int bytes_len);
+int		get_param_value(t_vm *vm, t_node *proc, int param[2], int mod);
+t_chmp	*get_chmp_by_num(t_cor *cor, int champ_num);
+
+int		is_codingbyte_valid(t_node *proc, int coding_byte);
+int		get_codingbyte_len(t_node *proc, int coding_byte);
+int		read_coding_byte(int byte, int index);
+int		extract_params(t_vm *vm, t_node *proc, int coding_byte);
+int		cycle_to_die(t_cor *c, int cycle);
+void	rm_element(t_list2 **lst, t_node *proc);
 
 // <br>* Champion sans nom / sans commentaire
 // <br>* Champion avec un nom ou un commentaire trop long

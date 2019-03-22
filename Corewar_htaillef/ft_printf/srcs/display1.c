@@ -96,7 +96,6 @@ int		display_format(t_format *infos, va_list *args, t_logs *logs)
 		customput(final);
 	else
 		add_logs(logs, final);
-		//ft_putstr(final);
 	len = ft_strlen(final);
 	ft_memdel((void **)&final);
 	return (isnull ? len - 1 : len);

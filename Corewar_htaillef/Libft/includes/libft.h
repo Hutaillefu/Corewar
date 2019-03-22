@@ -17,9 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "../get_next_line.h"
-# include "./ft_printf.h"
 
-#include <stdint.h>
+# include <stdint.h>
 
 typedef	struct		s_list
 {
@@ -38,7 +37,7 @@ void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-size_t				ft_strlen(char *str);
+size_t				ft_strlen1(const char *str);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
@@ -97,7 +96,8 @@ char				*ft_strndup(char *src, int n);
 void				ft_free_2d(char **tab);
 long				ft_atol(const char *str);
 void				ft_free_2d(char **tab);
-void				*ft_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void				*ft_realloc(void *ptr, unsigned int old_size,
+unsigned int new_size);
 void				*ft_memsub(void *dst, const void *src, int start, size_t n);
 
 #endif

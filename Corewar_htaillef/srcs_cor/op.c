@@ -6,14 +6,14 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 15:00:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 16:23:51 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 15:34:20 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-t_op	op_tab[17] =
+struct s_op	op_tab[17] =
 {
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},

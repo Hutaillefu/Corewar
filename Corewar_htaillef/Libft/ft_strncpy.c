@@ -20,7 +20,7 @@ char	*ft_strncpy(char *dst, const char *src, size_t len)
 	char			*str;
 
 	str = (char *)src;
-	j = ft_strlen(str);
+	j = ft_strlen1(str);
 	i = 0;
 	while (src[i] != '\0' && (i < len))
 	{

@@ -23,7 +23,7 @@ SRC = ft_memset.c \
 	ft_striteri.c \
 	ft_strmap.c \
 	ft_strmapi.c \
-	ft_strlen.c \
+	ft_strlen1.c \
 	ft_strequ.c \
 	ft_strnequ.c \
 	ft_strsub.c \

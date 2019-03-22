@@ -21,15 +21,15 @@
 
 # define LOGS_LEN 10240
 
-typedef struct	s_logs
+typedef struct		s_logs
 {
 	char	*buffer;
 	int		len;
-}				t_logs;
+}					t_logs;
 
-int				init_logs(t_logs *logs);
-void			add_logs(t_logs *logs, char *log);
-void			dump_logs(t_logs *logs);
+int					init_logs(t_logs *logs);
+void				add_logs(t_logs *logs, char *log);
+void				dump_logs(t_logs *logs);
 
 int					ft_printf(t_logs *logs, const char *restrict format, ...);
 
@@ -104,7 +104,8 @@ t_format			*new_format(void);
 t_format			*extract(char **str);
 void				free_format(t_format **format);
 
-int					display_format(t_format *infos, va_list *args, t_logs *logs);
+int					display_format(t_format *infos, va_list *args,
+t_logs *logs);
 
 int					wcharlen(wchar_t wchar);
 char				*wchartostr(wchar_t wchar);

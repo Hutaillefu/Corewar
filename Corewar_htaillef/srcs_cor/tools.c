@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 15:39:54 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/14 16:41:35 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 16:04:42 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -97,7 +97,6 @@ void	push_back(t_list2 **lst, t_node *proc)
 	(*lst)->len++;
 }
 
-
 void	push_front(t_list2 **lst, t_node *proc)
 {
 	if (!lst)
@@ -111,7 +110,7 @@ void	push_front(t_list2 **lst, t_node *proc)
 	{
 		proc->prev = NULL;
 		proc->next = (*lst)->head;
-		(*lst)->head->prev = proc; 
+		(*lst)->head->prev = proc;
 		(*lst)->head = proc;
 	}
 	(*lst)->nb++;
