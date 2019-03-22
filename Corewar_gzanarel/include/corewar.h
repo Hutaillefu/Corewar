@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/11 12:09:41 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/18 14:52:46 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -162,7 +162,7 @@ int     check_processus(t_vm *vm, t_node *proc);
 ** processus
 */
 int		start_processus(t_cor *cor, t_node *proc);
-void	load_processus(int start, t_node *proc);
+void	load_processus(int start, t_node *proc, int i);
 
 /*
 ** flags
