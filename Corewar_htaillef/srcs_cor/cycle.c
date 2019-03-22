@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/13 17:18:19 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 12:30:01 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -58,23 +58,25 @@ void	rm_element(t_list2 **lst, t_node *proc)
 	}
 }
 
-static void		read_and_load(t_cor *c, t_node *tmp)
+static void		read_and_load(t_cor *c, t_node *tmp, int i)
 {
 	if (tmp->exec == 0)
 	{
 		load(c->vm, tmp);
-		load_processus(c->vm->cycle, tmp);
+		load_processus(c->vm->cycle, tmp, i);
 	}
 }
 
-static void		read_and_exec(t_cor *c, t_node *tmp)
+static int		read_and_exec(t_cor *c, t_node *tmp)
 {
-	if ((c->vm->cycle == tmp->exec && tmp->exec != 0))
+		if ((c->vm->cycle >= tmp->exec && tmp->exec != 0))
 	{
 		exec(c->vm, tmp);
-		if (c->vm->cycle == tmp->exec && start_processus(c, tmp))
-			read_and_load(c, c->proc->head);
+		if (c->vm->cycle >= tmp->exec)
+			start_processus(c, tmp);
+		return (0);
 	}
+	return (1);
 }
 
 /*
@@ -138,21 +140,16 @@ void	cycle(t_cor *c)
 			tmp = c->proc->head;
 			while (tmp)
 			{
-				read_and_exec(c, tmp);
+				if (tmp->exec >= c->vm->cycle && c->vm->cycle != 0)
+					read_and_exec(c, tmp);
+				else if (!(c->vm->cycle))
+					read_and_load(c, tmp, 0);
+				else
+					read_and_load(c, tmp, 1);
+				if (tmp->op.opcode == -1 || tmp->op.opcode == 0)
+					read_and_exec(c, tmp);
 				tmp = tmp->next;
 			}
-			tmp = c->proc->head;
-			while (tmp)
-			{
-				read_and_load(c, tmp);
-				tmp = tmp->next;
-			}
-			// while (tmp)
-			// {
-			// 	read_and_exec(c, tmp);
-			// 	read_and_load(c, tmp);
-			// 	tmp = tmp->next;
-			// }
 			if (c->vm->dump == c->vm->cycle)
 				ft_flag_dump(c);
 			cycle = cycle_to_die(c, cycle);

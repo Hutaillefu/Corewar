@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 15:39:54 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/11 12:12:42 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/14 16:41:35 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -65,15 +65,16 @@ void	add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i)
 
 	if (!lst || !(new = create_proc(c, chmp, i)))
 		return ;
-	if (!((*lst)->tail))
+	if (!((*lst)->head))
 	{
 		(*lst)->head = new;
 		(*lst)->tail = new;
 	}
 	else
 	{
-		(*lst)->tail->next = new;
-		new->prev = (*lst)->tail;
+		(*lst)->head->prev = new;
+		new->next = (*lst)->head;
+		(*lst)->head = new;
 	}
 	(*lst)->len++;
 }

@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/16 13:45:58 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/08 16:41:56 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 10:08:35 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -42,9 +42,9 @@ int	start_processus(t_cor *cor, t_node *proc)
 		i_sti(proc, cor->vm);
 	else if (proc->op.opcode == 12)
 	{
+		proc->exec = 0;
 		i_fork(proc, cor);
 		proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
-		proc->exec = 0;
 		return (1);
 	}
 	else if (proc->op.opcode == 13)
@@ -55,11 +55,12 @@ int	start_processus(t_cor *cor, t_node *proc)
 		i_aff(proc, cor->vm);
 	proc->pc = (proc->pc + proc->op_size) % MEM_SIZE;
 	proc->exec = 0;
+	proc->op.opcode = 0;
 	return (0);
 }
 
-void	load_processus(int start, t_node *proc)
+void	load_processus(int start, t_node *proc, int i)
 {
-	proc->exec = start + proc->op.nb_cycles;
+	proc->exec = (start - i) + proc->op.nb_cycles;
 	//ft_printf("Instruction %s will be proceed at cycle %d\n", proc->op.name, proc->exec);
 }

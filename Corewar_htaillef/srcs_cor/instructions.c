@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/11 13:33:40 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/13 17:19:51 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 11:19:49 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -74,7 +74,7 @@ int		get_param_value(t_vm *vm, t_node *proc, int param[2], int mod)
 	else if (param[1] == IND_CODE)
 	{
 		if (mod)
-			addr = (proc->pc + param[0]) % (proc->pc_b + IDX_MOD);
+			addr = (proc->pc + (param[0] % IDX_MOD));
 		else 
 			addr = (proc->pc + param[0]) % MEM_SIZE;
 		addr = addr < 0 ? (MEM_SIZE -(-addr)) % MEM_SIZE : addr % MEM_SIZE;
@@ -140,7 +140,7 @@ void	i_sti(t_node *proc, t_vm *vm)
 	p1 = get_param_value(vm, proc, proc->param[1], 1);
 	p2 = get_param_value(vm, proc, proc->param[2], 1);
 	p3 = get_param_value(vm, proc, proc->param[0], 1);
-	addr = (proc->pc + p1 + p2);
+	addr = proc->pc + ((p1 + p2) % IDX_MOD);
 	write_uint(vm, p3, addr, REG_SIZE);
 	if (vm->verbose & V_OP)
 	{
@@ -170,7 +170,7 @@ void	i_zjmp(t_node *proc, t_vm *vm)
 	else 
 	{
 		if (vm->verbose & V_OP)
-			ft_printf(&(vm->logs), "P% 5d | zjmp %d FAILED\n", proc->num, p1 % (proc->pc_b + MEM_SIZE));
+			ft_printf(&(vm->logs), "P% 5d | zjmp %d FAILED\n", proc->num, p1);
 		if (vm->verbose & V_ADV)
 			adv(vm, proc->pc, proc->op_size);
 	}
@@ -193,7 +193,7 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
-	addr = proc->pc + (((p1 % IDX_MOD) + p2) % IDX_MOD);
+	addr = proc->pc + ((p1 + p2) % IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	//addr %= MEM_SIZE;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
@@ -223,7 +223,7 @@ void	i_lldi(t_node *proc, t_vm *vm)
 	}
 	p1 = get_param_value(vm, proc, proc->param[0], 0);
 	p2 = get_param_value(vm, proc, proc->param[1], 0);
-	addr = (proc->pc + p1 + p2) % MEM_SIZE;
+	addr = proc->pc + (p1 + p2) % MEM_SIZE;
 	// addr = addr < 0 ? MEM_SIZE -(-addr) : addr;
 	//addr %= MEM_SIZE;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
@@ -231,7 +231,7 @@ void	i_lldi(t_node *proc, t_vm *vm)
 	if (vm->verbose & V_OP)
 	{
 		ft_printf(&(vm->logs), "P% 5d | lldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
-		ft_printf(&(vm->logs), "       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+		ft_printf(&(vm->logs), "       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, p1 + p2);
 	}
 	if (vm->verbose & V_ADV)
 		adv(vm, proc->pc, proc->op_size);
@@ -462,7 +462,7 @@ void	i_fork(t_node *proc, t_cor *cor)
 	p1 = get_param_value(cor->vm, proc, proc->param[0], 1);
 	if (!(child = clone_proc(proc)))
 		return ;
-	child->pc = proc->pc + p1 % (proc->pc_b + IDX_MOD);
+	child->pc = (proc->pc + (p1 % IDX_MOD)) % MEM_SIZE;
 	child->pc_b = child->pc;
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->nb;
@@ -486,7 +486,7 @@ void	i_lfork(t_node *proc, t_cor *cor)
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->nb;
 	if (cor->vm->verbose & V_OP)
-		ft_printf(&(cor->vm->logs), "P% 5d | lfork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf(&(cor->vm->logs), "P% 5d | lfork %d (%d)\n", proc->num, p1, proc->pc + p1);
 	if (cor->vm->verbose & V_ADV)
 		adv(cor->vm, proc->pc, proc->op_size);
 }
