@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/18 14:52:46 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 16:00:54 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -114,18 +114,19 @@ void			add_element_end(t_list2 **lst, t_cor *c, t_chmp *chmp, int i);
 t_node			*clone_proc(t_node *parent);
 void			push_back(t_list2 **lst, t_node *proc);
 void			push_front(t_list2 **lst, t_node *proc);
+void			rm_element(t_list2 **lst, t_node *proc);
 
 
 /*
 ** error
 */
-void				ft_exit(t_logs *logs, int error, char *s);
+void				ft_exit(t_logs *logs, int error, char *s, t_cor *c);
 
 /*
 ** init
 */
 t_cor	*init_cor(char **av, int ac);
-void				init_vm(t_vm *vm);
+void				init_vm(t_cor *c, t_vm *vm);
 void				init_map(t_cor *c);
 void				init_proc(t_cor *c, t_list2 *proc);
 void				init_num_chmp(t_cor *c, int i);
@@ -139,7 +140,7 @@ void		ft_print_winner(t_cor *c);
 /*
 **parse
 */
-int					check_parse(t_vm *vm, char **av, int ac);
+int					check_parse(t_cor *c, t_vm *vm, char **av, int ac);
 
 /*
 ** read_infos
@@ -147,6 +148,12 @@ int					check_parse(t_vm *vm, char **av, int ac);
 void		read_infos(t_cor *c);
 int	little_endian(int value);
 int    read_next_uint(t_vm *vm, int index, int bytes_len);
+
+
+/*
+** CTD
+*/
+int     cycle_to_die(t_cor *c, int cycle);
 
 
 /*
@@ -161,7 +168,7 @@ int     check_processus(t_vm *vm, t_node *proc);
 /*
 ** processus
 */
-int		start_processus(t_cor *cor, t_node *proc);
+void		start_processus(t_cor *cor, t_node *proc);
 void	load_processus(int start, t_node *proc, int i);
 
 /*

@@ -6,18 +6,14 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:32:47 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/07 13:09:23 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/22 16:02:30 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-/*
-** Convertie le Big Endian - Little Endian
-*/
-
-int	little_endian(int value)
+int			little_endian(int value)
 {
 	return ((value & 0x000000FF) << 24 | (value & 0x0000FF00) << 8 |
 	(value & 0xFF000000) >> 24 | (value & 0x00FF0000) >> 8);
@@ -25,9 +21,9 @@ int	little_endian(int value)
 
 void		read_infos(t_cor *c)
 {
-	t_header *h;
-	int fd;
-	int i;
+	t_header	*h;
+	int			fd;
+	int			i;
 
 	i = -1;
 	while (++i < c->vm->nb_player)
@@ -39,7 +35,7 @@ void		read_infos(t_cor *c)
 		c->chmp[i]->name = ft_strdup(h->prog_name);
 		c->chmp[i]->comment = ft_strdup(h->comment);
 		if ((c->chmp[i]->champ_size = little_endian(h->prog_size)) > 682)
-			ft_exit(&(c->vm->logs), 3, c->chmp[i]->name);
+			ft_exit(&(c->vm->logs), 3, c->chmp[i]->name, c);
 		c->chmp[i]->infos = ft_strnew(c->chmp[i]->champ_size);
 		read(fd, c->chmp[i]->infos, c->chmp[i]->champ_size);
 		close(fd);
