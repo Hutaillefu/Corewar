@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 15:18:30 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 20:29:52 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -61,6 +61,7 @@ void		print_map(t_cor *c, int octet)
 
 	i = -1;
 	j = 0;
+
 	ft_printf(&(c->vm->logs), "0x0000 :");
 	while (++i < MEM_SIZE)
 	{
