@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:52:54 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/02/15 13:41:01 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 09:49:13 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,7 +45,7 @@
 # define NBR_LIVE 21
 # define MAX_CHECKS 10
 
-typedef char t_arg_type;
+typedef char	t_arg_type;
 
 # define T_REG 1
 # define T_DIR 2
@@ -65,4 +65,3 @@ typedef struct		s_header
 }					t_header;
 
 #endif
-

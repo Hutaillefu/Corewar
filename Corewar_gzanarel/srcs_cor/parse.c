@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 19:14:24 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 10:02:11 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -82,6 +82,8 @@ int			check_parse(t_cor *c, t_vm *vm, char **av, int ac)
 			check_verb(c, vm, av[++i]);
 		else if (!ft_strcmp(av[i], "-a"))
 			vm->aff = 1;
+		else if (!ft_strcmp(av[i], "-m"))
+			vm->map_color = 1;
 		else if ((len = ft_strlen(av[i])) > 4)
 			check_files(c, vm, av[i], len);
 		else

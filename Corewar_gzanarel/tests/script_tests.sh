@@ -12,6 +12,8 @@ fi
 
 for corfile in chmps/*.cor; do
 
+    for corfile_2 in chmps/*.cor; do
+
         if [ $# -ge 1 ] && [ $# -le 2 ]; then
             
             if [ -f $1 ]; then
@@ -26,13 +28,13 @@ for corfile in chmps/*.cor; do
             if [ $# -ge 2 ]; then
                 
                 if [ -f $2 ]; then
-                    # if [ $stop = "1" ]; then
-                        # echo "Usage: ./tester.sh *.cor X [1 - 31]"
-                        # break
-                    # else
+                    if [ $stop = "1" ]; then
+                        echo "Usage: ./tester.sh *.cor X [1 - 31]"
+                        break
+                    else
                         corfile_2="$2"
                         stop="1"
-                    # fi
+                    fi
                 
                 elif [ $# == 2 ] && [ $2 = "-d" ]; then
                     cycle="1000"
@@ -99,4 +101,5 @@ for corfile in chmps/*.cor; do
         if [ $stop = "1" ]; then
             break
         fi
+    done
 done

@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 21:11:26 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 10:03:35 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -30,50 +30,49 @@ void		ft_print_winner(t_cor *c)
 			win = j;
 		}
 	}
-	ft_printf(&(c->vm->logs), "Contestant %d, \"%s\", has won !\n", win + 1, c->chmp[win]->name);
+	ft_printf(&(c->vm->logs), "Contestant %d, \"%s\", has won !\n",
+	win + 1, c->chmp[win]->name);
 }
 
+static void	print_map_color(t_cor *c, int i)
+{
+	t_node		*tmp;
+	short int	draw;
 
-void	print_map(t_cor *c, int octet)
+	if (c->vm->map_color)
+	{
+		draw = 0;
+		tmp = c->proc->head;
+		while (tmp)
+		{
+			if (tmp->pc == i)
+				draw = 1;
+			tmp = tmp->next;
+		}
+		if (!draw)
+			ft_printf(&(c->vm->logs), "%3.2x", c->vm->area[i]);
+		else
+			ft_printf(&(c->vm->logs), "\033[31;01m%3.2x\033[00m",
+			c->vm->area[i]);
+	}
+	else
+		ft_printf(&(c->vm->logs), "%3.2x", c->vm->area[i]);
+}
+
+void		print_map(t_cor *c, int octet)
 {
 	int i;
 	int j;
-	int draw;
-	t_node *tmp;
 
 	i = -1;
 	j = 0;
-
-	// ft_printf("nb_proc: %d\n", c->proc->len);
-	// tmp = c->proc->head;
-	// while (tmp)
-	// {
-	// 	ft_printf("proc: %d\n", tmp->num);
-	// 	tmp = tmp->next;
-	// }
-	// printf("NB Procs: %d\n", c->proc->len);
-
 	ft_printf(&(c->vm->logs), "0x0000 :");
-	tmp = c->proc->head;
 	while (++i < MEM_SIZE)
 	{
 		if (i != 0 && j == 0)
 			ft_printf(&(c->vm->logs), "%#06x :", i);
 		++j;
-		draw = 0;
-		tmp = c->proc->head;
-		// while (tmp)
-		// {
-		// 	if (tmp->pc == i)
-		// 	{
-		// 		ft_printf(&(c->vm->logs), "\033[31;01m%3.2x\033[00m", c->vm->area[i]);
-		// 		draw = 1;
-		// 		break;
-		// 	}
-		// 	tmp = tmp->next;
-		// }
-		if (!draw)
-			ft_printf(&(c->vm->logs), "%3.2x", c->vm->area[i]);
+		print_map_color(c, i);
 		if (j == octet)
 		{
 			j = 0;
