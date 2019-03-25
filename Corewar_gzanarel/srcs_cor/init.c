@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 21:06:30 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 15:29:56 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -69,6 +69,7 @@ void	init_proc(t_cor *c, t_list2 *proc)
 		add_element_end(&(proc), c, c->chmp[i], i);
 	}
 	proc->nb = c->vm->nb_player;
+	c->vm->chmp_win_num = -c->proc->head->num;
 }
 
 void	init_vm(t_cor *c, t_vm *vm)
