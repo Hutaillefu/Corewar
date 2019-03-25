@@ -31,7 +31,7 @@ for corfile in chmps/*.cor; do
                 
                 if [ -f $2 ]; then
                     corfile_2="$2"
-                    stop="1"
+                    stop="2"
                 
                 elif [ $# == 2 ] && [ $2 = "-d" ]; then
                     cycle="1000"
@@ -93,11 +93,11 @@ for corfile in chmps/*.cor; do
         
         done
         
-        if [ $stop = "1" ]; then
+        if [ $stop = "2" ]; then
             break
         fi
     done
-    if [ $stop = "1" ]; then
+    if [ $stop = "1" ] || [ $stop = "2" ]; then
         break
     fi
 done

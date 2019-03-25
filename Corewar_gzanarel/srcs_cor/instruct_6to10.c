@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 20:34:07 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 11:17:31 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 15:22:26 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -131,11 +131,12 @@ void	i_ldi(t_node *proc, t_vm *vm)
 	p2 = get_param_value(vm, proc, proc->param[1], 1);
 	addr = proc->pc + ((p1 + p2) % IDX_MOD);
 	addr = addr < 0 ? MEM_SIZE - (-addr) : addr;
+	addr %= MEM_SIZE;
 	proc->reg[proc->param[2][0] - 1] = read_next_uint(vm, addr, REG_SIZE);
 	if (vm->verbose & V_OP)
 	{
 		ft_printf(&(vm->logs), "P% 5d | ldi %d %d r%d\n", proc->num, p1, p2, proc->param[2][0]);
-		ft_printf(&(vm->logs), "       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, addr);
+		ft_printf(&(vm->logs), "       | -> load from %d + %d = %d (with pc and mod %d)\n", p1, p2, p1 + p2, proc->pc + ((p1 + p2) % IDX_MOD));
 	}
 	if (vm->verbose & V_ADV)
 		adv(vm, proc->pc, proc->op_size);

@@ -1,4 +1,2141 @@
-91393c91393
-< Contestant 2, "Celebration Funebre v0.99pl42", has won !
+74886a74887
+> ADV 5 (0x0f65 -> 0x0f6a) 08 54 03 03 00 
+74902d74902
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+75524a75525,75527
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+75545,75547d75547
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+75660a75661,75663
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 4063)
+> ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+75678,75680d75680
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 4063)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+75776c75776,75777
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
 ---
-> Contestant 1, "Celebration Funebre v0.99pl42", has won !
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+75786a75788,75790
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3901)
+> ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+75803,75805d75806
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3901)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+75817d75817
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+75840a75841,75842
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+75855,75857d75856
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+75881a75881,75882
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+75887a75889
+> P    4 | zjmp -37 OK
+75901,75902d75902
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+75907d75906
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+75936a75936,75938
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+75977a75980
+> P    1 | zjmp 13 OK
+75994d75996
+< P    1 | zjmp 13 OK
+76006a76009,76010
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+76028,76029d76031
+< P    1 | xor 0 0 r3
+< ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+76065a76068,76070
+> P    4 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3905)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+76105a76111
+> P    1 | zjmp -207 OK
+76128d76133
+< P    1 | zjmp -207 OK
+76153a76159,76161
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+76176,76178d76183
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+76193a76199,76201
+> P    4 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3743)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+76239a76248,76249
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+76266a76277,76278
+> P    4 | xor 48 8 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+76286a76299,76301
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+76302,76304d76316
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+< ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+76369a76382,76383
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+76394a76409,76410
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+76408a76425,76427
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+76426,76428d76444
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+< ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+76459a76476,76477
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+76483,76484d76500
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+76497a76514,76516
+> P    4 | zjmp -37 OK
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+76514,76515d76532
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+76531,76533d76547
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+76550a76565,76567
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+76593a76611
+> P    1 | zjmp 13 OK
+76613d76630
+< P    1 | zjmp 13 OK
+76632a76650,76651
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0f65 -> 0x0f6a) 08 54 03 03 03 
+76661,76663d76679
+< P    4 | ldi -5 4 r1
+<        | -> load from -5 + 4 = -1 (with pc and mod 4067)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+76667d76682
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+76682a76698,76700
+> P    4 | ldi -5 8 r1
+>        | -> load from -5 + 8 = 3 (with pc and mod 3909)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+76705d76722
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+76734a76752
+> P    1 | zjmp -207 OK
+76784,76786d76801
+< P    4 | sti r1 -173 4
+<        | -> store to -173 + 4 = -169 (with pc and mod 3905)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+76788a76804,76806
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+76813a76832,76834
+> P    4 | sti r1 -173 8
+>        | -> store to -173 + 8 = -165 (with pc and mod 3747)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+76839,76840d76859
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+76857a76877,76878
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+76869,76870d76889
+< P    4 | xor 48 8 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+76888a76908,76909
+> P    4 | xor 48 12 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+76915a76937,76939
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3739)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+76972,76973d76995
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+76989a77012,77013
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+76997,76998d77020
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+77012a77035,77036
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+77045a77070
+> ADV 2 (0x0ea6 -> 0x0ea8) 0b 00 
+77094d77118
+< P    4 | zjmp -37 OK
+77116a77141
+> P    4 | zjmp -37 OK
+77151,77153d77175
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+77164a77187,77189
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+77274,77276d77298
+< P    4 | ldi -5 8 r1
+<        | -> load from -5 + 8 = 3 (with pc and mod 4071)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+77291a77314,77316
+> P    4 | ldi -5 12 r1
+>        | -> load from -5 + 12 = 7 (with pc and mod 3913)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+77323,77325d77347
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+77401,77403d77422
+< P    4 | sti r1 -173 8
+<        | -> store to -173 + 8 = -165 (with pc and mod 3909)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+77424a77444,77446
+> P    4 | sti r1 -173 12
+>        | -> store to -173 + 12 = -161 (with pc and mod 3751)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+77458,77459d77479
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+77465,77467d77484
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 4063)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+77478a77496,77497
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+77492,77493d77510
+< P    4 | xor 48 12 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+77509a77527,77528
+> P    4 | xor 48 16 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+77590,77594d77608
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3901)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+77610a77625,77626
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+77619,77620d77634
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+77634a77649,77650
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+77644,77645d77659
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+77675,77676d77688
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+77718d77729
+< P    4 | zjmp -37 OK
+77742a77754
+> P    4 | zjmp -37 OK
+77780,77782d77791
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+77784d77792
+< P    1 | zjmp 13 OK
+77794a77803,77805
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+77807,77808d77817
+< P    1 | xor 0 0 r3
+< ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+77860a77870,77872
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+77905,77907d77916
+< P    4 | ldi -5 12 r1
+<        | -> load from -5 + 12 = 7 (with pc and mod 4075)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+77913d77921
+< P    1 | zjmp -207 OK
+77924a77933,77935
+> P    4 | ldi -5 16 r1
+>        | -> load from -5 + 16 = 11 (with pc and mod 3917)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+77961,77963d77971
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+77994a78003,78005
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+78028,78030d78038
+< P    4 | sti r1 -173 12
+<        | -> store to -173 + 12 = -161 (with pc and mod 3913)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+78054a78063,78065
+> P    4 | sti r1 -173 16
+>        | -> store to -173 + 16 = -157 (with pc and mod 3755)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+78088,78089d78098
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+78101,78103d78109
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+< ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+78108a78115,78116
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+78122,78123d78129
+< P    4 | xor 48 16 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+78127a78134,78136
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+78139a78149,78150
+> P    4 | xor 48 20 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+78176a78188,78189
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+78212a78226,78227
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+78223,78224d78237
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+78233,78235d78245
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+< ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+78242a78253,78254
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+78251,78252d78262
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+78266a78277,78278
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+78279,78280d78290
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+78309,78310c78319
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+---
+> P    1 | zjmp 13 OK
+78340a78350,78351
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0f65 -> 0x0f6a) 08 54 03 03 03 
+78349d78359
+< P    4 | zjmp -37 OK
+78373a78384
+> P    4 | zjmp -37 OK
+78411,78413d78421
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+78419d78426
+< P    1 | zjmp 13 OK
+78426a78434,78436
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+78447a78458
+> P    1 | zjmp -207 OK
+78461d78471
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+78496a78507,78509
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+78502d78514
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+78541,78543d78552
+< P    4 | ldi -5 16 r1
+<        | -> load from -5 + 16 = 11 (with pc and mod 4079)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+78561a78571,78573
+> P    4 | ldi -5 20 r1
+>        | -> load from -5 + 20 = 15 (with pc and mod 3921)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+78625a78638,78640
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3739)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+78656,78658d78670
+< P    4 | sti r1 -173 16
+<        | -> store to -173 + 16 = -157 (with pc and mod 3917)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+78682a78695,78697
+> P    4 | sti r1 -173 20
+>        | -> store to -173 + 20 = -153 (with pc and mod 3759)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+78716,78717d78730
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+78732a78746,78747
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+78741,78742d78755
+< P    4 | xor 48 20 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+78757a78771,78773
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3577)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+78763a78780,78781
+> P    4 | xor 48 24 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+78806a78825,78826
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+78840a78861
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 00 00 00 
+78846,78847d78866
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+78866a78886,78887
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+78872,78873d78892
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+78890a78910,78911
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+78968d78988
+< P    4 | zjmp -37 OK
+78992a79013
+> P    4 | zjmp -37 OK
+79025,79027d79045
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+79041a79060,79062
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+79133,79135d79153
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+79154,79156d79171
+< P    4 | ldi -5 20 r1
+<        | -> load from -5 + 20 = 15 (with pc and mod 4083)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+79177a79193,79195
+> P    4 | ldi -5 24 r1
+>        | -> load from -5 + 24 = 19 (with pc and mod 3925)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+79264,79266d79281
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 4063)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+79281,79283d79295
+< P    4 | sti r1 -173 20
+<        | -> store to -173 + 20 = -153 (with pc and mod 3921)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+79307a79320,79322
+> P    4 | sti r1 -173 24
+>        | -> store to -173 + 24 = -149 (with pc and mod 3763)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+79338,79339d79352
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+79355a79369,79370
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+79364,79365d79378
+< P    4 | xor 48 24 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+79384a79398,79399
+> P    4 | xor 48 28 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+79395,79397d79409
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3901)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+79446,79447d79457
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+79471,79472d79480
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+79485,79486d79492
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+79493a79500,79501
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+79499,79500d79506
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+79517a79524,79525
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+79581d79588
+< P    1 | zjmp 13 OK
+79585a79593,79595
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+79598d79607
+< P    4 | zjmp -37 OK
+79617,79618d79625
+< P    1 | xor 0 0 r3
+< ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+79624a79632
+> P    4 | zjmp -37 OK
+79659,79661d79666
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+79675a79681,79683
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+79713c79721,79723
+< P    1 | zjmp -207 OK
+---
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+79766,79768d79775
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+79784,79786d79790
+< P    4 | ldi -5 24 r1
+<        | -> load from -5 + 24 = 19 (with pc and mod 4087)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+79807a79812,79814
+> P    4 | ldi -5 28 r1
+>        | -> load from -5 + 28 = 23 (with pc and mod 3929)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+79846a79854,79856
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+79895,79897c79905,79906
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+< ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+---
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+79911,79913d79919
+< P    4 | sti r1 -173 24
+<        | -> store to -173 + 24 = -149 (with pc and mod 3925)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+79931a79938,79939
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+79937a79946,79948
+> P    4 | sti r1 -173 28
+>        | -> store to -173 + 28 = -145 (with pc and mod 3767)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+79971,79972d79981
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+79988a79998,79999
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+80000,80001d80010
+< P    4 | xor 48 28 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+80019a80029,80030
+> P    4 | xor 48 32 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+80031,80033d80041
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+< ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+80035a80044
+> P    1 | zjmp 13 OK
+80066a80076,80077
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0f65 -> 0x0f6a) 08 54 03 03 03 
+80085,80086d80095
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+80105,80106d80113
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+80120,80121d80126
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+80124a80130,80131
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+80130,80131d80136
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+80149a80155,80156
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+80170a80178
+> P    1 | zjmp -207 OK
+80218d80225
+< P    1 | zjmp 13 OK
+80222a80230,80232
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+80231d80240
+< P    4 | zjmp -37 OK
+80255a80265
+> P    4 | zjmp -37 OK
+80277d80286
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+80291,80293d80299
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+80306a80313,80315
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+80310d80318
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+80351a80360,80362
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3739)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+80417,80419d80427
+< P    4 | ldi -5 28 r1
+<        | -> load from -5 + 28 = 23 (with pc and mod 4091)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+80437a80446,80448
+> P    4 | ldi -5 32 r1
+>        | -> load from -5 + 32 = 27 (with pc and mod 3933)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+80477a80489,80491
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3577)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+80524a80539,80540
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+80535,80537d80550
+< P    4 | sti r1 -173 28
+<        | -> store to -173 + 28 = -145 (with pc and mod 3929)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+80561a80575,80577
+> P    4 | sti r1 -173 32
+>        | -> store to -173 + 32 = -141 (with pc and mod 3771)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+80564a80581,80582
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+80594,80595d80611
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+80611a80628,80629
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+80623,80624d80640
+< P    4 | xor 48 32 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+80642a80659,80660
+> P    4 | xor 48 36 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+80662a80681
+> P    1 | zjmp 13 OK
+80726,80727d80744
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+80743a80761,80762
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+80749,80750d80767
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+80767a80785,80786
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+80843d80861
+< P    4 | zjmp -37 OK
+80870a80889
+> P    4 | zjmp -37 OK
+80902,80904d80920
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+80921a80938,80940
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+80929,80931d80947
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+81034,81036d81049
+< P    4 | ldi -5 32 r1
+<        | -> load from -5 + 32 = 27 (with pc and mod 4095)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+81054a81068,81070
+> P    4 | ldi -5 36 r1
+>        | -> load from -5 + 36 = 31 (with pc and mod 3937)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81060,81062d81075
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 4063)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+81154,81156d81166
+< P    4 | sti r1 -173 32
+<        | -> store to -173 + 32 = -141 (with pc and mod 3933)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+81181a81192,81194
+> P    4 | sti r1 -173 36
+>        | -> store to -173 + 36 = -137 (with pc and mod 3775)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81190,81192d81202
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3901)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+81215,81216d81224
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+81230c81238,81239
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
+---
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+81234a81244,81245
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81243,81246d81253
+< P    4 | xor 48 36 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+81264a81272,81273
+> P    4 | xor 48 40 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+81270d81278
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+81277,81278d81284
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+81314d81319
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+81329c81334,81335
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
+---
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+81332c81338,81340
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
+---
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+81347a81356,81358
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81350,81351d81360
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+81356d81364
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+81368a81377,81378
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+81372,81373d81381
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+81376,81377d81383
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+81382d81387
+< P    1 | zjmp 13 OK
+81386a81392,81394
+> P    7 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81395a81404,81405
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+81411,81412d81420
+< P    1 | xor 0 0 r3
+< ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+81414d81421
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+81417d81423
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+81432a81439
+> P   28 | zjmp -37 OK
+81433a81441
+> P   16 | zjmp -37 OK
+81455,81456d81462
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+81471a81478,81480
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81477d81485
+< P    4 | zjmp -37 OK
+81481a81490,81492
+> P   28 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81484a81496,81498
+> P   16 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81495a81510
+> P    4 | zjmp -37 OK
+81512c81527,81529
+< P    1 | zjmp -207 OK
+---
+> P    7 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3905)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81525,81527d81541
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+81542a81557,81559
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81553,81555d81569
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81590a81605,81607
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81598a81616,81618
+> P   28 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3905)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81601a81622,81624
+> P   16 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3905)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81626a81650,81652
+> P    7 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3743)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81637a81664,81665
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81647,81649d81674
+< P    4 | ldi -5 36 r1
+<        | -> load from -5 + 36 = 31 (with pc and mod 4099)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+81667a81693,81695
+> P    4 | ldi -5 40 r1
+>        | -> load from -5 + 40 = 35 (with pc and mod 3941)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81671a81700,81701
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+81675a81706,81707
+> P    7 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81679,81681d81710
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+< ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+81709a81739,81740
+> P    7 | xor 48 8 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+81719a81751,81753
+> P   28 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3743)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81722a81757,81759
+> P   16 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3743)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81761,81763d81797
+< P    4 | sti r1 -173 36
+<        | -> store to -173 + 36 = -137 (with pc and mod 3937)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+81765a81800
+> P    1 | zjmp 13 OK
+81770a81806,81807
+> P   28 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81772a81810,81811
+> P   16 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81786a81826,81828
+> P    4 | sti r1 -173 40
+>        | -> store to -173 + 40 = -133 (with pc and mod 3779)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81794a81837,81838
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0f65 -> 0x0f6a) 08 54 03 03 03 
+81797,81799d81840
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+< ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+81800a81842,81843
+> P   28 | xor 48 8 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+81806a81850,81853
+> P   16 | xor 48 8 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+> P    7 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+81814,81815d81860
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+81828a81874,81875
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+81829a81877,81878
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81838,81839d81886
+< P    4 | xor 48 40 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+81846,81847d81892
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+81859a81905,81906
+> P    4 | xor 48 44 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+81873,81874d81919
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+81892a81938
+> P    1 | zjmp -207 OK
+81894a81941,81942
+> P   28 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+81896a81945,81946
+> P   16 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+81919a81970,81971
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+81921a81974,81976
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+81936,81937c81991,81993
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+---
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+81952,81954d82007
+< P    7 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+81956a82010,82011
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+81962,81963d82016
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+81975c82028,82030
+< P    1 | zjmp 13 OK
+---
+> P    7 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+81980a82036,82037
+> P    4 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+82016d82072
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+82017a82074
+> P   28 | zjmp -37 OK
+82018a82076
+> P   16 | zjmp -37 OK
+82043,82045d82100
+< P   28 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82052,82054d82106
+< P   16 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82058d82109
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+82064c82115,82117
+< P    4 | zjmp -37 OK
+---
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3739)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+82071a82125,82127
+> P   28 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+82074a82131,82133
+> P   16 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+82083,82085d82141
+< P    7 | ldi -5 4 r1
+<        | -> load from -5 + 4 = -1 (with pc and mod 4067)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82088a82145
+> P    4 | zjmp -37 OK
+82104a82162,82164
+> P    7 | ldi -5 8 r1
+>        | -> load from -5 + 8 = 3 (with pc and mod 3909)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+82117,82119d82176
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82135a82193,82195
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+82169,82171d82228
+< P   28 | ldi -5 4 r1
+<        | -> load from -5 + 4 = -1 (with pc and mod 4067)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82180,82182d82236
+< P   16 | ldi -5 4 r1
+<        | -> load from -5 + 4 = -1 (with pc and mod 4067)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82187a82242,82244
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3577)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+82191a82249,82251
+> P   28 | ldi -5 8 r1
+>        | -> load from -5 + 8 = 3 (with pc and mod 3909)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+82194a82255,82257
+> P   16 | ldi -5 8 r1
+>        | -> load from -5 + 8 = 3 (with pc and mod 3909)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+82199,82201d82261
+< P    7 | sti r1 -173 4
+<        | -> store to -173 + 4 = -169 (with pc and mod 3905)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+82222a82283,82285
+> P    7 | sti r1 -173 8
+>        | -> store to -173 + 8 = -165 (with pc and mod 3747)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82240,82242d82302
+< P    4 | ldi -5 40 r1
+<        | -> load from -5 + 40 = 35 (with pc and mod 4103)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82244a82305,82306
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+82252,82253d82313
+< P    7 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+82262a82323,82325
+> P    4 | ldi -5 44 r1
+>        | -> load from -5 + 44 = 39 (with pc and mod 3945)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+82270a82334,82335
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+82273a82339,82340
+> P    7 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+82284,82285d82350
+< P    7 | xor 48 8 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+82296,82298d82360
+< P   28 | sti r1 -173 4
+<        | -> store to -173 + 4 = -169 (with pc and mod 3905)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+82304,82306c82366,82367
+< P   16 | sti r1 -173 4
+<        | -> store to -173 + 4 = -169 (with pc and mod 3905)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+---
+> P    7 | xor 48 12 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+82322a82384,82386
+> P   28 | sti r1 -173 8
+>        | -> store to -173 + 8 = -165 (with pc and mod 3747)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82325a82390,82392
+> P   16 | sti r1 -173 8
+>        | -> store to -173 + 8 = -165 (with pc and mod 3747)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82349,82352d82415
+< P   28 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+< P   16 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+82365,82367d82427
+< P    4 | sti r1 -173 40
+<        | -> store to -173 + 40 = -133 (with pc and mod 3941)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+82376a82437
+> P    1 | zjmp 13 OK
+82377a82439,82440
+> P   28 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+82379a82443,82444
+> P   16 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+82387,82388d82451
+< P   28 | xor 48 8 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+82393,82396c82456,82458
+< P   16 | xor 48 8 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+< P    7 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+---
+> P    4 | sti r1 -173 44
+>        | -> store to -173 + 44 = -129 (with pc and mod 3783)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82406a82469,82470
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0ec3 -> 0x0ec8) 08 54 03 03 03 
+82407a82472,82473
+> P   28 | xor 48 12 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+82410a82477,82480
+> P   16 | xor 48 12 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+> P    7 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+82420,82421d82489
+< P    7 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+82423,82424d82490
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+82437a82504,82505
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+82441a82510,82511
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+82450,82451d82519
+< P    4 | xor 48 44 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+82469a82538,82539
+> P    4 | xor 48 48 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+82486,82487d82555
+< P   28 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+82490,82491d82557
+< P   16 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+82507a82574
+> P    1 | zjmp -207 OK
+82508a82576,82577
+> P   28 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+82510a82580,82581
+> P   16 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+82515,82516d82585
+< P   28 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+82519,82521d82587
+< P   16 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+< P    7 | zjmp -37 OK
+82535a82602,82603
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+82537a82606,82608
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+82552,82553d82622
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+82557a82627,82628
+> P    1 | live -256
+> ADV 5 (0x0df9 -> 0x0dfe) 01 ff ff ff 00 
+82568,82570d82638
+< P    7 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82572a82641
+> P    4 | zjmp 13 OK
+82578,82579d82646
+< P    4 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+82588a82656,82658
+> P    7 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+82600a82671,82672
+> P    4 | xor 48 48 r3
+> ADV 5 (0x0f65 -> 0x0f6a) 08 54 03 03 03 
+82609d82680
+< P   28 | zjmp -37 OK
+82612d82682
+< P   16 | zjmp -37 OK
+82632a82703
+> P   28 | zjmp -37 OK
+82633a82705
+> P   16 | zjmp -37 OK
+82658,82660d82729
+< P   28 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82667,82669d82735
+< P   16 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82678d82743
+< P    4 | zjmp -37 OK
+82685,82687d82749
+< P    1 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82688a82751,82753
+> P   28 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+82691a82757,82759
+> P   16 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+82700,82702d82767
+< P    7 | ldi -5 8 r1
+<        | -> load from -5 + 8 = 3 (with pc and mod 4071)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82711a82777
+> P    4 | zjmp -207 OK
+82721a82788,82790
+> P    7 | ldi -5 12 r1
+>        | -> load from -5 + 12 = 7 (with pc and mod 3913)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+82734,82736d82802
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+82757a82824,82826
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+82791,82793d82859
+< P   28 | ldi -5 8 r1
+<        | -> load from -5 + 8 = 3 (with pc and mod 4071)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82802,82804d82867
+< P   16 | ldi -5 8 r1
+<        | -> load from -5 + 8 = 3 (with pc and mod 4071)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82813,82815d82875
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 4063)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82816a82877,82879
+> P   28 | ldi -5 12 r1
+>        | -> load from -5 + 12 = 7 (with pc and mod 3913)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+82820c82883,82886
+< It is now cycle 23929
+---
+> P   16 | ldi -5 12 r1
+>        | -> load from -5 + 12 = 7 (with pc and mod 3913)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+> It is now cycle 23929
+82824,82826d82889
+< P    7 | sti r1 -173 8
+<        | -> store to -173 + 8 = -165 (with pc and mod 3909)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+82848a82912,82914
+> P    7 | sti r1 -173 12
+>        | -> store to -173 + 12 = -161 (with pc and mod 3751)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82866,82868d82931
+< P    4 | ldi -5 44 r1
+<        | -> load from -5 + 44 = 39 (with pc and mod 4107)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+82878,82879d82940
+< P    7 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+82892a82954,82956
+> P    4 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3739)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+82896a82961,82962
+> P    7 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+82907,82908d82972
+< P    7 | xor 48 12 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+82919,82921d82982
+< P   28 | sti r1 -173 8
+<        | -> store to -173 + 8 = -165 (with pc and mod 3909)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+82927,82929c82988,82989
+< P   16 | sti r1 -173 8
+<        | -> store to -173 + 8 = -165 (with pc and mod 3909)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+---
+> P    7 | xor 48 16 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+82943,82945d83002
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3901)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+82946a83004,83006
+> P   28 | sti r1 -173 12
+>        | -> store to -173 + 12 = -161 (with pc and mod 3751)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82949a83010,83012
+> P   16 | sti r1 -173 12
+>        | -> store to -173 + 12 = -161 (with pc and mod 3751)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+82973,82976d83035
+< P   28 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+< P   16 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+82988,82990d83046
+< P    4 | sti r1 -173 44
+<        | -> store to -173 + 44 = -129 (with pc and mod 3945)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+83000,83001d83055
+< P    1 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+83002a83057,83058
+> P   28 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+83004a83061,83062
+> P   16 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+83009,83010d83066
+< P   28 | xor 48 12 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+83013,83016d83068
+< P   16 | xor 48 12 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+< P    7 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+83028a83081,83083
+> P    4 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3577)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+83032,83033d83086
+< P    1 | xor 0 0 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+83034a83088,83089
+> P   28 | xor 48 16 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+83037a83093,83096
+> P   16 | xor 48 16 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+> P    7 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+83047,83048d83105
+< P    7 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+83050,83051d83106
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+83064a83120,83121
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+83073a83131,83132
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+83077,83078d83135
+< P    4 | xor 48 48 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+83106a83164,83165
+> P    4 | xor 48 4 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+83113,83114d83171
+< P   28 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+83116,83117d83172
+< P   16 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+83135d83189
+< P    1 | zjmp 13 OK
+83136a83191,83192
+> P   28 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+83138a83195,83196
+> P   16 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+83140,83141d83197
+< P   28 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+83144,83146d83199
+< P   16 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+< P    7 | zjmp -37 OK
+83166a83220,83221
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+83169,83170c83224,83226
+< P    1 | xor 0 0 r3
+< ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+---
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+83185d83240
+< P    4 | zjmp 13 OK
+83200,83202d83254
+< P    7 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+83212a83265,83266
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0eb6 -> 0x0eb9) 09 00 0d 
+83217,83218d83270
+< P    4 | xor 48 48 r3
+< ADV 5 (0x0007 -> 0x000c) 08 54 03 03 03 
+83222a83275,83277
+> P    7 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+83234a83290,83291
+> P    4 | ld 0 r7
+> ADV 7 (0x0eb9 -> 0x0ec0) 02 90 00 00 00 00 07 
+83243d83299
+< P   28 | zjmp -37 OK
+83246d83301
+< P   16 | zjmp -37 OK
+83263a83319
+> P   28 | zjmp -37 OK
+83265c83321
+< P    1 | zjmp -207 OK
+---
+> P   16 | zjmp -37 OK
+83290,83292d83345
+< P   28 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+83296,83298d83348
+< P   16 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+83314d83363
+< P    4 | zjmp -207 OK
+83315a83365,83367
+> P   28 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+83319,83321c83371
+< P   14 | ld 0 r7
+< ADV 7 (0x0285 -> 0x028c) 02 90 00 00 00 00 07 
+< P    1 | live -2
+---
+> P   16 | live -2
+83323a83374,83375
+> P   14 | ld 0 r7
+> ADV 7 (0x0285 -> 0x028c) 02 90 00 00 00 00 07 
+83328,83330d83379
+< P    7 | ldi -5 12 r1
+<        | -> load from -5 + 12 = 7 (with pc and mod 4075)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+83341a83391
+> P    4 | zjmp -37 OK
+83351a83402,83404
+> P    7 | ldi -5 16 r1
+>        | -> load from -5 + 16 = 11 (with pc and mod 3917)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+83371,83373d83423
+< P    4 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+83387a83438,83440
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+83418a83472,83474
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+83420,83422d83475
+< P   28 | ldi -5 12 r1
+<        | -> load from -5 + 12 = 7 (with pc and mod 4075)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+83428,83430d83480
+< P   16 | ldi -5 12 r1
+<        | -> load from -5 + 12 = 7 (with pc and mod 4075)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+83441a83492,83494
+> P   28 | ldi -5 16 r1
+>        | -> load from -5 + 16 = 11 (with pc and mod 3917)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+83445,83446c83498,83499
+< P    1 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+---
+> P   16 | ldi -5 16 r1
+>        | -> load from -5 + 16 = 11 (with pc and mod 3917)
+83452,83454d83504
+< P    7 | sti r1 -173 12
+<        | -> store to -173 + 12 = -161 (with pc and mod 3913)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+83477a83528,83530
+> P    7 | sti r1 -173 16
+>        | -> store to -173 + 16 = -157 (with pc and mod 3755)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+83501,83503d83553
+< P    4 | ldi -5 0 r1
+<        | -> load from -5 + 0 = -5 (with pc and mod 3901)
+< ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+83507,83508d83556
+< P    7 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+83524a83573,83575
+> P    4 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3743)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+83528a83580,83581
+> P    7 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+83539,83540d83591
+< P    7 | xor 48 16 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+83549a83601,83603
+> P    1 | ldi -5 0 r1
+>        | -> load from -5 + 0 = -5 (with pc and mod 3739)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+83551,83553d83604
+< P   28 | sti r1 -173 12
+<        | -> store to -173 + 12 = -161 (with pc and mod 3913)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+83559,83561c83610,83611
+< P   16 | sti r1 -173 12
+<        | -> store to -173 + 12 = -161 (with pc and mod 3913)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+---
+> P    7 | xor 48 20 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+83577a83628,83630
+> P   28 | sti r1 -173 16
+>        | -> store to -173 + 16 = -157 (with pc and mod 3755)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+83580a83634,83636
+> P   16 | sti r1 -173 16
+>        | -> store to -173 + 16 = -157 (with pc and mod 3755)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+83583,83585d83638
+< P    1 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+< ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+83606,83609d83658
+< P   28 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+< P   16 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+83626,83628d83674
+< P    4 | sti r1 -173 0
+<        | -> store to -173 + 0 = -173 (with pc and mod 3739)
+< ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+83631a83678,83679
+> P   28 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+83634c83682
+< P    1 | add r3 r4 r3
+---
+> P   16 | add r3 r4 r3
+83640,83641d83687
+< P   28 | xor 48 16 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+83644,83647d83689
+< P   16 | xor 48 16 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+< P    7 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+83659a83702,83704
+> P    4 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3581)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+83663a83709,83710
+> P   28 | xor 48 20 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+83667c83714
+< P    1 | xor 0 0 r6
+---
+> P   16 | xor 48 20 r6
+83668a83716,83717
+> P    7 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+83678,83679d83726
+< P    7 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+83685,83686d83731
+< P    4 | add r3 r4 r3
+< ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+83689a83735,83737
+> P    1 | sti r1 -173 0
+>        | -> store to -173 + 0 = -173 (with pc and mod 3577)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+83693a83742,83743
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+83701a83752,83753
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+83711,83712d83762
+< P    4 | xor 48 4 r6
+< ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+83733a83784,83785
+> P    4 | xor 48 8 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+83738a83791,83792
+> P    1 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+83741,83742d83794
+< P   28 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+83744,83745d83795
+< P   16 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+83764a83815,83816
+> P   28 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+83767c83819,83822
+< P    1 | zjmp 13 OK
+---
+> P   16 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+> P    1 | xor 0 0 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+83769,83770d83823
+< P   28 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+83773,83775d83825
+< P   16 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+< P    7 | zjmp -37 OK
+83795a83846,83847
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+83797a83850,83852
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+83816,83818d83870
+< P    4 | zjmp 13 FAILED
+< ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+83829,83831d83880
+< P    7 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+83841a83891,83892
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0eb6 -> 0x0eb9) 09 00 0d 
+83846d83896
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
+83850a83901,83903
+> P    7 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+83856d83908
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+83862a83915,83916
+> P    4 | ld 0 r7
+> ADV 7 (0x0eb9 -> 0x0ec0) 02 90 00 00 00 00 07 
+83869a83924
+> P    1 | zjmp 13 OK
+83871d83925
+< P   28 | zjmp -37 OK
+83874d83927
+< P   16 | zjmp -37 OK
+83881d83933
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+83895a83948
+> P   28 | zjmp -37 OK
+83896a83950
+> P   16 | zjmp -37 OK
+83900a83955,83956
+> P    1 | xor 0 0 r3
+> ADV 5 (0x0ec3 -> 0x0ec8) 08 54 03 03 03 
+83920d83975
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+83922,83924d83976
+< P   28 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+83928,83930d83979
+< P   16 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+83948a83998,84000
+> P   28 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+83951a84004,84006
+> P   16 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+83958,83960d84012
+< P    7 | ldi -5 16 r1
+<        | -> load from -5 + 16 = 11 (with pc and mod 4079)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+83970c84022
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+---
+> P    4 | zjmp -37 OK
+83982a84035,84037
+> P    7 | ldi -5 20 r1
+>        | -> load from -5 + 20 = 15 (with pc and mod 3921)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84002a84058
+> P    1 | zjmp -207 OK
+84012a84069,84071
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+84043,84045d84101
+< P   28 | ldi -5 16 r1
+<        | -> load from -5 + 16 = 11 (with pc and mod 4079)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+84051,84053c84107,84109
+< P   16 | ldi -5 16 r1
+<        | -> load from -5 + 16 = 11 (with pc and mod 4079)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+---
+> P    1 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0df9 -> 0x0dfe) 01 ff ff ff fe 
+84065a84122,84124
+> P   28 | ldi -5 20 r1
+>        | -> load from -5 + 20 = 15 (with pc and mod 3921)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84068a84128,84130
+> P   16 | ldi -5 20 r1
+>        | -> load from -5 + 20 = 15 (with pc and mod 3921)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84073,84075d84134
+< P    7 | sti r1 -173 16
+<        | -> store to -173 + 16 = -157 (with pc and mod 3917)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+84093c84152,84153
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
+---
+> P    6 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84097a84158,84160
+> P    7 | sti r1 -173 20
+>        | -> store to -173 + 20 = -153 (with pc and mod 3759)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84124,84125d84186
+< P    7 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+84133d84193
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+84142a84203,84205
+> P    4 | ldi -5 8 r1
+>        | -> load from -5 + 8 = 3 (with pc and mod 3747)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+84146a84210,84211
+> P    7 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84154,84155d84218
+< P    7 | xor 48 20 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+84168d84230
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+84170,84172d84231
+< P   28 | sti r1 -173 16
+<        | -> store to -173 + 16 = -157 (with pc and mod 3917)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+84178,84180c84237,84238
+< P   16 | sti r1 -173 16
+<        | -> store to -173 + 16 = -157 (with pc and mod 3917)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+---
+> P    7 | xor 48 24 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+84183a84242
+> ADV 6 (0x0dfe -> 0x0e04) 0a 94 ff 00 00 00 
+84194a84254
+> P    6 | zjmp -37 OK
+84195a84256,84258
+> P   28 | sti r1 -173 20
+>        | -> store to -173 + 20 = -153 (with pc and mod 3759)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84198a84262,84264
+> P   16 | sti r1 -173 20
+>        | -> store to -173 + 20 = -153 (with pc and mod 3759)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84209d84274
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+84223,84226d84287
+< P   28 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+< P   16 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+84243c84304,84308
+< ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 00 
+---
+> P    6 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+> P    2 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84244a84310,84311
+> P   28 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84246a84314,84315
+> P   16 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84251,84252d84319
+< P   28 | xor 48 20 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+84255,84258d84321
+< P   16 | xor 48 20 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+< P    7 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+84270a84334,84336
+> P    4 | sti r1 -173 8
+>        | -> store to -173 + 8 = -165 (with pc and mod 3585)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+84274a84341,84342
+> P   28 | xor 48 24 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+84277a84346,84349
+> P   16 | xor 48 24 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+> P    7 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84287,84289d84358
+< P    7 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+< ADV 2 (0x0f64 -> 0x0f66) 07 00 
+84302a84372,84373
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84309a84381,84382
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+84321d84393
+< ADV 2 (0x0f68 -> 0x0f6a) 07 00 
+84339a84412,84414
+> P    4 | xor 48 12 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+> P    2 | zjmp -37 OK
+84346,84347d84420
+< P   28 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+84349,84350d84421
+< P   16 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+84358d84428
+< ADV 2 (0x0f6c -> 0x0f6e) 07 00 
+84364a84435,84437
+> P    6 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3905)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84366a84440,84441
+> P   28 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84368a84444,84445
+> P   16 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84371,84372d84447
+< P   28 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+84375,84377d84449
+< P   16 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+< P    7 | zjmp -37 OK
+84387a84460,84462
+> P    2 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+84391a84467,84468
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84393a84471,84473
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+84425,84427d84504
+< P    7 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+84434,84436c84511,84512
+< Process 6 hasn't lived for 161 cycles (CTD 136)
+< Process 4 hasn't lived for 211 cycles (CTD 136)
+< Process 1 hasn't lived for 220 cycles (CTD 136)
+---
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0eb6 -> 0x0eb9) 09 00 0d 
+84445a84522,84524
+> P    7 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+84452a84532,84533
+> P    4 | ld 0 r7
+> ADV 7 (0x0eb9 -> 0x0ec0) 02 90 00 00 00 00 07 
+84469d84549
+< P   28 | zjmp -37 OK
+84472d84551
+< P   16 | zjmp -37 OK
+84484a84564,84566
+> P    6 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3743)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84486a84569
+> P   28 | zjmp -37 OK
+84487a84571
+> P   16 | zjmp -37 OK
+84501a84586,84588
+> P    2 | ldi -5 4 r1
+>        | -> load from -5 + 4 = -1 (with pc and mod 3905)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84512,84514d84598
+< P   28 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+84518,84520d84601
+< P   16 | live -2
+< Player 2 (Jumper !) is said to be alive
+< ADV 5 (0x0fdf -> 0x0fe4) 01 ff ff ff fe 
+84528a84610,84611
+> P    6 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84532a84616,84618
+> P   28 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+84535a84622,84624
+> P   16 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+84542,84544d84630
+< P    7 | ldi -5 20 r1
+<        | -> load from -5 + 20 = 15 (with pc and mod 4083)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+84550a84637
+> P    4 | zjmp -37 OK
+84558a84646,84647
+> P    6 | xor 48 8 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+84563a84653,84655
+> P    7 | ldi -5 24 r1
+>        | -> load from -5 + 24 = 19 (with pc and mod 3925)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84593a84686,84688
+> P    4 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0e9b -> 0x0ea0) 01 ff ff ff fe 
+84618a84714,84716
+> P    2 | sti r1 -173 4
+>        | -> store to -173 + 4 = -169 (with pc and mod 3743)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84626,84628d84723
+< P   28 | ldi -5 20 r1
+<        | -> load from -5 + 20 = 15 (with pc and mod 4083)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+84634,84636d84728
+< P   16 | ldi -5 20 r1
+<        | -> load from -5 + 20 = 15 (with pc and mod 4083)
+< ADV 6 (0x0fe4 -> 0x0fea) 0a 94 ff fb 03 01 
+84645a84738,84739
+> P    6 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84646a84741,84743
+> P   28 | ldi -5 24 r1
+>        | -> load from -5 + 24 = 19 (with pc and mod 3925)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84649a84747,84749
+> P   16 | ldi -5 24 r1
+>        | -> load from -5 + 24 = 19 (with pc and mod 3925)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84654,84656d84753
+< P    7 | sti r1 -173 20
+<        | -> store to -173 + 20 = -153 (with pc and mod 3921)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+84661a84759,84760
+> P    2 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84667a84767,84768
+> P    6 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84671a84773,84775
+> P    7 | sti r1 -173 24
+>        | -> store to -173 + 24 = -149 (with pc and mod 3763)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84692a84797,84798
+> P    2 | xor 48 8 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+84697,84698d84802
+< P    7 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+84708a84813,84815
+> P    4 | ldi -5 12 r1
+>        | -> load from -5 + 12 = 7 (with pc and mod 3751)
+> ADV 6 (0x0ea0 -> 0x0ea6) 0a 94 ff fb 03 01 
+84715a84823,84824
+> P    7 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84723,84724d84831
+< P    7 | xor 48 24 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+84741,84743d84847
+< P   28 | sti r1 -173 20
+<        | -> store to -173 + 20 = -153 (with pc and mod 3921)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+84749,84751c84853,84854
+< P   16 | sti r1 -173 20
+<        | -> store to -173 + 20 = -153 (with pc and mod 3921)
+< ADV 6 (0x0fea -> 0x0ff0) 0b 64 01 ff 53 03 
+---
+> P    7 | xor 48 28 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+84760a84864
+> P    6 | zjmp -37 OK
+84761a84866,84868
+> P   28 | sti r1 -173 24
+>        | -> store to -173 + 24 = -149 (with pc and mod 3763)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84764a84872,84874
+> P   16 | sti r1 -173 24
+>        | -> store to -173 + 24 = -149 (with pc and mod 3763)
+> ADV 6 (0x0f48 -> 0x0f4e) 0b 64 01 ff 53 03 
+84782a84893,84894
+> P    2 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84791,84794d84902
+< P   28 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+< P   16 | add r3 r4 r3
+< ADV 5 (0x0ff0 -> 0x0ff5) 04 54 03 04 03 
+84807a84916,84920
+> P    6 | live -2
+> Player 2 (Jumper !) is said to be alive
+> ADV 5 (0x0f3d -> 0x0f42) 01 ff ff ff fe 
+> P    2 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84808a84922,84923
+> P   28 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84810a84926,84927
+> P   16 | add r3 r4 r3
+> ADV 5 (0x0f4e -> 0x0f53) 04 54 03 04 03 
+84815,84816d84931
+< P   28 | xor 48 24 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+84819,84822d84933
+< P   16 | xor 48 24 r6
+< ADV 5 (0x0ff5 -> 0x0ffa) 08 54 05 03 06 
+< P    7 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+84828a84940,84942
+> P    4 | sti r1 -173 12
+>        | -> store to -173 + 12 = -161 (with pc and mod 3589)
+> ADV 6 (0x0ea6 -> 0x0eac) 0b 64 01 ff 53 03 
+84840,84841c84954,84955
+< Process 7 hasn't lived for 88 cycles (CTD 86)
+< Process 2 hasn't lived for 217 cycles (CTD 86)
+---
+> Process 2 hasn't lived for 96 cycles (CTD 86)
+> Process 1 hasn't lived for 164 cycles (CTD 86)
+84847a84962,84963
+> P   28 | xor 48 28 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+84849a84966,84969
+> P   16 | xor 48 28 r6
+> ADV 5 (0x0f53 -> 0x0f58) 08 54 05 03 06 
+> P    7 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84869a84990,84991
+> P    7 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84874a84997,84998
+> P    4 | add r3 r4 r3
+> ADV 5 (0x0eac -> 0x0eb1) 04 54 03 04 03 
+84900a85025,85026
+> P    4 | xor 48 16 r6
+> ADV 5 (0x0eb1 -> 0x0eb6) 08 54 05 03 06 
+84909,84912d85034
+< P   28 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+< P   16 | zjmp 13 FAILED
+< ADV 3 (0x0ffa -> 0x0ffd) 09 00 0d 
+84924a85047,85049
+> P    6 | ldi -5 8 r1
+>        | -> load from -5 + 8 = 3 (with pc and mod 3909)
+> ADV 6 (0x0f42 -> 0x0f48) 0a 94 ff fb 03 01 
+84929a85055,85056
+> P   28 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84931a85059,85060
+> P   16 | zjmp 13 FAILED
+> ADV 3 (0x0f58 -> 0x0f5b) 09 00 0d 
+84933,84934d85061
+< P   28 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+84937,84938d85063
+< P   16 | ld 0 r7
+< ADV 7 (0x0ffd -> 0x1004) 02 90 00 00 00 00 07 
+84952a85078,85079
+> P   28 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+84954a85082,85084
+> P   16 | ld 0 r7
+> ADV 7 (0x0f5b -> 0x0f62) 02 90 00 00 00 00 07 
+> P    7 | zjmp -37 OK
+84979a85110,85111
+> P    4 | zjmp 13 FAILED
+> ADV 3 (0x0eb6 -> 0x0eb9) 09 00 0d 
+84990c85122
+< Process 28 hasn't lived for 104 cycles (CTD 36)
+---
+> Process 28 hasn't lived for 100 cycles (CTD 36)
+84996c85128
+< Process 16 hasn't lived for 104 cycles (CTD 36)
+---
+> Process 16 hasn't lived for 100 cycles (CTD 36)
+85001a85134,85135
+> Process 7 hasn't lived for 120 cycles (CTD 36)
+> Process 6 hasn't lived for 41 cycles (CTD 36)
+85002a85137
+> Process 4 hasn't lived for 87 cycles (CTD 36)
