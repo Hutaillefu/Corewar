@@ -2,6 +2,8 @@ verb="-1"
 stop="0"
 d=""
 cycle="-1"
+GooD="0"
+False="0"
 
 if [ -f zaz_res ]; then
     rm -f zaz_res
@@ -28,13 +30,8 @@ for corfile in chmps/*.cor; do
             if [ $# -ge 2 ]; then
                 
                 if [ -f $2 ]; then
-                    if [ $stop = "1" ]; then
-                        echo "Usage: ./tester.sh *.cor X [1 - 31]"
-                        break
-                    else
-                        corfile_2="$2"
-                        stop="1"
-                    fi
+                    corfile_2="$2"
+                    stop="1"
                 
                 elif [ $# == 2 ] && [ $2 = "-d" ]; then
                     cycle="1000"
@@ -65,16 +62,16 @@ for corfile in chmps/*.cor; do
         echo "Verbose is \033[7m$verb\033[0m !"
         echo "Corefile is \033[7m$corfile\033[0m !"
 
-        for i in {1..28}; do
+        for i in {1..ch28}; do
             
             if [ $cycle -ge 0 ]; then
                 y=$(($cycle * $i))
             fi
             
             echo "\033[44;1m./zaz_cor/$corfile $corfile_2\033[0m"
-            ./zaz_cor $corfile $d $y -v $verb | cat -e > zaz_res
+            ./zaz_cor $corfile $corfile_2 $d $y -v $verb | cat -e > zaz_res
             echo "\033[46;1m./grp_cor/$corfile $corfile_2\033[0m"
-            ./grp_cor $corfile $d $y -v $verb | cat -e > grp_res
+            ./grp_cor $corfile $corfile_2 $d $y -v $verb | cat -e > grp_res
 
             res=$(diff zaz_res grp_res -q)
 
@@ -83,13 +80,11 @@ for corfile in chmps/*.cor; do
                     echo "\033[32m$corfile $corfile_2 OK at cycle $y !\033[0m"
                 else
                     echo "\033[32m$corfile $corfile_2 FINISH !\033[0m"
+                    GooD=$(($GooD+1))
                 fi
-            
             else
                 echo "\033[31m$corfile $corfile_2 KO at cycle $y !\033[0m"
-                if [ $cycle -ge 0 ]; then
-                    break
-                fi
+                False=$(($False+1))
             fi
             
             if [ $cycle = "-1" ]; then
@@ -102,4 +97,10 @@ for corfile in chmps/*.cor; do
             break
         fi
     done
+    if [ $stop = "1" ]; then
+        break
+    fi
 done
+
+echo "Success: $GooD"
+echo "Fail: $False"

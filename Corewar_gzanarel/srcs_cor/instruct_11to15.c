@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 20:35:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 20:58:45 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 11:47:04 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -53,11 +53,12 @@ void	i_fork(t_node *proc, t_cor *cor)
 	if (!(child = clone_proc(proc)))
 		return ;
 	child->pc = (proc->pc + (p1 % IDX_MOD)) % MEM_SIZE;
+	child->pc = child->pc < 0 ? MEM_SIZE -(-child->pc) : child->pc;
 	child->pc_b = child->pc;
 	push_front(&(cor->proc), child);
 	child->num = cor->proc->nb;
 	if (cor->vm->verbose & V_OP)
-		ft_printf(&(cor->vm->logs), "P% 5d | fork %d (%d)\n", proc->num, p1, child->pc);
+		ft_printf(&(cor->vm->logs), "P% 5d | fork %d (%d)\n", proc->num, p1, (proc->pc + (p1 % IDX_MOD)));
 	if (cor->vm->verbose & V_ADV)
 		adv(cor->vm, proc->pc, proc->op_size);
 }

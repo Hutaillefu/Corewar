@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 10:03:35 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 11:47:11 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,22 +16,17 @@
 void		ft_print_winner(t_cor *c)
 {
 	int j;
-	int last;
-	int win;
 
-	win = 0;
 	j = -1;
-	last = 0;
 	while (++j < c->vm->nb_player)
 	{
-		if (c->chmp[j]->last_live >= last)
+		if (c->chmp[j]->num == c->vm->chmp_win_num)
 		{
-			last = c->chmp[j]->last_live;
-			win = j;
+			ft_printf(&(c->vm->logs), "Contestant %d, \"%s\", has won !\n",
+			-c->vm->chmp_win_num, c->chmp[-c->vm->chmp_win_num - 1]->name);
+			return ;
 		}
 	}
-	ft_printf(&(c->vm->logs), "Contestant %d, \"%s\", has won !\n",
-	win + 1, c->chmp[win]->name);
 }
 
 static void	print_map_color(t_cor *c, int i)

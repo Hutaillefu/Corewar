@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:36:11 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 19:01:00 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/25 10:14:17 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -67,8 +67,6 @@ void		cycle(t_cor *c)
 	}
 	if (c->vm->cycle_to_die < 0 && (c->vm->verbose & V_CYCLE))
 		ft_printf(&(c->vm->logs), "It is now cycle %d\n", c->vm->cycle);
-	tmp = c->proc->head;
-	read_proc(c, tmp);
-	tmp = c->proc->head;
+	read_proc(c, c->proc->head);
 	cycle_to_die(c, cycle);
 }
