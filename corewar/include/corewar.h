@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 17:29:29 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 19:08:56 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -192,6 +192,7 @@ int					check_parse(t_cor *c, t_vm *vm, char **av, int ac);
 */
 void				ft_print_winner(t_cor *c);
 void				print_map(t_cor *c, int octet);
+void				print_usage(void);
 
 /*
 ** processus

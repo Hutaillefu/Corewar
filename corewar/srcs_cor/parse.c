@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 10:02:11 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 19:12:43 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -16,7 +16,7 @@
 static void	check_verb(t_cor *c, t_vm *vm, char *av)
 {
 	if (!av)
-		ft_exit(&(vm->logs), 5, av, c);
+		ft_exit(&(vm->logs), 7, av, c);
 	vm->verbose = ft_atoi(av);
 	if (vm->verbose < 0 || vm->verbose > 31)
 		vm->verbose = 0;
@@ -28,10 +28,10 @@ static void	check_num(t_cor *c, t_vm *vm, char *av)
 
 	j = -1;
 	if (!av)
-		ft_exit(&(vm->logs), 5, av, c);
+		ft_exit(&(vm->logs), 7, av, c);
 	while (av[++j])
 		if (ft_isalnum(av[j]) == 0)
-			ft_exit(&(vm->logs), 5, av, c);
+			ft_exit(&(vm->logs), 7, av, c);
 	vm->num[vm->nb_player] = ft_atoi(av);
 }
 
@@ -41,10 +41,10 @@ static void	check_dump(t_cor *c, t_vm *vm, char *av)
 
 	j = -1;
 	if (!av)
-		ft_exit(&(vm->logs), 5, av, c);
+		ft_exit(&(vm->logs), 7, av, c);
 	while (av[++j])
 		if (ft_isalnum(av[j]) == 0)
-			ft_exit(&(vm->logs), 5, av, c);
+			ft_exit(&(vm->logs), 7, av, c);
 	vm->dump = ft_atoi(av);
 }
 
@@ -87,7 +87,7 @@ int			check_parse(t_cor *c, t_vm *vm, char **av, int ac)
 		else if ((len = ft_strlen(av[i])) > 4)
 			check_files(c, vm, av[i], len);
 		else
-			ft_exit(&(vm->logs), 8, av[i], c);
+			ft_exit(&(vm->logs), 7, av[i], c);
 	}
 	if (vm->nb_player == 0)
 		ft_exit(&(vm->logs), 5, av[i], c);
