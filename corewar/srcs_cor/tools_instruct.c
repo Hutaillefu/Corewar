@@ -18,20 +18,22 @@ int		is_regnum_valid(int regnum)
 	return (regnum >= 0 && regnum <= 15);
 }
 
-void	adv(t_vm *vm, int pc, int opsize)
+void	adv(t_vm *vm, t_node *p)
 {
 	int i;
 
+	if (!(vm->verbose & V_ADV))
+		return ;
 	i = -1;
-	if (pc == 0)
-		ft_printf(&(vm->logs), "ADV %d (0x0000 -> %#06x)", opsize,
-		(pc + opsize));
+	if (p->pc == 0)
+		ft_printf(&(vm->logs), "ADV %d (0x0000 -> %#06x)", p->op_size,
+		(p->pc + p->op_size));
 	else
-		ft_printf(&(vm->logs), "ADV %d (%#06x -> %#06x)", opsize, pc,
-		(pc + opsize));
-	while (++i < opsize)
+		ft_printf(&(vm->logs), "ADV %d (%#06x -> %#06x)", p->op_size, p->pc,
+		(p->pc + p->op_size));
+	while (++i < p->op_size)
 	{
-		ft_printf(&(vm->logs), "%3.2x", vm->area[(pc + i) % MEM_SIZE]);
+		ft_printf(&(vm->logs), "%3.2x", vm->area[(p->pc + i) % MEM_SIZE]);
 	}
 	ft_printf(&(vm->logs), " \n");
 }

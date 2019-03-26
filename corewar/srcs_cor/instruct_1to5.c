@@ -26,8 +26,7 @@ void	i_live(t_node *proc, t_cor *cor)
 	if ((chmp = get_chmp_by_num(cor, champ_num)) && (cor->vm->verbose & V_LIVE))
 		ft_printf(&(cor->vm->logs), "Player %d (%s) is said to be alive\n",
 		-chmp->num, chmp->name);
-	if (cor->vm->verbose & V_ADV)
-		adv(cor->vm, proc->pc, proc->op_size);
+	adv(cor->vm, proc);
 	if (!chmp)
 		return ;
 	cor->vm->chmp_win_num = champ_num;
@@ -40,8 +39,7 @@ void	i_ld(t_node *proc, t_vm *vm)
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
 	if (!is_regnum_valid(proc->param[1][0] - 1) || proc->op.name == NULL)
 	{
-		if (vm->verbose & V_ADV)
-			adv(vm, proc->pc, proc->op_size);
+		adv(vm, proc);
 		return ;
 	}
 	proc->reg[proc->param[1][0] - 1] = p1;
@@ -49,45 +47,33 @@ void	i_ld(t_node *proc, t_vm *vm)
 	if (vm->verbose & V_OP)
 		ft_printf(&(vm->logs), "P% 5d | ld %d r%d\n", proc->num, p1,
 		proc->param[1][0]);
-	if (vm->verbose & V_ADV)
-		adv(vm, proc->pc, proc->op_size);
+	adv(vm, proc);
 }
 
 void	i_st(t_node *proc, t_vm *vm)
 {
-	int p1;
-	int	p2;
-	int addr;
-
 	if (!is_regnum_valid(proc->param[0][0] - 1) || !proc->op.name)
 	{
-		if (vm->verbose & V_ADV)
-			adv(vm, proc->pc, proc->op_size);
+		adv(vm, proc);
 		return ;
 	}
-	p1 = get_param_value(vm, proc, proc->param[0], 1);
-	p2 = proc->param[1][0];
 	if (proc->param[1][1] == IND_CODE)
-	{
-		addr = proc->pc + (p2 % IDX_MOD);
-		addr = addr < 0 ? MEM_SIZE - (-addr) : addr;
-		write_uint(vm, p1, addr, REG_SIZE);
-	}
+		write_uint(vm, get_param_value(vm, proc, proc->param[0], 1), proc->pc +
+		(proc->param[1][0] % IDX_MOD), REG_SIZE);
 	else if (proc->param[1][1] == REG_CODE)
 	{
-		if (!is_regnum_valid(p2 - 1))
+		if (!is_regnum_valid(proc->param[1][0] - 1))
 		{
-			if (vm->verbose & V_ADV)
-				adv(vm, proc->pc, proc->op_size);
+			adv(vm, proc);
 			return ;
 		}
-		proc->reg[p2 - 1] = p1;
+		proc->reg[proc->param[1][0] - 1] = get_param_value(vm, proc,
+		proc->param[0], 1);
 	}
 	if (vm->verbose & V_OP)
 		ft_printf(&(vm->logs), "P% 5d | st r%d %d\n", proc->num,
-		proc->param[0][0], p2);
-	if (vm->verbose & V_ADV)
-		adv(vm, proc->pc, proc->op_size);
+		proc->param[0][0], proc->param[1][0]);
+	adv(vm, proc);
 }
 
 void	i_add(t_node *proc, t_vm *vm)
@@ -99,8 +85,7 @@ void	i_add(t_node *proc, t_vm *vm)
 		!is_regnum_valid(proc->param[1][0] - 1) ||
 		!is_regnum_valid(proc->param[2][0] - 1) || proc->op.name == NULL)
 	{
-		if (vm->verbose & V_ADV)
-			adv(vm, proc->pc, proc->op_size);
+		adv(vm, proc);
 		return ;
 	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
@@ -110,8 +95,7 @@ void	i_add(t_node *proc, t_vm *vm)
 	if (vm->verbose & V_OP)
 		ft_printf(&(vm->logs), "P% 5d | add r%d r%d r%d\n", proc->num,
 		proc->param[0][0], proc->param[1][0], proc->param[2][0]);
-	if (vm->verbose & V_ADV)
-		adv(vm, proc->pc, proc->op_size);
+	adv(vm, proc);
 }
 
 void	i_sub(t_node *proc, t_vm *vm)
@@ -123,8 +107,7 @@ void	i_sub(t_node *proc, t_vm *vm)
 	!is_regnum_valid(proc->param[1][0] - 1)
 	|| !is_regnum_valid(proc->param[2][0] - 1) || proc->op.name == NULL)
 	{
-		if (vm->verbose & V_ADV)
-			adv(vm, proc->pc, proc->op_size);
+		adv(vm, proc);
 		return ;
 	}
 	p1 = get_param_value(vm, proc, proc->param[0], 1);
@@ -134,6 +117,5 @@ void	i_sub(t_node *proc, t_vm *vm)
 	if (vm->verbose & V_OP)
 		ft_printf(&(vm->logs), "P% 5d | sub r%d r%d r%d\n", proc->num,
 		proc->param[0][0], proc->param[1][0], proc->param[2][0]);
-	if (vm->verbose & V_ADV)
-		adv(vm, proc->pc, proc->op_size);
+	adv(vm, proc);
 }

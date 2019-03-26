@@ -61,7 +61,6 @@ void		print_map(t_cor *c, int octet)
 
 	i = -1;
 	j = 0;
-
 	ft_printf(&(c->vm->logs), "0x0000 :");
 	while (++i < MEM_SIZE)
 	{

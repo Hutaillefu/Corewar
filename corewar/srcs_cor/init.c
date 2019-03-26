@@ -13,7 +13,7 @@
 
 #include "../include/corewar.h"
 
-void	init_map(t_cor *c)
+void		init_map(t_cor *c)
 {
 	int start;
 	int player;
@@ -51,7 +51,7 @@ static void	init_num_chmp(t_cor *c, int i)
 		c->chmp[i]->num = (i + 1) * -1;
 }
 
-void	init_proc(t_cor *c, t_list2 *proc)
+void		init_proc(t_cor *c, t_list2 *proc)
 {
 	int i;
 
@@ -72,7 +72,7 @@ void	init_proc(t_cor *c, t_list2 *proc)
 	c->vm->chmp_win_num = -c->proc->head->num;
 }
 
-void	init_vm(t_cor *c, t_vm *vm)
+void		init_vm(t_cor *c, t_vm *vm)
 {
 	int j;
 
@@ -92,7 +92,7 @@ void	init_vm(t_cor *c, t_vm *vm)
 		vm->num[j] = -1;
 }
 
-t_cor	*init_cor(char **av, int ac)
+t_cor		*init_cor(char **av, int ac)
 {
 	t_cor *c;
 

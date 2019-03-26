@@ -25,6 +25,7 @@ int		read_next_uint(t_vm *vm, int index, int bytes_len)
 
 	if (!vm)
 		return (0);
+	index = index < 0 ? (MEM_SIZE - (-index)) % MEM_SIZE : index % MEM_SIZE;
 	i = 0;
 	res = 0;
 	dec = (bytes_len - 1) * 8;

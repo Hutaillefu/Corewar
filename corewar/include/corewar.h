@@ -213,7 +213,7 @@ void				rm_element(t_list2 **lst, t_node *proc);
 ** tools_instruct
 */
 int					is_regnum_valid(int regnum);
-void				adv(t_vm *vm, int pc, int opsize);
+void				adv(t_vm *vm, t_node *proc);
 void				write_uint(t_vm *vm, int value,
 					int start_index, int bytes_len);
 int					get_param_value(t_vm *vm, t_node *proc,
