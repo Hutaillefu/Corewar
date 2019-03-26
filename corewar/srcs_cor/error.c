@@ -6,12 +6,22 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:37:01 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 20:40:35 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 13:20:54 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
+
+void	del_list(t_list2 *l)
+{
+	while (l)
+	{
+		free(l->head);
+		l->head = NULL;
+		l->head = l->head->next;
+	}
+}
 
 void    ft_exit(t_logs *logs, int error, char *s, t_cor *c)
 {
@@ -33,7 +43,12 @@ void    ft_exit(t_logs *logs, int error, char *s, t_cor *c)
 	// 	ft_putstr("Error malloc\n");
 	if (error > 0)
 		s = NULL;
-	free(c);
 	dump_logs(logs);
+	if (!c->proc)
+		del_list(c->proc);
+	if (!c->vm)
+		free(c->vm);
+	if (!c)
+		free(c);
 	exit(1);
 }

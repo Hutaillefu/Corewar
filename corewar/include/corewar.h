@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 09:58:18 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 17:08:42 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -229,5 +229,6 @@ void				add_element_end(t_list2 **lst, t_cor *c,
 					t_chmp *chmp, int i);
 void				push_back(t_list2 **lst, t_node *proc);
 void				push_front(t_list2 **lst, t_node *proc);
+void				del_list(t_list2 *l);
 
 #endif

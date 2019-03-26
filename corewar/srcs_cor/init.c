@@ -6,14 +6,14 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 15:29:56 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 13:10:57 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-void		init_map(t_cor *c)
+void	init_map(t_cor *c)
 {
 	int start;
 	int player;
@@ -51,7 +51,7 @@ static void	init_num_chmp(t_cor *c, int i)
 		c->chmp[i]->num = (i + 1) * -1;
 }
 
-void		init_proc(t_cor *c, t_list2 *proc)
+void	init_proc(t_cor *c, t_list2 *proc)
 {
 	int i;
 
@@ -72,7 +72,7 @@ void		init_proc(t_cor *c, t_list2 *proc)
 	c->vm->chmp_win_num = -c->proc->head->num;
 }
 
-void		init_vm(t_cor *c, t_vm *vm)
+void	init_vm(t_cor *c, t_vm *vm)
 {
 	int j;
 
@@ -92,15 +92,15 @@ void		init_vm(t_cor *c, t_vm *vm)
 		vm->num[j] = -1;
 }
 
-t_cor		*init_cor(char **av, int ac)
+t_cor	*init_cor(char **av, int ac)
 {
 	t_cor *c;
 
-	if (!(c = ft_memalloc(sizeof(t_cor))))
+	if (!(c = (t_cor *)ft_memalloc(sizeof(t_cor))))
 		ft_exit(NULL, 8, NULL, c);
-	if (!(c->vm = ft_memalloc(sizeof(t_vm))))
+	if (!(c->vm = (t_vm *)ft_memalloc(sizeof(t_vm))))
 		ft_exit(NULL, 8, NULL, c);
-	if (!(c->proc = ft_memalloc(sizeof(t_list2))))
+	if (!(c->proc = (t_list2 *)ft_memalloc(sizeof(t_list2))))
 		ft_exit(NULL, 8, NULL, c);
 	init_vm(c, c->vm);
 	if (check_parse(c, c->vm, av, ac) == 1)
