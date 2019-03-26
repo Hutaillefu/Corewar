@@ -15,12 +15,53 @@
 
 void	del_list(t_list2 *l)
 {
-	while (l)
+	t_node *current;
+	t_node *next;
+
+	current = l->head;
+	while (current)
 	{
-		free(l->head);
-		l->head = NULL;
-		l->head = l->head->next;
+		next = current->next;
+		free(current);
+		current = next;
 	}
+	l->head = NULL;
+	l->tail = NULL;
+	free(l);
+}
+
+void	free_vm(t_vm **vm)
+{
+	int i;
+
+	if (!vm || !(*vm))
+		return ;
+	(*vm)->area ? free((*vm)->area) : 0;
+	i = -1;
+	while (++i < (*vm)->nb_player)
+		free((*vm)->player[i]);
+	free(*vm);
+	*vm = NULL;
+}
+
+void	free_cor(t_cor **c)
+{
+	int i;
+
+	if (!c || !(*c))
+		return ;
+	i = -1;
+	while (++i < (*c)->vm->nb_player)
+	{
+		(*c)->chmp[i]->name ? free((*c)->chmp[i]->name) : 0;
+		(*c)->chmp[i]->comment ? free((*c)->chmp[i]->comment) : 0;
+		(*c)->chmp[i]->infos ? free((*c)->chmp[i]->infos) : 0;
+		(*c)->chmp[i] ? free((*c)->chmp[i]) : 0;
+	}
+	free_vm(&(*c)->vm);
+	del_list((*c)->proc);
+	free(*c);
+	*c = NULL;
 }
 
 void    ft_exit(t_logs *logs, int error, char *s, t_cor *c)
@@ -47,22 +88,6 @@ void    ft_exit(t_logs *logs, int error, char *s, t_cor *c)
 	if (error > 0)
 		s = NULL;
 	dump_logs(logs);
-	if (c->proc)
-		del_list(c->proc);
-	while (++i < c->vm->nb_player)
-	{
-		!c->chmp[i]->name ? free(c->chmp[i]->name) : 0;
-		!c->chmp[i]->comment ? free(c->chmp[i]->comment) : 0;
-		!c->chmp[i]->infos ? free(c->chmp[i]->infos) : 0;
-		!c->chmp[i] ? free(c->chmp[i]) : 0;
-	}
-	if (c->vm)
-	{
-		if (c->vm->area)
-			free(c->vm->area);
-		free(c->vm);
-	}
-	if (c)
-		free(c);
+	free_cor(&c);
 	exit(1);
 }

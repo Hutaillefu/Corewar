@@ -131,6 +131,7 @@ void				cycle(t_cor *c);
 ** error
 */
 void				ft_exit(t_logs *logs, int error, char *s, t_cor *c);
+void				free_cor(t_cor **c);
 
 /*
 ** flags

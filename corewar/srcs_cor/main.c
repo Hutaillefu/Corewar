@@ -16,7 +16,6 @@
 int		main(int ac, char **av)
 {
 	t_cor *c;
-	int i = -1;
 
 	c = init_cor(av, ac);
 	read_infos(c);
@@ -24,22 +23,6 @@ int		main(int ac, char **av)
 	cycle(c);
 	ft_print_winner(c);
 	dump_logs(&(c->vm->logs));
-	if (c->proc)
-		del_list(c->proc);
-	while (++i < c->vm->nb_player)
-	{
-		!c->chmp[i]->name ? free(c->chmp[i]->name) : 0;
-		!c->chmp[i]->comment ? free(c->chmp[i]->comment) : 0;
-		!c->chmp[i]->infos ? free(c->chmp[i]->infos) : 0;
-		!c->chmp[i] ? free(c->chmp[i]) : 0;
-	}
-	if (c->vm)
-	{
-		if (c->vm->area)
-			free(c->vm->area);
-		free(c->vm);
-	}
-	if (c)
-		free(c);
+	free_cor(&c);
 	return (0);
 }
