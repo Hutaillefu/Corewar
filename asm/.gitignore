@@ -1,0 +1,12 @@
+## Project
+asm
+*.cor
+
+## Compilation
+*.o
+*.a
+*.out
+*.dSYM/
+
+## Garbage
+.DS_Store
