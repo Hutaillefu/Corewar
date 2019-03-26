@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 18:53:46 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 21:07:10 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/26 17:38:31 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -54,7 +54,7 @@ int			cycle_to_die(t_cor *c, int cycle)
 		c->vm->nb_live >= NBR_LIVE ? nbr_lives(c) : 0;
 		cycle = 0;
 		c->vm->nb_live = 0;
-		free(tmp);
+		// !tmp ? free(tmp) : 0;
 	}
 	return (cycle);
 }
