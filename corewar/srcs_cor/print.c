@@ -6,30 +6,37 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 18:38:50 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 15:22:16 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/corewar.h"
 
-void	print_usage(void)
+void		print_usage(void)
 {
 	t_logs *logs;
 
 	logs = ft_memalloc(sizeof(t_logs));
-	ft_printf(logs, "Usage: ./corewar [-d N -v N -n N] [-a] <champion1.cor> <...>\n");
-    ft_printf(logs, "%64s\n", "-a        : Prints output from \"aff\" (Default is to hide it)");
-	ft_printf(logs, "#### TEXT OUTPUT MODE ##########################################################\n");
-    ft_printf(logs, "%54s\n", "-d N      : Dumps memory after N cycles then exits");
-    ft_printf(logs, "%73s\n", "-v N      : Verbosity levels, can be added together to enable several");
+	ft_printf(logs,
+	"Usage: ./corewar [-d N -v N -n N] [-a] <champion1.cor> <...>\n");
+	ft_printf(logs,
+	"%64s\n", "-a        : Prints output from \"aff\" (Default is to hide it)");
+	ft_printf(logs, "#### TEXT OUTPUT MODE ###################%s\n",
+	"#######################################");
+	ft_printf(logs, "%54s\n",
+	"-d N      : Dumps memory after N cycles then exits");
+	ft_printf(logs, "%73s\n",
+	"-v N      : Verbosity levels, can be added together to enable several");
 	ft_printf(logs, "%42s\n", "- 0 : Show only essentials");
 	ft_printf(logs, "%32s\n", "- 1 : Show lives");
 	ft_printf(logs, "%33s\n", "- 2 : Show cycles");
-	ft_printf(logs, "%67s\n", "- 4 : Show operations (Params are NOT litteral ...)");
+	ft_printf(logs, "%67s\n",
+	"- 4 : Show operations (Params are NOT litteral ...)");
 	ft_printf(logs, "%33s\n", "- 8 : Show deaths");
 	ft_printf(logs, "%59s\n", "- 16 : Show PC movements (Except for jumps)");
-	ft_printf(logs, "################################################################################\n");
+	ft_printf(logs, "###########################%s\n",
+	"#####################################################");
 	dump_logs(logs);
 	free(logs);
 }
@@ -82,7 +89,6 @@ void		print_map(t_cor *c, int octet)
 
 	i = -1;
 	j = 0;
-
 	ft_printf(&(c->vm->logs), "0x0000 :");
 	while (++i < MEM_SIZE)
 	{
