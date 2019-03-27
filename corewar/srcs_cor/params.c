@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 19:27:37 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 19:56:19 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 16:10:13 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -73,7 +73,7 @@ int coding_byte)
 ** Initializes param to default value.
 */
 
-static void	init_param(t_node *proc)
+void		init_param(t_node *proc)
 {
 	if (!proc)
 		return ;

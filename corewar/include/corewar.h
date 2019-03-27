@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/09 14:59:42 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 19:08:56 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 16:08:29 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -175,6 +175,7 @@ int					main(int ac, char **av);
 ** params
 */
 int					extract_params(t_vm *vm, t_node *proc, int coding_byte);
+void				init_param(t_node *proc);
 
 /*
 ** parse_instruct

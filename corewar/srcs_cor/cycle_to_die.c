@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 18:53:46 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 13:15:39 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 16:20:13 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -35,28 +35,28 @@ static void	nbr_checks(t_cor *c)
 int			cycle_to_die(t_cor *c, int cycle)
 {
 	t_node *tmp;
+	t_node *next;
 
-	if (cycle == c->vm->cycle_to_die || c->vm->cycle_to_die < 0)
+	if (cycle < c->vm->cycle_to_die && c->vm->cycle_to_die >= 0)
+		return (cycle);
+	tmp = c->proc->head;
+	while (tmp)
 	{
-		tmp = c->proc->head;
-		while (tmp)
+		if (c->vm->cycle - tmp->last_live >= c->vm->cycle_to_die)
 		{
-			if (c->vm->cycle - tmp->last_live >= c->vm->cycle_to_die)
-			{
-				if (c->vm->verbose & V_DEATH)
-					ft_printf(&(c->vm->logs),
-	"Process %d hasn't lived for %d cycles (CTD %d)\n",
-	tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
-				rm_element(&(c->proc), tmp);
-			}
-			tmp = tmp->next;
+			if (c->vm->verbose & V_DEATH)
+				ft_printf(&(c->vm->logs),
+"Process %d hasn't lived for %d cycles (CTD %d)\n",
+tmp->num, c->vm->cycle - tmp->last_live, c->vm->cycle_to_die);
+			next = tmp->next;
+			rm_element(&(c->proc), tmp);
+			tmp = next;
 		}
-		c->vm->max_chk >= MAX_CHECKS ? nbr_checks(c) : c->vm->max_chk++;
-		c->vm->nb_live >= NBR_LIVE ? nbr_lives(c) : 0;
-		cycle = 0;
-		c->vm->nb_live = 0;
-		!tmp ? free(tmp) : 0;
-		tmp = NULL;
+		else
+			tmp = tmp->next;
 	}
-	return (cycle);
+	c->vm->max_chk >= MAX_CHECKS ? nbr_checks(c) : c->vm->max_chk++;
+	c->vm->nb_live >= NBR_LIVE ? nbr_lives(c) : 0;
+	c->vm->nb_live = 0;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/09/26 15:39:54 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/22 20:28:13 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 16:16:27 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -45,6 +45,7 @@ t_node	*clone_proc(t_node *parent)
 	j = -1;
 	if (!(mll = (t_node *)malloc(sizeof(t_node))))
 		return (NULL);
+	init_param(mll);
 	mll->carry = parent->carry;
 	mll->pc = parent->pc;
 	mll->pc_b = parent->pc_b;
