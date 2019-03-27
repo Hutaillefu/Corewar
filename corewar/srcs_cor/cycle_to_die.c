@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/03/22 18:53:46 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 17:39:38 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 13:15:39 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -24,11 +24,12 @@ static void	nbr_lives(t_cor *c)
 
 static void	nbr_checks(t_cor *c)
 {
-	c->vm->max_chk = 1;
 	c->vm->cycle_to_die -= c->vm->cycle_delta;
 	if (c->vm->verbose & V_CYCLE)
 		ft_printf(&(c->vm->logs), "Cycle to die is now %d\n",
 		c->vm->cycle_to_die);
+	c->vm->max_chk = 1;
+	c->vm->nb_live = 0;
 }
 
 int			cycle_to_die(t_cor *c, int cycle)
