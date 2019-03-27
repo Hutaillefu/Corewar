@@ -87,6 +87,7 @@ int		display_format(t_format *infos, va_list *args, t_logs *logs)
 	isnull = ft_strcmp(res, "^@") == 0;
 	if (res[0] == '-' && infos->is_numeric)
 	{
+		free(res);
 		res = ft_strsub(res, 1, ft_strlen(res) - 1);
 		infos->is_negative = TRUE;
 	}
@@ -96,7 +97,6 @@ int		display_format(t_format *infos, va_list *args, t_logs *logs)
 		customput(final);
 	else
 		add_logs(logs, final);
-		//ft_putstr(final);
 	len = ft_strlen(final);
 	ft_memdel((void **)&final);
 	return (isnull ? len - 1 : len);

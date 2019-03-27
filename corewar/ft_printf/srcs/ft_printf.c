@@ -16,7 +16,6 @@
 void	end(char *buf, t_logs *logs)
 {
 	add_logs(logs, buf);
-	//ft_putstr(buf);
 	ft_memdel((void **)&buf);
 }
 
@@ -29,7 +28,6 @@ void	nln(char **buf, char **format, int *chars)
 void	nln1(char **buf, char **format, t_format **infos, t_logs *logs)
 {
 	add_logs(logs, *buf);
-	//ft_putstr(*buf);
 	ft_memdel((void **)buf);
 	*buf = ft_strdup("");
 	(*format)++;
