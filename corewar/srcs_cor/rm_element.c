@@ -44,7 +44,7 @@ void		rm_element(t_list2 **lst, t_node *proc)
 	if (proc->num == (*lst)->head->num || proc->num == (*lst)->tail->num)
 	{
 		rm_element_head_tail(&(*lst), proc);
-		free(proc);	
+		free(proc);
 		return ;
 	}
 	tmp = (*lst)->head;
@@ -55,7 +55,7 @@ void		rm_element(t_list2 **lst, t_node *proc)
 			tmp->prev->next = tmp->next;
 			tmp->next->prev = tmp->prev;
 			(*lst)->len--;
-			free(proc);	
+			free(proc);
 			return ;
 		}
 		tmp = tmp->next;
