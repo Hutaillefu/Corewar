@@ -6,7 +6,7 @@
 /*   By: quruiz <quruiz@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/24 21:29:23 by quruiz       #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 16:54:45 by quruiz      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 14:06:32 by quruiz      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -46,7 +46,7 @@ int		init_output(t_asm *env)
 	if (fd == -1)
 		return (err_code(ERROR_FILE, NULL, env));
 	env->output_fd = fd;
-	printf("Writing output program to %s\n", env->name);
+	ft_printf("Writing output program to %s\n", env->name);
 	return (1);
 }
 

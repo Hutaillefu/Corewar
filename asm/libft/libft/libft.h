@@ -6,7 +6,7 @@
 /*   By: quruiz <quruiz@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 18:21:33 by quruiz       #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/25 16:23:33 by quruiz      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/27 14:00:24 by quruiz      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <wchar.h>
 # include "../get_next_line/get_next_line.h"
+# include "../ft_printf/ft_printf.h"
 
 typedef struct	s_list
 {

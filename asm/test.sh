@@ -11,15 +11,16 @@ myasm=asm
 zazasm=ressources/vm_champs/asm
 
 ##	Creation repertoire
+
 #	test/myasm 			= .cor de mon asm
 #	test/myasm/dump		= hexdump de chaque .cor
 #	test/zazasm 		= .cor de l'asm de zaz
 #	test/zazasm/dump	= hexdump de chaque .cor
 #	test/result			= sortie de chaque executable + valgrind
 #	test/result/dump	= sortie du diff
-##
 
 mkdir -p test/{myasm,zazasm,result}/dump
+make
 
 for f in `find . -type f -name "*.s"`
 do
@@ -34,7 +35,7 @@ do
 	fi
 
 	## Compile le champion avec mon asm et stocke la sortie dans un fichier
-	valgrind --leak-check=full ./$myasm $f >> test/result/$file 2>&1
+	valgrind ./$myasm $f >> test/result/$file 2>&1
 	if [ -f ${f%.s}.cor ]; then
 		hexdump -Cv ${f%.s}.cor >> test/myasm/dump/$file
 		mv ${f%.s}.cor test/myasm/
@@ -47,11 +48,22 @@ do
 
 	## Compare les resultats
 	if [ -f test/zazasm/${file}.cor ] && [ -f test/myasm/${file}.cor ]; then
-		echo "${Green}$f ✅${Reset}"
+		echo "${Green}$f ✅"
+		head -n 15 test/result/$file | tail -2
 	elif [ -f test/zazasm/${file}.cor ]; then
-		echo "${Red}$f ❌${Reset}"
+		echo "${Red}$f ❌"
+		head -n 15 test/result/$file | tail -2
 	else
-		echo "${Yellow}$f ⚠️${Reset}"
+		echo "${Yellow}$f ⚠️"
+		head -n 15 test/result/$file | tail -2
 	fi
+	## Check les hexdump
+	if [ -s test/result/dump/$file ]
+	then
+		echo "Dump : KO${Color_Off}"
+	else
+		echo "Dump : OK${Color_Off}"
+	fi
+	echo "==============================="
 
 done

@@ -6,14 +6,14 @@
 #    By: quruiz <quruiz@student.le-101.fr>          +:+   +:    +:    +:+      #
 #                                                  #+#   #+    #+    #+#       #
 #    Created: 2018/01/18 12:41:18 by quruiz       #+#   ##    ##    #+#        #
-#    Updated: 2019/03/25 18:03:25 by quruiz      ###    #+. /#+    ###.fr      #
+#    Updated: 2019/03/27 15:51:39 by quruiz      ###    #+. /#+    ###.fr      #
 #                                                          /                   #
 #                                                         /                    #
 # **************************************************************************** #
 
 NAME = libft.a
 FLAG = -Werror -Wall -Wextra
-HEADER = libft/libft.h get_next_line/get_next_line.h
+HEADER = libft/libft.h get_next_line/get_next_line.h ft_printf/ft_printf.h
 LIBFT_SRC = ft_atoi.c ft_bzero.c ft_conncat.c ft_intlen.c ft_isalnum.c \
 	ft_isalpha.c ft_isascii.c ft_isdigit.c ft_islower.c ft_isprint.c \
 	ft_isupper.c ft_itoa.c ft_itoa_base.c ft_lstadd.c ft_lstdel.c \
@@ -35,8 +35,11 @@ LIBFT_SRC = ft_atoi.c ft_bzero.c ft_conncat.c ft_intlen.c ft_isalnum.c \
 	ft_add_line_to_tab.c ft_free_line.c ft_atoui.c ft_check_limit.c ft_uitoa.c \
 	ft_uintlen.c ft_split_whitespaces.c ft_bswap_int32.c ft_bswap_int16.c \
 	ft_str_is_empty.c ft_strsplit_trim.c ft_isnotprint.c
+FT_PRINTF_SRC = ft_dispatch.c ft_parse.c ft_parser.c ft_printf.c ft_printf_c.c \
+	ft_printf_d.c ft_printf_d_justify.c ft_printf_o.c ft_printf_o_justify.c \
+	ft_printf_p.c ft_printf_s.c ft_printf_x.c ft_printf_x_justify.c ft_utils.c
 GNL_SRC = get_next_line/get_next_line.c
-SRC = $(addprefix libft/, $(LIBFT_SRC)) $(GNL_SRC)
+SRC = $(addprefix libft/, $(LIBFT_SRC)) $(addprefix ft_printf/, $(FT_PRINTF_SRC)) $(GNL_SRC)
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
