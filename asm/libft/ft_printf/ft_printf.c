@@ -6,7 +6,7 @@
 /*   By: quruiz <quruiz@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/01/11 19:07:40 by quruiz       #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 14:14:42 by quruiz      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 14:07:16 by quruiz      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -91,8 +91,6 @@ int		ft_dprintf(int fd, char *format, ...)
 		box = malloc(sizeof(t_sgmt));
 		box->next = NULL;
 		box->fd = fd;
-		box->err = 0;
-		box->set = 1;
 		va_start(arg, format);
 		tmp = ft_strdup(format);
 		ft_format_cutter(box, tmp, fd);
@@ -120,8 +118,6 @@ int		ft_printf(char *format, ...)
 		box = malloc(sizeof(t_sgmt));
 		box->next = NULL;
 		box->fd = 1;
-		box->err = 0;
-		box->set = 1;
 		va_start(arg, format);
 		tmp = ft_strdup(format);
 		ft_format_cutter(box, tmp, 1);

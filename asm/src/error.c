@@ -6,14 +6,14 @@
 /*   By: quruiz <quruiz@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/22 17:21:02 by quruiz       #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 14:06:09 by quruiz      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 14:06:02 by quruiz      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "../include/asm.h"
 
-int		err_code(int code, char *token, t_asm *env)
+int		err_code(int code, char *tkn, t_asm *env)
 {
 	if (code == MEM_ERROR)
 		ft_printf("Malloc error\n");
@@ -22,15 +22,15 @@ int		err_code(int code, char *token, t_asm *env)
 	else if (code == ERROR_FILE)
 		ft_printf("Can't read or create file\n");
 	else if (code == SIZE_ERROR)
-		ft_printf("%s too long\n", token);
+		ft_printf("%s too long\n", tkn);
 	else if (code == SYNTAX_ERROR)
 		ft_printf("Syntax error at line %.3d\n", env->line_nb);
 	else if (code == INVALID_OP)
 		ft_printf("Invalid instruction at line %.3d\n", env->line_nb);
 	else if (code == INVALID_PARAM)
-		ft_printf("Invalid parameter for %s at line %.3d\n", token, env->line_nb);
+		ft_printf("Invalid parameter for %s at line %.3d\n", tkn, env->line_nb);
 	else if (code == NO_TOKEN)
-		ft_printf("Can't find token \"%s\" at line %.3d\n", token, env->line_nb);
+		ft_printf("Can't find token \"%s\" at line %.3d\n", tkn, env->line_nb);
 	else if (code == LEXICAL_ERROR)
 		ft_printf("Lexical error at line %.3d\n", env->line_nb);
 	else if (code == NEW_LINE)

@@ -8,7 +8,7 @@ Yellow='\033[0;33m'       # Yellow
 
 # Executables
 myasm=asm
-zazasm=ressources/vm_champs/asm
+zazasm=ressources/vm_champs/asmzaz
 
 ##	Creation repertoire
 
@@ -35,7 +35,7 @@ do
 	fi
 
 	## Compile le champion avec mon asm et stocke la sortie dans un fichier
-	valgrind ./$myasm $f >> test/result/$file 2>&1
+	valgrind --leak-check=full ./$myasm $f >> test/result/$file 2>&1
 	if [ -f ${f%.s}.cor ]; then
 		hexdump -Cv ${f%.s}.cor >> test/myasm/dump/$file
 		mv ${f%.s}.cor test/myasm/
@@ -49,13 +49,13 @@ do
 	## Compare les resultats
 	if [ -f test/zazasm/${file}.cor ] && [ -f test/myasm/${file}.cor ]; then
 		echo "${Green}$f ✅"
-		head -n 15 test/result/$file | tail -2
+		head -n 29 test/result/$file | tail -2
 	elif [ -f test/zazasm/${file}.cor ]; then
 		echo "${Red}$f ❌"
-		head -n 15 test/result/$file | tail -2
+		head -n 29 test/result/$file | tail -2
 	else
 		echo "${Yellow}$f ⚠️"
-		head -n 15 test/result/$file | tail -2
+		head -n 29 test/result/$file | tail -2
 	fi
 	## Check les hexdump
 	if [ -s test/result/dump/$file ]

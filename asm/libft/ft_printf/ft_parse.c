@@ -6,7 +6,7 @@
 /*   By: quruiz <quruiz@student.le-101.fr>          +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2018/02/27 16:03:04 by quruiz       #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/27 14:13:26 by quruiz      ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 14:06:44 by quruiz      ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -62,6 +62,7 @@ int		ft_flag_detect(t_sgmt *box, va_list arg)
 	while (box)
 	{
 		box->c = 0;
+		box->err = 0;
 		if (box->str && box->str[0] == '%')
 		{
 			box->flag = (t_flag *)malloc(sizeof(t_flag));
@@ -102,8 +103,6 @@ void	ft_format_cutter(t_sgmt *box, char *tmp, int fd)
 		{
 			box->next = malloc(sizeof(t_sgmt));
 			box = box->next;
-			box->err = 0;
-			box->set = 1;
 			box->next = NULL;
 		}
 	}
