@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 16:55:17 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 17:20:08 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,7 +48,6 @@ static void	init_num_chmp(t_cor *c, int i)
 			}
 		}
 		c->chmp[i]->num = c->vm->num[i] * -1;
-		printf("%d\n", c->chmp[i]->num);
 	}
 	else
 		c->chmp[i]->num = (i + 1) * -1;
