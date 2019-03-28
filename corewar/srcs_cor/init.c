@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 11:21:38 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/26 13:10:57 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 16:55:17 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -40,12 +40,15 @@ static void	init_num_chmp(t_cor *c, int i)
 	if (c->vm->num[i] >= 0)
 	{
 		while (++j < i)
+		{
 			if (c->chmp[j]->num == -c->vm->num[i])
 			{
 				c->vm->num[i] += 1;
 				j = -1;
 			}
+		}
 		c->chmp[i]->num = c->vm->num[i] * -1;
+		printf("%d\n", c->chmp[i]->num);
 	}
 	else
 		c->chmp[i]->num = (i + 1) * -1;
@@ -67,9 +70,9 @@ void		init_proc(t_cor *c, t_list2 *proc)
 		c->chmp[i]->infos = NULL;
 		init_num_chmp(c, i);
 		add_element_end(&(proc), c, c->chmp[i], i);
+		c->vm->chmp_win_num = c->chmp[i]->num;
 	}
 	proc->nb = c->vm->nb_player;
-	c->vm->chmp_win_num = -c->proc->head->num;
 }
 
 void		init_vm(t_cor *c, t_vm *vm)
