@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/10 14:53:51 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 17:21:53 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 17:42:24 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -48,7 +48,7 @@ void		ft_print_winner(t_cor *c)
 
 	num = 0;
 	j = -1;
-	while (c->chmp[++j])
+	while (++j < c->vm->nb_player)
 	{
 		if (c->chmp[j]->num == c->vm->chmp_win_num)
 			num = j;
