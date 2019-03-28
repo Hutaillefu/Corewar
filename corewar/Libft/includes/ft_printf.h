@@ -3,10 +3,10 @@
 /*                                                              /             */
 /*   ft_printf.h                                      .::    .:/ .      .::   */
 /*                                                 +:+:+   +:    +:  +:+:+    */
-/*   By: htaillef <htaillef@student.le-101.fr>      +:+   +:    +:    +:+     */
+/*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/12/05 16:01:43 by htaillef     #+#   ##    ##    #+#       */
-/*   Updated: 2018/02/20 17:21:33 by htaillef    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 11:12:08 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -21,15 +21,15 @@
 
 # define LOGS_LEN 10240
 
-typedef struct s_logs
+typedef struct		s_logs
 {
-	char	*buffer;
-	int		len;
-}				t_logs;
+	char			*buffer;
+	int				len;
+}					t_logs;
 
-int				init_logs(t_logs *logs);
-void			add_logs(t_logs *logs, char *log);
-void			dump_logs(t_logs *logs);
+int					init_logs(t_logs *logs);
+void				add_logs(t_logs *logs, char *log);
+void				dump_logs(t_logs *logs);
 
 int					ft_printf(t_logs *logs, const char *restrict format, ...);
 
@@ -50,13 +50,13 @@ typedef struct		s_flags
 
 typedef	union		u_type
 {
-	int			t_int;
-	long		t_long;
-	long long	t_long_long;
-	size_t		t_size_t;
-	intmax_t	t_intmax_t;
-	char		t_char;
-	short		t_short;
+	int				t_int;
+	long			t_long;
+	long long		t_long_long;
+	size_t			t_size_t;
+	intmax_t		t_intmax_t;
+	char			t_char;
+	short			t_short;
 }					t_type;
 
 typedef struct		s_format
@@ -96,15 +96,17 @@ char				*ft_strncpy(char *dst, const char *src, size_t len);
 void				ft_memdel(void **ap);
 
 char				*ft_strnjoin(char *s1, char const *s2, size_t n);
-char				*ft_itoall_base(long long n, int base, enum e_bool capital);
+char				*ft_itoall_base(long long n,
+					int base, enum e_bool capital);
 char				*ft_itoaull_base(unsigned long long n, long long base,
-	enum e_bool capital);
+					enum e_bool capital);
 
 t_format			*new_format(void);
 t_format			*extract(char **str);
 void				free_format(t_format **format);
 
-int					display_format(t_format *infos, va_list *args, t_logs *logs);
+int					display_format(t_format *infos, va_list *args,
+					t_logs *logs);
 
 int					wcharlen(wchar_t wchar);
 char				*wchartostr(wchar_t wchar);

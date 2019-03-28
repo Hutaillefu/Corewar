@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2017/11/23 14:26:36 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/01/15 13:21:16 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/03/28 11:13:35 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,7 +19,7 @@
 # include "../get_next_line.h"
 # include "./ft_printf.h"
 
-#include <stdint.h>
+# include <stdint.h>
 
 typedef	struct		s_list
 {
@@ -97,7 +97,8 @@ char				*ft_strndup(char *src, int n);
 void				ft_free_2d(char **tab);
 long				ft_atol(const char *str);
 void				ft_free_2d(char **tab);
-void				*ft_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void				*ft_realloc(void *ptr, unsigned int old_size,
+					unsigned int new_size);
 void				*ft_memsub(void *dst, const void *src, int start, size_t n);
 
 #endif
