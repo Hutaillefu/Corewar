@@ -14,7 +14,7 @@
 NAME = GOD
 
 ASM = 		./asm/
-COREWAR = 	./corewar/
+COREWAR = 	./vm/
 
 all: $(NAME)
 
