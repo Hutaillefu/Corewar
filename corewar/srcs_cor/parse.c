@@ -6,7 +6,7 @@
 /*   By: gzanarel <gzanarel@student.le-101.fr>      +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/01/15 13:31:55 by gzanarel     #+#   ##    ##    #+#       */
-/*   Updated: 2019/03/28 16:55:15 by gzanarel    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/04/01 11:44:57 by gzanarel    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -90,6 +90,6 @@ int			check_parse(t_cor *c, t_vm *vm, char **av, int ac)
 			ft_exit(&(vm->logs), 7, av[i], c);
 	}
 	if (vm->nb_player == 0)
-		ft_exit(&(vm->logs), 5, av[i], c);
+		ft_exit(&(vm->logs), 9, av[i], c);
 	return (0);
 }
